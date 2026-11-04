@@ -33,9 +33,9 @@
             <span class="small-label">REQUEST</span>
             <h1 class="page-title lang-text" data-ko="커미션 신청서" data-en="Commission Request Form">커미션 신청서</h1>
             <p class="apply-lead lang-text"
-               data-ko="항목을 작성하고 '신청서 이미지로 저장'을 누르면 내용이 이미지 파일로 저장됩니다. 그 이미지를 구글 폼에 업로드해서 제출해 주세요."
-               data-en="Fill in the fields and press “Save as Image” to download your request as a picture. Then upload that image on the Google Form to submit.">
-                항목을 작성하고 '신청서 이미지로 저장'을 누르면 내용이 이미지 파일로 저장됩니다. 그 이미지를 구글 폼에 업로드해서 제출해 주세요.
+               data-ko="항목을 작성하고 '신청서 보내기'를 누르면 내용이 바로 전달됩니다. 확인 후 입력하신 이메일로 승인 여부와 결제 안내를 드립니다."
+               data-en="Fill in the fields and press “Send Request” to submit. After reviewing it, I will email you about approval and payment.">
+                항목을 작성하고 '신청서 보내기'를 누르면 내용이 바로 전달됩니다. 확인 후 입력하신 이메일로 승인 여부와 결제 안내를 드립니다.
             </p>
             <a href="apply.html" class="back-btn lang-text" data-ko="신청 방법 선택으로 돌아가기" data-en="Back to Application Options">
                 <span class="back-btn-arrow">←</span> 신청 방법 선택으로 돌아가기
@@ -47,6 +47,10 @@
                 <div class="form-row">
                     <label for="reqName" class="lang-text" data-ko="이름 / 닉네임" data-en="Name / Nickname">이름 / 닉네임</label>
                     <input type="text" id="reqName" name="reqName" required>
+                </div>
+                <div class="form-row">
+                    <label for="reqEmail" class="lang-text" data-ko="이메일 (필수 · 승인/결제 안내를 받을 주소)" data-en="Email (required · for approval and payment info)">이메일 (필수 · 승인/결제 안내를 받을 주소)</label>
+                    <input type="email" id="reqEmail" name="reqEmail" autocomplete="email" required>
                 </div>
                 <div class="form-row">
                     <label for="reqContact" class="lang-text" data-ko="연락처 (X, 디스코드 등)" data-en="Contact (X, Discord, etc.)">연락처 (X, 디스코드 등)</label>
@@ -95,62 +99,20 @@
                     <label for="reqNote" class="lang-text" data-ko="추가 메모 (선택)" data-en="Additional Notes (optional)">추가 메모 (선택)</label>
                     <textarea id="reqNote" name="reqNote" rows="3"></textarea>
                 </div>
+                <input type="checkbox" name="botcheck" id="reqBotcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
             </form>
 
             <div class="form-actions">
-                <button type="button" id="saveImageBtn" class="apply-action-btn secondary lang-text" data-ko="신청서 이미지로 저장" data-en="Save as Image">신청서 이미지로 저장</button>
-                <a
-                    id="googleFormLink"
-                    href="#"
-                    class="apply-action-btn lang-text"
-                    data-ko="구글 폼으로 신청하기"
-                    data-en="Apply via Google Form"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    구글 폼으로 신청하기
-                </a>
+                <button type="button" id="sendRequestBtn" class="apply-action-btn lang-text" data-ko="신청서 보내기" data-en="Send Request">신청서 보내기</button>
             </div>
             <p id="formHint" class="form-hint lang-text"
-               data-ko="이미지를 먼저 저장한 뒤 구글 폼에서 업로드해 주세요."
-               data-en="Save the image first, then upload it on the Google Form.">
-                이미지를 먼저 저장한 뒤 구글 폼에서 업로드해 주세요.
+               data-ko="보내신 뒤 확인하고 입력하신 이메일로 승인 여부를 연락드립니다. 승인 연락을 받기 전에는 결제하지 말아 주세요."
+               data-en="After you send it, I will review it and email you about approval. Please do not pay before you receive my approval.">
+                보내신 뒤 확인하고 입력하신 이메일로 승인 여부를 연락드립니다. 승인 연락을 받기 전에는 결제하지 말아 주세요.
             </p>
-
-            <div class="request-payment-divider"></div>
-
-            <div class="request-payment-block">
-                <h2 class="confirm-title lang-text" data-ko="신청 후 결제 진행" data-en="Proceed to Payment After Applying">신청 후 결제 진행</h2>
-                <p class="confirm-copy lang-text"
-                   data-ko="신청서 이미지를 구글 폼에 제출한 뒤, 아래에서 바로 결제를 진행할 수 있습니다."
-                   data-en="After submitting your request image on the Google Form, you can proceed to payment right here.">
-                    신청서 이미지를 구글 폼에 제출한 뒤, 아래에서 바로 결제를 진행할 수 있습니다.
-                </p>
-                <div class="payment-grid">
-                    <div class="payment-col">
-                        <span class="payment-label">KR</span>
-                        <button type="button" class="payment-btn" id="kakaoPayBtn">Kakao</button>
-                    </div>
-                    <div class="payment-col">
-                        <span class="payment-label">JP / CH / EN / etc.</span>
-                        <a href="https://paypal.me/patohsi" class="payment-btn" target="_blank" rel="noopener noreferrer">Paypal</a>
-                    </div>
-                </div>
-            </div>
+            <p id="formStatus" class="form-hint" role="status" aria-live="polite"></p>
         </section>
 
-        <canvas id="requestCanvas" class="request-canvas-hidden"></canvas>
-    </div>
-
-    <!-- 카카오페이 QR 팝업 -->
-    <div id="kakaoQrModal" class="qr-modal is-hidden">
-        <div class="qr-modal-backdrop" onclick="closeKakaoQr()"></div>
-        <div class="qr-modal-box">
-            <button type="button" class="qr-modal-close" onclick="closeKakaoQr()" aria-label="닫기">×</button>
-            <h3 class="lang-text" data-ko="카카오페이로 결제" data-en="Pay with KakaoPay">카카오페이로 결제</h3>
-            <p class="lang-text" data-ko="아래 QR코드를 카카오톡으로 스캔해 주세요." data-en="Scan the QR code below with KakaoTalk.">아래 QR코드를 카카오톡으로 스캔해 주세요.</p>
-            <img src="../assets/kakao_qr.png" alt="카카오페이 QR코드" class="qr-modal-img" onerror="this.onerror=null;this.removeAttribute('src');this.closest('.qr-modal-box').classList.add('qr-no-image')">
-        </div>
     </div>
 
     <div id="scroll-top-btn" onclick="scrollToTop()">

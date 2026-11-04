@@ -50,47 +50,134 @@
             </p>
         </div>
 
-        <!-- 사용 가능 툴 섹션 -->
+        <!-- AI 미사용 선언 (한·중·일·영) -->
+        <div class="ai-notice" role="note">
+            <p lang="ko"><span>KR</span>제 그림에는 절대 AI를 사용하지 않습니다.</p>
+            <p lang="zh"><span>CN</span>我的画作绝不使用AI。</p>
+            <p lang="ja"><span>JP</span>私の絵には、AIを一切使用していません。</p>
+            <p lang="en"><span>EN</span>I never use AI in my artwork.</p>
+        </div>
+
+        <!-- 사용 가능 툴 섹션 (숙련도 3단계) -->
         <div class="tools-section">
             <h2 class="section-title">사용 가능 툴</h2>
-            
-            <div class="tools-list">
-                <!-- 긴 아이콘 (Unreal, CSP) -->
-                <img src="assets/tool_unreal.png" alt="Unreal Engine" class="tool-banner" onerror="this.style.background='#000'">
-                <img src="assets/tool_csp.png" alt="Clip Studio Paint" class="tool-banner" onerror="this.style.background='#eee'">
 
-                <!-- 정사각형 아이콘 그리드 (1행) -->
-                <div class="tool-grid-row">
-                    <img src="assets/tool_speedtree.png" alt="SpeedTree" class="tool-square">
-                    <img src="assets/tool_c4d.png" alt="Cinema 4D" class="tool-square">
-                    <!-- 빈칸 (이미지상 빈칸이 있음) -->
-                    <div class="tool-square" style="visibility: hidden;"></div>
-                </div>
-
-                <!-- 정사각형 아이콘 그리드 (2행) -->
-                <div class="tool-grid-row">
-                    <img src="assets/tool_substance.png" alt="Substance Painter" class="tool-square">
-                    <img src="assets/tool_substance_ds.png" alt="substance" class="tool-square">
-                    <img src="assets/tool_recap.png" alt="realcpa" class="tool-square">
-                </div>
-
-                <!-- 정사각형 아이콘 그리드 (3행) -->
-                <div class="tool-grid-row">
-                    <img src="assets/tool_marmoset.png" alt="Marmoset" class="tool-square">
-                    <img src="assets/tool_blender.png" alt="Blender" class="tool-square">
-                    <img src="assets/tool_vs.png" alt="Visual Studio" class="tool-square">
-                </div>
-                <div class="tool-grid-row">
-                    <img src="assets/html.jpg" alt="html" class="tool-square">
-                    <img src="assets/js.jpg" alt="js" class="tool-square">
-                    <img src="assets/css.webp" alt="css" class="tool-square">
-                </div>
-                <div class="tool-grid-row">
-                    <img src="assets/clude.png" alt="clude" class="tool-square">
-                    <img src="assets/tool_gaea.png" alt="Gaea" class="tool-square">
-                    <img src="assets/c++.png" alt="c++" class="tool-square">
-                </div>
+            <!-- 메인 툴: 가장 주력으로 쓰는 두 툴을 가로 배너로 맨 위에 고정 -->
+            <div class="tool-main-banners">
+                <img src="assets/tool_unreal.png" alt="Unreal Engine" class="tool-banner">
+                <img src="assets/tool_csp.png" alt="Clip Studio Paint" class="tool-banner">
             </div>
+
+            <!--
+                각 tool-tier가 숙련도 한 단계를 나타냅니다.
+                아이콘을 다른 단계로 옮기려면 <img> 태그를 통째로
+                원하는 .tool-tier-grid 안으로 잘라 옮기면 됩니다.
+            -->
+            <div class="tool-tiers">
+                <section class="tool-tier">
+                    <div class="tier-head"><h3 class="tool-tier-title">MAIN</h3><span class="tier-sub">주력으로 쓰는 툴</span><span class="tier-meter" data-lv="3" aria-label="숙련도 3/3"><i></i><i></i><i></i></span></div>
+                    <div class="tool-tier-grid">
+                        <div class="tool-icon"><img src="assets/color/substance_zoom.png" alt="Substance Painter"><span>Substance Painter</span></div>
+                        <div class="tool-icon"><img src="assets/tool_blender.png" alt="Blender"><span>Blender</span></div>
+                        <div class="tool-icon"><img src="assets/tool_photoshop.webp" alt="Photoshop"><span>Photoshop</span></div>
+                        <div class="tool-icon"><img src="assets/color/claude.svg" alt="Claude"><span>Claude</span></div>
+                        <div class="tool-icon"><img src="assets/color/html.png" alt="HTML"><span>HTML</span></div>
+                        <div class="tool-icon"><img src="assets/tool_c4d.png" alt="Cinema 4D"><span>Cinema 4D</span></div>
+                        <div class="tool-icon"><img src="assets/tool_marvelousdesigner.png" alt="Marvelous Designer"><span>Marvelous Designer</span></div>
+                        <div class="tool-icon"><img src="assets/tool_speedtree.png" alt="SpeedTree"><span>SpeedTree</span></div>
+                        <div class="tool-icon"><img src="assets/tool_live2d.png" alt="Live2D Cubism"><span>Live2D Cubism</span></div>
+                    </div>
+                </section>
+
+                <section class="tool-tier">
+                    <div class="tier-head"><h3 class="tool-tier-title">WORKING</h3><span class="tier-sub">작업에 쓸 수 있는 툴</span><span class="tier-meter" data-lv="2" aria-label="숙련도 2/3"><i></i><i></i><i></i></span></div>
+                    <div class="tool-tier-grid">
+                        <div class="tool-icon"><img src="assets/tool_recap.png" alt="RealityCapture"><span>RealityCapture</span></div>
+                        <!-- TODO: Marmoset 로고 필요 (기존 파일이 Marvelous 로고여서 임시 제외) <div class="tool-icon"><img src="assets/tool_marmoset.png" alt="Marmoset"><span>Marmoset</span></div> -->
+                        <div class="tool-icon"><img src="assets/tool_vs.png" alt="Visual Studio"><span>Visual Studio</span></div>
+                        <div class="tool-icon"><img src="assets/color/js.png" alt="JavaScript"><span>JavaScript</span></div>
+                        <div class="tool-icon"><img src="assets/color/css.png" alt="CSS"><span>CSS</span></div>
+                        <div class="tool-icon"><img src="assets/tool_gaea.png" alt="Gaea"><span>Gaea</span></div>
+                        <div class="tool-icon"><img src="assets/tool_illustrator.webp" alt="Illustrator"><span>Illustrator</span></div>
+                        <div class="tool-icon"><img src="assets/tool_premiere.webp" alt="Premiere Pro"><span>Premiere Pro</span></div>
+                        <div class="tool-icon"><img src="assets/tool_figma.webp" alt="Figma"><span>Figma</span></div>
+                        <div class="tool-icon"><img src="assets/color/mixer.png" alt="Quixel Mixer"><span>Quixel Mixer</span></div>
+                        <div class="tool-icon"><img src="assets/color/sketchup.png" alt="SketchUp"><span>SketchUp</span></div>
+                    </div>
+                </section>
+
+                <section class="tool-tier">
+                    <div class="tier-head"><h3 class="tool-tier-title">LEARNING</h3><span class="tier-sub">익히는 중인 툴</span><span class="tier-meter" data-lv="1" aria-label="숙련도 1/3"><i></i><i></i><i></i></span></div>
+                    <div class="tool-tier-grid">
+                        <div class="tool-icon"><img src="assets/color/cpp.svg" alt="C++"><span>C++</span></div>
+                        <div class="tool-icon"><img src="assets/tool_maya.png" alt="Maya"><span>Maya</span></div>
+                        <div class="tool-icon"><img class="on-light" src="assets/color/zbrush.png" alt="ZBrush"><span>ZBrush</span></div>
+                        <div class="tool-icon"><img src="assets/color/substance_ds_zoom.png" alt="Substance Designer"><span>Substance Designer</span></div>
+                        <div class="tool-icon"><img src="assets/tool_aftereffects.webp" alt="After Effects"><span>After Effects</span></div>
+                        <div class="tool-icon"><img src="assets/tool_vegas.svg" alt="Vegas"><span>Vegas</span></div>
+                        <div class="tool-icon"><img src="assets/tool_davinci.webp" alt="DaVinci Resolve"><span>DaVinci Resolve</span></div>
+                        <div class="tool-icon"><img src="assets/tool_flstudio.png" alt="FL Studio"><span>FL Studio</span></div>
+                        <div class="tool-icon"><img src="assets/tool_voicevox.png" alt="VOICEVOX"><span>VOICEVOX</span></div>
+                        <div class="tool-icon"><img src="assets/tool_vroid.png" alt="VRoid Studio"><span>VRoid Studio</span></div>
+                        <div class="tool-icon"><img src="assets/color/alchemist.png" alt="Substance Alchemist"><span>Substance Alchemist</span></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 작업 파이프라인 -->
+            <h3 class="pipeline-title">작업 파이프라인</h3>
+            <div class="pipelines">
+                <section class="pipe-line">
+                    <div class="pipe-line-head"><span class="pipe-line-en">MODELING</span><span class="pipe-line-ko">모델링</span></div>
+                    <ol class="pipeline">
+                        <li class="pipe-stage"><h4>컨셉 · 스캔</h4><div class="pipe-icons"><div class="tool-icon"><img src="assets/tool_photoshop.webp" alt="Photoshop"><span>Photoshop</span></div><div class="tool-icon"><img src="assets/tool_recap.png" alt="RealityCapture"><span>RealityCapture</span></div></div></li>
+                        <li class="pipe-stage"><h4>하이폴리 · 환경</h4><div class="pipe-icons"><div class="tool-icon"><img class="on-light" src="assets/color/zbrush.png" alt="ZBrush"><span>ZBrush</span></div><div class="tool-icon"><img src="assets/tool_marvelousdesigner.png" alt="Marvelous Designer"><span>Marvelous Designer</span></div><div class="tool-icon"><img src="assets/tool_speedtree.png" alt="SpeedTree"><span>SpeedTree</span></div><div class="tool-icon"><img src="assets/tool_gaea.png" alt="Gaea"><span>Gaea</span></div></div></li>
+                        <li class="pipe-stage"><h4>로우폴 · UV</h4><div class="pipe-icons"><div class="tool-icon"><img src="assets/tool_blender.png" alt="Blender"><span>Blender</span></div><div class="tool-icon"><img src="assets/tool_maya.png" alt="Maya"><span>Maya</span></div><div class="tool-icon"><img src="assets/tool_c4d.png" alt="Cinema 4D"><span>Cinema 4D</span></div><div class="tool-icon"><img src="assets/color/sketchup.png" alt="SketchUp"><span>SketchUp</span></div></div></li>
+                        <li class="pipe-stage"><h4>베이크 · 텍스처</h4><div class="pipe-icons"><div class="tool-icon"><img src="assets/color/substance_zoom.png" alt="Substance Painter"><span>Substance Painter</span></div><div class="tool-icon"><img src="assets/color/substance_ds_zoom.png" alt="Substance Designer"><span>Substance Designer</span></div><div class="tool-icon"><img src="assets/color/alchemist.png" alt="Substance Alchemist"><span>Substance Alchemist</span></div><div class="tool-icon"><img src="assets/color/mixer.png" alt="Quixel Mixer"><span>Quixel Mixer</span></div></div></li>
+                        <li class="pipe-stage"><h4>리깅 · 애니</h4><div class="pipe-icons"><div class="tool-icon"><img src="assets/tool_live2d.png" alt="Live2D Cubism"><span>Live2D Cubism</span></div><div class="tool-icon"><img src="assets/tool_vroid.png" alt="VRoid Studio"><span>VRoid Studio</span></div></div></li>
+                    </ol>
+                </section>
+                <section class="pipe-line">
+                    <div class="pipe-line-head"><span class="pipe-line-en">VIDEO</span><span class="pipe-line-ko">영상편집</span></div>
+                    <ol class="pipeline">
+                        <li class="pipe-stage"><h4>컷 편집</h4><div class="pipe-icons"><div class="tool-icon"><img src="assets/tool_premiere.webp" alt="Premiere Pro"><span>Premiere Pro</span></div><div class="tool-icon"><img src="assets/tool_vegas.svg" alt="Vegas"><span>Vegas</span></div><div class="tool-icon"><img src="assets/tool_davinci.webp" alt="DaVinci Resolve"><span>DaVinci Resolve</span></div></div></li>
+                        <li class="pipe-stage"><h4>모션 · 이펙트</h4><div class="pipe-icons"><div class="tool-icon"><img src="assets/tool_aftereffects.webp" alt="After Effects"><span>After Effects</span></div></div></li>
+                        <li class="pipe-stage"><h4>사운드 · 보이스</h4><div class="pipe-icons"><div class="tool-icon"><img src="assets/tool_flstudio.png" alt="FL Studio"><span>FL Studio</span></div><div class="tool-icon"><img src="assets/tool_voicevox.png" alt="VOICEVOX"><span>VOICEVOX</span></div></div></li>
+                    </ol>
+                </section>
+                <section class="pipe-line">
+                    <div class="pipe-line-head"><span class="pipe-line-en">WEB</span><span class="pipe-line-ko">웹디자인</span></div>
+                    <ol class="pipeline">
+                        <li class="pipe-stage"><h4>디자인</h4><div class="pipe-icons"><div class="tool-icon"><img src="assets/tool_figma.webp" alt="Figma"><span>Figma</span></div><div class="tool-icon"><img src="assets/tool_illustrator.webp" alt="Illustrator"><span>Illustrator</span></div><div class="tool-icon"><img src="assets/tool_photoshop.webp" alt="Photoshop"><span>Photoshop</span></div></div></li>
+                        <li class="pipe-stage"><h4>퍼블리싱</h4><div class="pipe-icons"><div class="tool-icon"><img src="assets/color/html.png" alt="HTML"><span>HTML</span></div><div class="tool-icon"><img src="assets/color/css.png" alt="CSS"><span>CSS</span></div></div></li>
+                        <li class="pipe-stage"><h4>스크립트</h4><div class="pipe-icons"><div class="tool-icon"><img src="assets/color/js.png" alt="JavaScript"><span>JavaScript</span></div><div class="tool-icon"><img src="assets/color/cpp.svg" alt="C++"><span>C++</span></div><div class="tool-icon"><img src="assets/tool_vs.png" alt="Visual Studio"><span>Visual Studio</span></div></div></li>
+                    </ol>
+                </section>
+                <section class="pipe-ai">
+                    <div class="pipe-ai-arrows" aria-hidden="true">↑ ↑ ↑</div>
+                    <div class="pipe-ai-body">
+                        <div class="pipe-ai-text"><span class="pipe-line-en">AI · COMMON</span><strong>모든 파이프라인 공통</strong><span>필요한 프로그램·스크립트를 직접 만들어 반복 작업을 빠르게 처리합니다.</span></div>
+                        <div class="pipe-icons"><div class="tool-icon"><img src="assets/color/claude.svg" alt="Claude"><span>Claude</span></div><div class="tool-icon"><img src="assets/color/comfy.png" alt="ComfyUI"><span>ComfyUI</span></div></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- 작업 이력 섹션 -->
+        <div class="career-section">
+            <h2 class="section-title">작업 이력</h2>
+
+            <ul class="career-list">
+                <li class="career-item">
+                    <span class="career-period">2024 - 현재</span>
+                    <span class="career-role">프리랜서 일러스트레이터 / 3D 아티스트</span>
+                    <span class="career-desc">커미션, 게임 리소스, 부스 소품 제작 등</span>
+                </li>
+            </ul>
+
+            <button type="button" class="resume-btn" onclick="openResume()">
+                이력서 보기
+            </button>
         </div>
 
         <!-- SNS 아이콘 (하단 2줄) -->
@@ -109,6 +196,23 @@
 
     </div>
 
+    <!-- 이력서 팝업 -->
+    <div id="resumeModal" class="resume-modal is-hidden">
+        <div class="resume-modal-backdrop" onclick="closeResume()"></div>
+        <div class="resume-modal-box">
+            <button type="button" class="resume-modal-close" onclick="closeResume()" aria-label="닫기">×</button>
+            <h3>이력서</h3>
+            <div class="resume-modal-body">
+                <p>이력서가 아직 준비 중입니다.<br>곧 업데이트될 예정입니다.</p>
+                <!--
+                    이력서 파일이 준비되면 아래 주석을 해제하고 경로를 넣어주세요.
+                    이미지: <img src="assets/resume.jpg" alt="이력서" class="resume-img">
+                    PDF   : <iframe src="assets/resume.pdf" class="resume-pdf"></iframe>
+                -->
+            </div>
+        </div>
+    </div>
+
     <!-- 스크롤 탑 버튼 -->
     <div id="scroll-top-btn" onclick="scrollToTop()">
         <img src="../assets/top_btn.png" class="top-btn-img">
@@ -118,7 +222,7 @@
     <div class="bottom-nav-wrapper inverted-nav">
         <div class="nav-glow"></div>
         <nav id="main-nav" class="nav-bar">
-            <!-- SVG -->
+            <!-- svg -->
             <div class="nav-bump-svg-container" onclick="toggleNav()">
                 <svg viewBox="0 0 400 60" preserveAspectRatio="none" class="bump-svg">
                     <path d="M0,60 L110,60 Q140,60 150,40 L160,15 Q165,0 185,0 L215,0 Q235,0 240,15 L250,40 Q260,60 290,60 L400,60 Z"></path>

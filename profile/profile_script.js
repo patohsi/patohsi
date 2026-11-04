@@ -1,10 +1,10 @@
-// ³×ºñ°ÔÀÌ¼Ç Åä±Û
+// ë„¤ë¹„ê²Œì´ì…˜ í† ê¸€
 function toggleNav() {
     const navBar = document.getElementById('main-nav');
     navBar.classList.toggle('active');
 }
 
-// ½ºÅ©·Ñ Å¾
+// ìŠ¤í¬ë¡¤ íƒ‘
 function scrollToTop() {
     window.scrollTo({
         top: 0,
@@ -12,7 +12,7 @@ function scrollToTop() {
     });
 }
 
-// ¿ÜºÎ Å¬¸¯ ½Ã ³×ºñ°ÔÀÌ¼Ç ´İ±â
+// ì™¸ë¶€ í´ë¦­ ì‹œ ë„¤ë¹„ê²Œì´ì…˜ ë‹«ê¸°
 document.addEventListener('click', function (event) {
     const navWrapper = document.querySelector('.bottom-nav-wrapper');
     const navBar = document.getElementById('main-nav');
@@ -20,4 +20,23 @@ document.addEventListener('click', function (event) {
     if (navWrapper && !navWrapper.contains(event.target) && navBar.classList.contains('active')) {
         navBar.classList.remove('active');
     }
+});
+
+// ì´ë ¥ì„œ íŒì—…
+function openResume() {
+    const modal = document.getElementById('resumeModal');
+    if (!modal) return;
+    modal.classList.remove('is-hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeResume() {
+    const modal = document.getElementById('resumeModal');
+    if (!modal) return;
+    modal.classList.add('is-hidden');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') closeResume();
 });

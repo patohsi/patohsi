@@ -116,10 +116,11 @@ body {
         font-weight: 500;
     }
 
-/* --- 사용 가능 툴 섹션 --- */
+/* --- 사용 가능 툴 섹션 (숙련도 3단계) --- */
 .tools-section {
     width: 100%;
     margin-bottom: 50px;
+    align-self: center;
 }
 
 .section-title {
@@ -127,45 +128,317 @@ body {
     font-weight: 800;
     margin-bottom: 20px;
     color: #000;
-    text-align: left; /* 제목 왼쪽 정렬 */
-    padding-left: 20%;
-}
-.tools-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 자식 요소들을 가로축 기준 중앙으로 정렬 */
-    gap: 15px;
-    width: 100%;
+    text-align: center;
 }
 
-/* 긴 배너형 아이콘 (Unreal, CSP) */
+/* 메인 툴 배너: 가장 주력인 툴을 가로로 길게, 맨 위에 고정 */
+.tool-main-banners {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 32px;
+}
+
 .tool-banner {
     width: 100%;
     height: 60px;
-    object-fit: contain; /* 비율 유지하며 안에 맞춤 */
+    object-fit: contain;
     border-radius: 10px;
-    /* 배경색이 필요하다면 추가, 이미지가 꽉 차면 불필요 */
-    /* border: 1px solid #eee; */
-}
-/* 정사각형 아이콘 그리드 */
-.tool-grid-row {
-    display: grid;
-    /* 1fr(비율)을 유지하되, 전체 그리드의 최대 너비를 제한하여 크기 조절 */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 15px; /* 박스 사이 간격 */
-    width: 62%; /* 전체 화면 대비 그리드 영역의 너비 (이 수치로 크기 조절) */
-    max-width: 400px; /* 너무 커지지 않게 마지노선 정하기 */
-    margin: 0 auto; /* 그리드 자체를 중앙으로 보냄 */
 }
 
-.tool-square {
+/* 숙련도 3단계 컨테이너: 모바일에서는 세로로 쌓임 */
+.tool-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
     width: 100%;
+}
+
+.tool-tier-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #304ffe;
+    margin: 0 0 18px;
+    text-align: center;
+}
+
+/* 각 단계 내부 그리드.
+   모바일: 한 줄에 3개씩 고정된 3열 그리드로 여러 줄에 걸쳐 표시.
+   PC: 아이콘 개수(최대 11개)가 한 줄에 다 들어가도록 균등 분할. */
+.tool-tier-grid {
+    --tool-count: 11;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 0 4%;
+}
+
+.tool-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+/* 흑백 통일 아이콘: 흰 타일 위에 검정 로고, 로고가 가장자리에 붙지 않도록 여백 */
+.tool-icon img {
+    width: 100%;
+    max-width: 100px;
     aspect-ratio: 1 / 1;
     object-fit: contain;
-    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 0;
+    border-radius: 22%;
     background-color: #fff;
-    border: 1px solid #eee;
+    border: 1px solid #e4e4e4;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* 아이콘 이름: 평소엔 숨기고(스크린리더에는 남김),
+   마우스를 올리거나(PC) 탭해서 포커스가 가면(모바일) 아이콘 위에 말풍선으로 표시 */
+.tool-icon {
+    position: relative;
+    cursor: default;
+    outline: none;
+}
+
+.tool-icon span {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translate(-50%, 4px);
+    z-index: 20;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #111;
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+/* 말풍선 꼬리 */
+.tool-icon span::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid transparent;
+    border-top-color: #111;
+}
+
+.tool-icon:hover span,
+.tool-icon:focus span,
+.tool-icon:focus-within span {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.tool-icon:hover img,
+.tool-icon:focus img {
+    border-color: #304ffe;
+    box-shadow: 0 6px 16px rgba(48, 79, 254, 0.25);
+    transform: translateY(-2px);
+}
+
+.tool-icon img {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+/* 좌우 끝 아이콘의 말풍선이 화면 밖으로 잘리지 않게 */
+.tool-tier-grid .tool-icon:first-child span { left: 0; transform: translate(0, 4px); }
+.tool-tier-grid .tool-icon:first-child:hover span,
+.tool-tier-grid .tool-icon:first-child:focus span { transform: translate(0, 0); }
+.tool-tier-grid .tool-icon:first-child span::after { left: 24px; }
+.tool-tier-grid .tool-icon:last-child span { left: auto; right: 0; transform: translate(0, 4px); }
+.tool-tier-grid .tool-icon:last-child:hover span,
+.tool-tier-grid .tool-icon:last-child:focus span { transform: translate(0, 0); }
+.tool-tier-grid .tool-icon:last-child span::after { left: auto; right: 24px; margin-left: 0; }
+
+/* PC 화면: 툴 섹션만 넓게 펼쳐서 100px 아이콘이 한 줄에 다 들어가게 함
+   (다른 섹션은 그대로 600px 폭 유지, 이 섹션만 max-width를 키우고 중앙 정렬) */
+@media (min-width: 900px) {
+    .tools-section {
+        max-width: 1160px;
+        width: 92vw;
+    }
+
+    .tool-main-banners {
+        max-width: 560px;
+    }
+
+    .tool-tiers {
+        gap: 44px;
+    }
+
+    .tool-tier-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: min(1.2vw, 20px);
+        padding: 0;
+    }
+
+    .tool-icon {
+        flex: 0 0 100px;
+        width: 100px;
+    }
+
+    .tool-icon img {
+        max-width: none;
+    }
+}
+
+/* --- 작업 이력 섹션 --- */
+.career-section {
+    width: 100%;
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.career-list {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0 6%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.career-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 18px;
+    border-radius: 16px;
+    background: #f7f8fc;
+    border: 1px solid #eee;
+}
+
+.career-period {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #304ffe;
+}
+
+.career-role {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.career-desc {
+    font-size: 0.82rem;
+    color: #666;
+}
+
+.resume-btn {
+    display: block;
+    margin: 0 6%;
+    padding: 14px 0;
+    width: calc(100% - 12%);
+    border: none;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.resume-btn:hover {
+    transform: translateY(-2px);
+    background: #304ffe;
+}
+
+/* --- 이력서 팝업 --- */
+.resume-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resume-modal.is-hidden {
+    display: none;
+}
+
+.resume-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 17, 17, 0.6);
+}
+
+.resume-modal-box {
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    border-radius: 24px;
+    padding: 36px 32px;
+    max-width: 420px;
+    width: calc(100% - 40px);
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+.resume-modal-box h3 {
+    margin: 0 0 16px;
+    font-size: 1.3rem;
+    color: #111;
+}
+
+.resume-modal-body p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.resume-img,
+.resume-pdf {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.resume-pdf {
+    height: 60vh;
+}
+
+.resume-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #f2f2f2;
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.resume-modal-close:hover {
+    background: #e5e5e5;
 }
 
 /* --- SNS 아이콘 (하단 2줄) --- */
@@ -241,4 +514,113 @@ body {
     .profile-wrapper {
         width: 90%;
     }
+}
+
+/* --- 숙련도 패널 (3D 아티스트 포트폴리오 스타일) --- */
+.tool-tiers {
+    background: #111;
+    border-radius: 24px;
+    padding: 8px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.tool-tier { padding: 22px 0; border-top: 1px solid #2a2a2a; }
+.tool-tier:first-child { border-top: 0; }
+.tier-head { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 14px; }
+.tool-tiers .tool-tier-title {
+    margin: 0; text-align: left; color: #fff;
+    font-family: 'Fredoka One', 'Noto Sans KR', sans-serif;
+    font-size: 1.35rem; font-weight: 400; letter-spacing: 0.08em;
+}
+.tier-sub { font-size: 0.8rem; color: #8a8a8a; }
+.tier-meter { display: flex; gap: 5px; margin-top: 2px; }
+.tier-meter i { width: 22px; height: 5px; border-radius: 3px; background: #333; }
+.tier-meter[data-lv="1"] i:nth-child(-n+1),
+.tier-meter[data-lv="2"] i:nth-child(-n+2),
+.tier-meter[data-lv="3"] i { background: #5c7cff; }
+.tool-tiers .tool-tier-grid { padding: 0; gap: 12px; justify-content: start; }
+.tool-tiers .tool-icon img { border: 0; box-shadow: none; }
+.tool-tiers .tool-icon span { background: #fff; color: #111; }
+.tool-tiers .tool-icon span::after { border-top-color: #fff; }
+@media (min-width: 900px) {
+    .tool-tiers { padding: 8px 36px; }
+    .tool-tier { display: grid; grid-template-columns: 190px 1fr; align-items: center; gap: 24px; }
+    .tier-head { margin: 0; }
+    .tool-tiers .tool-tier-grid { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 12px; }
+    .tool-tiers .tool-icon { flex: 0 0 68px; width: 68px; }
+}
+
+/* 아이콘 박스: 흰 배경 제거 (어두운 패널 위에서 투명) */
+.tool-icon img { background-color: transparent; }
+.tool-icon img.on-light { background-color: #fff; }
+
+/* --- 작업 파이프라인 (3개 라인 + 공통 AI) --- */
+.pipeline-title { text-align: center; font-size: 1.4rem; font-weight: 800; color: #304ffe; margin: 56px 0 24px; }
+.pipelines { display: flex; flex-direction: column; gap: 16px; }
+.pipe-line { background: #111; border-radius: 22px; padding: 18px 16px 22px; }
+.pipe-line-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+.pipe-line-en { font-family: 'Fredoka One','Noto Sans KR',sans-serif; letter-spacing: 0.1em; color: #5c7cff; font-size: 0.8rem; }
+.pipe-line-ko { color: #fff; font-weight: 800; font-size: 1.1rem; }
+.pipeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 26px; }
+.pipe-stage { position: relative; background: #1d1d1d; border-radius: 16px; padding: 12px 10px 14px; text-align: center; }
+.pipe-stage h4 { margin: 0 0 10px; font-size: 0.82rem; font-weight: 700; color: #cfcfcf; }
+.pipe-stage:not(:last-child)::after { content: "↓"; position: absolute; left: 50%; bottom: -24px; transform: translateX(-50%); color: #5c7cff; font-size: 1.3rem; font-weight: 900; line-height: 1; }
+.pipe-icons { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.pipe-icons .tool-icon { flex: 0 0 52px; width: 52px; }
+.pipe-icons .tool-icon img { max-width: none; border: 0; box-shadow: none; }
+.pipe-icons .tool-icon span { background: #fff; color: #111; }
+.pipe-icons .tool-icon span::after { border-top-color: #fff; }
+.pipe-ai { text-align: center; }
+.pipe-ai-arrows { color: #5c7cff; font-weight: 900; font-size: 1.3rem; letter-spacing: 0.9em; padding-left: 0.9em; margin-bottom: 4px; }
+.pipe-ai-body { background: #111; border: 1px dashed #5c7cff; border-radius: 22px; padding: 18px 16px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.pipe-ai-text { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.pipe-ai-text strong { color: #fff; font-size: 1.05rem; }
+.pipe-ai-text span:last-child { color: #9a9a9a; font-size: 0.82rem; line-height: 1.5; }
+@media (min-width: 900px) {
+    .pipe-line { display: grid; grid-template-columns: 110px 1fr; align-items: center; gap: 18px; padding: 18px 24px; }
+    .pipe-line-head { flex-direction: column; gap: 4px; margin: 0; }
+    .pipeline { flex-direction: row; gap: 30px; }
+    .pipe-stage { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+    .pipe-stage:not(:last-child)::after { content: "→"; left: auto; right: -23px; bottom: auto; top: 50%; transform: translateY(-50%); }
+    .pipe-ai-body { flex-direction: row; justify-content: space-between; padding: 18px 28px; }
+    .pipe-ai-text { align-items: flex-start; text-align: left; }
+}
+
+@media (min-width: 900px) {
+    .tool-tiers .tool-tier-grid { gap: 10px; }
+    .tool-tiers .tool-icon { flex: 0 0 60px; width: 60px; }
+}
+
+
+/* --- AI 미사용 선언 --- */
+.ai-notice {
+    width: 100%;
+    margin: -16px 0 40px;
+    padding: 16px 20px;
+    border: 2px solid #111;
+    border-radius: 16px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.ai-notice p {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #111;
+}
+.ai-notice span {
+    flex: 0 0 auto;
+    min-width: 2.2em;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: #304ffe;
 }

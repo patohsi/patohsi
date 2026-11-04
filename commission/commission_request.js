@@ -2,52 +2,45 @@
    커미션 신청서 페이지 (request.html) 전용 스크립트
    - 커미션 종류: 태그 단일 선택
    - 추가 옵션: +버튼으로 여러 개 추가/제거
-   - 작성 내용 -> 이미지(PNG)로 저장 -> 구글 폼 링크로 이동
+   - 작성 내용 -> Web3Forms -> patohsi 이메일로 전송
    =================================================================== */
 
-// TODO: 구글 폼을 만든 뒤 이 URL을 실제 폼 주소로 교체하세요.
-// (폼 편집 화면에서 "보내기" -> 링크 아이콘으로 URL 복사)
-const GOOGLE_FORM_URL = 'https://forms.gle/REPLACE_WITH_YOUR_FORM_ID';
+// TODO: https://web3forms.com 에서 받은 Access Key로 교체하세요. (키는 공개되어도 되는 값입니다)
+const WEB3FORMS_ACCESS_KEY = 'REPLACE_WITH_WEB3FORMS_ACCESS_KEY';
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
 let selectedAddons = []; // { label, value } 목록, 같은 종류 중복 추가 가능
 
-document.addEventListener('DOMContentLoaded', () => {
-    const googleFormLink = document.getElementById('googleFormLink');
-    if (googleFormLink) {
-        googleFormLink.href = GOOGLE_FORM_URL;
-    }
+const MESSAGES = {
+    ko: {
+        sending: '보내는 중입니다…',
+        done: '신청서가 전달되었습니다. 확인 후 입력하신 이메일로 연락드리겠습니다.',
+        fail: '전송에 실패했습니다. 잠시 후 다시 시도하거나 X(DM)로 연락해 주세요.',
+        noKey: '아직 전송 설정이 되어 있지 않습니다. (관리자: commission_request.js 의 Access Key 를 입력해 주세요)',
+        type: '커미션 종류를 선택해 주세요.',
+    },
+    en: {
+        sending: 'Sending…',
+        done: 'Your request has been sent. I will email you after reviewing it.',
+        fail: 'Failed to send. Please try again later or contact me via X (DM).',
+        noKey: 'Sending is not configured yet. (Admin: set the Access Key in commission_request.js)',
+        type: 'Please choose a commission type.',
+    },
+};
 
+function currentLang() {
+    const active = document.querySelector('.lang-btn.active');
+    return active && /EN/i.test(active.textContent) ? 'en' : 'ko';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     setupTypeTags();
     setupAddonButtons();
 
-    const saveImageBtn = document.getElementById('saveImageBtn');
-    if (saveImageBtn) {
-        saveImageBtn.addEventListener('click', saveRequestAsImage);
+    const sendBtn = document.getElementById('sendRequestBtn');
+    if (sendBtn) {
+        sendBtn.addEventListener('click', sendRequest);
     }
-
-    const kakaoPayBtn = document.getElementById('kakaoPayBtn');
-    if (kakaoPayBtn) {
-        kakaoPayBtn.addEventListener('click', openKakaoQr);
-    }
-});
-
-/* --- 카카오페이 QR 팝업 --- */
-function openKakaoQr() {
-    const modal = document.getElementById('kakaoQrModal');
-    if (!modal) return;
-    modal.classList.remove('is-hidden');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeKakaoQr() {
-    const modal = document.getElementById('kakaoQrModal');
-    if (!modal) return;
-    modal.classList.add('is-hidden');
-    document.body.style.overflow = '';
-}
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeKakaoQr();
 });
 
 /* --- 커미션 종류: 태그 단일 선택 --- */
@@ -74,9 +67,7 @@ function setupAddonButtons() {
 
     addButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            const value = btn.dataset.value;
-            const label = btn.dataset.label;
-            selectedAddons.push({ label, value });
+            selectedAddons.push({ label: btn.dataset.label, value: btn.dataset.value });
             renderAddonChips();
         });
     });
@@ -102,10 +93,9 @@ function renderAddonChips() {
 
 function getFormValues() {
     const form = document.getElementById('requestForm');
-    if (!form) return null;
-
     return {
         name: form.reqName.value.trim(),
+        email: form.reqEmail.value.trim(),
         contact: form.reqContact.value.trim(),
         type: form.reqType.value,
         addons: selectedAddons.map(a => a.value),
@@ -116,10 +106,18 @@ function getFormValues() {
     };
 }
 
-function saveRequestAsImage() {
+function setStatus(text, ok) {
+    const el = document.getElementById('formStatus');
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle('form-hint-success', !!ok);
+}
+
+async function sendRequest() {
     const form = document.getElementById('requestForm');
-    const hint = document.getElementById('formHint');
+    const sendBtn = document.getElementById('sendRequestBtn');
     const typeRow = document.getElementById('typeTagGroup').closest('.form-row');
+    const msg = MESSAGES[currentLang()];
 
     if (!form.reportValidity()) {
         return;
@@ -127,114 +125,60 @@ function saveRequestAsImage() {
     if (!form.reqType.value) {
         typeRow.classList.add('has-error');
         typeRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setStatus(msg.type, false);
+        return;
+    }
+    if (WEB3FORMS_ACCESS_KEY.indexOf('REPLACE_') === 0) {
+        setStatus(msg.noKey, false);
         return;
     }
 
-    const data = getFormValues();
-    const canvas = document.getElementById('requestCanvas');
-    const ctx = canvas.getContext('2d');
+    const d = getFormValues();
+    const summary = [
+        `이름/닉네임: ${d.name}`,
+        `이메일: ${d.email}`,
+        `연락처: ${d.contact}`,
+        `커미션 종류: ${d.type}`,
+        `추가 옵션: ${d.addons.length ? d.addons.join(', ') : '-'}`,
+        `캐릭터/리퀘스트 내용:\n${d.character}`,
+        `희망 마감일: ${d.deadline || '-'}`,
+        `레퍼런스 링크: ${d.reference || '-'}`,
+        `추가 메모: ${d.note || '-'}`,
+    ].join('\n\n');
 
-    const width = 900;
-    const padding = 48;
-    const lineHeight = 30;
-    const labelFont = '700 15px "Noto Sans KR", sans-serif';
-    const valueFont = '400 17px "Noto Sans KR", sans-serif';
-    const titleFont = '700 26px "Noto Sans KR", sans-serif';
+    const payload = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `[커미션 신청] ${d.type} - ${d.name}`,
+        from_name: d.name,
+        email: d.email, // 메일에서 바로 답장할 수 있게 reply-to 로 사용됨
+        message: summary,
+        botcheck: form.botcheck.checked,
+    };
 
-    const fields = [
-        { label: '이름 / 닉네임', value: data.name },
-        { label: '연락처', value: data.contact },
-        { label: '커미션 종류', value: data.type },
-        { label: '추가 옵션', value: data.addons.length ? data.addons.join(', ') : '-' },
-        { label: '캐릭터 / 리퀘스트 내용', value: data.character },
-        { label: '희망 마감일', value: data.deadline || '-' },
-        { label: '레퍼런스 링크', value: data.reference || '-' },
-        { label: '추가 메모', value: data.note || '-' },
-    ];
+    sendBtn.disabled = true;
+    setStatus(msg.sending, false);
 
-    ctx.font = valueFont;
-    const maxTextWidth = width - padding * 2;
-
-    function wrapText(text, font) {
-        ctx.font = font;
-        const words = text.split(/\s+/);
-        const lines = [];
-        let current = '';
-        words.forEach(word => {
-            const test = current ? current + ' ' + word : word;
-            if (ctx.measureText(test).width > maxTextWidth && current) {
-                lines.push(current);
-                current = word;
-            } else {
-                current = test;
-            }
+    try {
+        const res = await fetch(WEB3FORMS_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(payload),
         });
-        if (current) lines.push(current);
-        return lines.length ? lines : [''];
-    }
-
-    let totalHeight = padding + 46 + 24;
-    const wrappedFields = fields.map(f => {
-        const lines = wrapText(f.value || '-', valueFont);
-        const blockHeight = 22 + lines.length * lineHeight + 22;
-        totalHeight += blockHeight;
-        return { ...f, lines, blockHeight };
-    });
-    totalHeight += padding;
-
-    canvas.width = width;
-    canvas.height = Math.max(totalHeight, 400);
-
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = '#304ffe';
-    ctx.lineWidth = 4;
-    ctx.strokeRect(2, 2, canvas.width - 4, canvas.height - 4);
-
-    let y = padding + 32;
-    ctx.fillStyle = '#111111';
-    ctx.font = titleFont;
-    ctx.fillText('커미션 신청서', padding, y);
-    ctx.font = '400 13px "Noto Sans KR", sans-serif';
-    ctx.fillStyle = '#888888';
-    ctx.fillText('Patohsi Commission Request', padding, y + 20);
-    y += 20 + 30;
-
-    ctx.strokeStyle = '#e0e0e0';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(padding, y);
-    ctx.lineTo(width - padding, y);
-    ctx.stroke();
-    y += 34;
-
-    wrappedFields.forEach(f => {
-        ctx.font = labelFont;
-        ctx.fillStyle = '#304ffe';
-        ctx.fillText(f.label, padding, y);
-        y += 22;
-
-        ctx.font = valueFont;
-        ctx.fillStyle = '#222222';
-        f.lines.forEach(line => {
-            ctx.fillText(line, padding, y);
-            y += lineHeight;
-        });
-        y += 22;
-    });
-
-    ctx.font = '400 12px "Noto Sans KR", sans-serif';
-    ctx.fillStyle = '#aaaaaa';
-    ctx.fillText('이 이미지를 구글 폼에 첨부해 제출해 주세요.', padding, canvas.height - 20);
-
-    const link = document.createElement('a');
-    const safeName = (data.name || 'request').replace(/[\\/:*?"<>|]/g, '_');
-    link.download = `commission_request_${safeName}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-
-    if (hint) {
-        hint.textContent = '이미지가 저장되었습니다. 이제 "구글 폼으로 신청하기" 버튼을 눌러 업로드해 주세요.';
-        hint.classList.add('form-hint-success');
+        const json = await res.json();
+        if (res.ok && json.success) {
+            setStatus(msg.done, true);
+            setTimeout(() => { sendBtn.disabled = false; }, 5000);
+            form.reset();
+            selectedAddons = [];
+            renderAddonChips();
+            form.reqType.value = '';
+            document.querySelectorAll('#typeTagGroup .tag-chip').forEach(c => c.classList.remove('active'));
+        } else {
+            setStatus(msg.fail, false);
+            sendBtn.disabled = false;
+        }
+    } catch (err) {
+        setStatus(msg.fail, false);
+        sendBtn.disabled = false;
     }
 }

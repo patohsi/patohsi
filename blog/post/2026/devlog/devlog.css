@@ -1,0 +1,62 @@
+/* 개발 일지 - 원본과 같은 노드 박스/핀/와이어를 한 줄로 */
+.dl-post { max-width: 1040px; text-align: left; }
+.dl-post .post-main-title { text-align: center; margin-bottom: 16px; }
+.dl-lead { text-align: center; color: #888; margin: 0 0 56px; }
+.dl-sec { margin-bottom: 52px; }
+.dl-sec h2 { font-size: 1.15rem; font-weight: 800; color: #111; margin: 0 0 14px; }
+.dl-sec ol { margin: 0; padding-left: 1.4em; color: #333; line-height: 1.75; }
+.dl-sec .same { margin: 12px 0 0; font-size: 0.8rem; color: #8a8a8a; }
+
+.flow { background: #1a1a1a; border-radius: 18px; padding: 24px 22px 28px; margin-bottom: 12px; overflow-x: auto; overflow-y: hidden; }
+.canvas { position: relative; width: max-content; min-width: 100%; }
+.wires { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.seq, .fork, .extra { position: relative; z-index: 1; }
+
+.seq { display: flex; align-items: flex-start; gap: 46px; width: max-content; }
+.col { display: flex; align-items: flex-start; gap: 34px; }
+.feeds { display: flex; align-items: flex-start; gap: 34px; margin-top: 58px; }
+.lvl { display: flex; flex-direction: column; gap: 12px; }
+.main { flex: 0 0 auto; }
+.fork { margin-top: 30px; padding-left: 18px; border-left: 2px solid #444; display: flex; flex-direction: column; gap: 28px; }
+.lane { display: flex; align-items: flex-start; gap: 14px; }
+.lanebody { min-width: 0; }
+.extra { display: flex; align-items: flex-start; gap: 14px; margin-top: 30px; }
+.tag { flex: 0 0 auto; margin-top: 4px; padding: 3px 10px; border-radius: 999px; font: 700 11px 'Segoe UI', 'Noto Sans KR', sans-serif; background: #304ffe; color: #fff; white-space: nowrap; }
+
+/* 노드 */
+.nd { min-width: 150px; max-width: 250px; border-radius: 7px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05); font-family: 'Segoe UI', 'Noto Sans KR', sans-serif; }
+.nh { padding: 7px 11px; font-size: 11px; font-weight: 700; color: #fff; border-radius: 7px 7px 0 0; line-height: 1.35; word-break: break-word; background: #444; }
+.nbody { background: #272727; border-radius: 0 0 7px 7px; padding: 4px 0 5px; }
+.pr { display: flex; align-items: center; min-height: 24px; padding: 0 10px; gap: 7px; }
+.pr.txt { color: #8a8a8a; font-size: 10px; font-style: italic; }
+.pl { font-size: 10.5px; color: #b0b0b0; line-height: 1.3; }
+.sp { flex: 1; }
+.k-event .nh, .k-custom .nh, .k-def .nh { background: linear-gradient(135deg, #7a0000, #501010); }
+.k-func .nh { background: linear-gradient(135deg, #0d4a20, #082e12); }
+.k-pure .nh { background: linear-gradient(135deg, #103010, #061806); }
+.k-cast .nh { background: linear-gradient(135deg, #0d254a, #080e2e); }
+.k-set .nh { background: linear-gradient(135deg, #3a0a0a, #220606); }
+.k-get .nh, .k-self .nh, .k-lit .nh { background: linear-gradient(135deg, #251040, #120820); }
+.k-branch .nh, .k-switch .nh, .k-loop .nh { background: linear-gradient(135deg, #3a3a00, #252500); }
+.k-return .nh { background: linear-gradient(135deg, #333, #222); }
+.k-bind .nh, .k-new .nh, .k-dt .nh { background: linear-gradient(135deg, #0d3a42, #082329); }
+
+/* 핀 */
+.pd { flex: 0 0 auto; display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #777; box-sizing: border-box; background: transparent; }
+.pd.none { visibility: hidden; }
+.pd.exec { width: 10px; height: 10px; border-radius: 2px; border-color: #ccc; transform: rotate(45deg); }
+.pd.exec.live { background: #ccc; }
+.pd.object, .pd.self, .pd.soft { border-color: #4e9de8; background: #4e9de8; }
+.pd.int, .pd.int64, .pd.enum { border-color: #4ec4d0; background: #4ec4d0; }
+.pd.bool, .pd.deleg { border-color: #d04e4e; background: #d04e4e; }
+.pd.float { border-color: #7dd47a; background: #7dd47a; }
+.pd.name, .pd.reply, .pd.key { border-color: #c0c0c0; background: #c0c0c0; border-radius: 2px; width: 10px; height: 10px; }
+.pd.text { border-color: #f5844e; background: #f5844e; }
+.pd.str, .pd.struct { border-color: #c9a75a; background: #c9a75a; }
+.pd.tex { border-color: #e896e8; background: #e896e8; }
+.pd.empty { border-color: #444; background: transparent; }
+
+@media (max-width: 600px) {
+    .flow { padding: 16px 12px 20px; }
+    .nd { min-width: 130px; }
+}
