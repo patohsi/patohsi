@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>메인 시안 B + 박스</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#e9e9e9;font-family:'Noto Sans KR',sans-serif;padding:24px;zoom:.6}
+.tag{font:800 20px 'Noto Sans KR';margin:20px 0 10px;color:#111}
+.frame{width:1280px;background:#fff;position:relative;overflow:hidden;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.18);margin-bottom:34px}
+img{display:block;object-fit:cover}
+.hero{position:relative;height:560px;background:#000}
+.hero img{width:100%;height:100%;opacity:.95}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.6),rgba(0,0,0,0) 55%)}
+.hero .ttl{position:absolute;left:70px;top:50%;transform:translateY(-55%);color:#fff;z-index:2}
+.hero small{font:400 14px 'Fredoka One';letter-spacing:.3em;color:#a1c4fd}
+.hero h1{font:400 96px 'Fredoka One';line-height:1.05}
+.hero p{font-size:19px;font-weight:700;margin-top:6px}
+.hero .side{position:absolute;right:44px;top:50%;transform:translateY(-50%);z-index:2;color:#fff;text-align:right;display:flex;flex-direction:column;gap:16px;font:400 14px 'Fredoka One';letter-spacing:.12em}
+.hero .side b{color:#a1c4fd;display:inline-block;width:26px}
+.hero .timer{position:absolute;left:0;bottom:0;height:4px;width:40%;background:#304ffe;z-index:2}
+.cardrow{position:relative;z-index:3;padding:0 40px}
+.c{position:relative;border-radius:18px;overflow:hidden;background:#111;color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.22)}
+.c img{position:absolute;inset:0;width:100%;height:100%;opacity:.58}
+.c .k{position:absolute;left:20px;top:16px;font:400 12px 'Fredoka One';letter-spacing:.12em;color:#a1c4fd;z-index:1}
+.c .n{position:absolute;left:20px;bottom:44px;font-weight:800;font-size:22px;z-index:1}
+.c .d{position:absolute;left:20px;bottom:16px;font-size:13px;opacity:.9;z-index:1}
+.st{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.2);padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700}
+.st u{width:9px;height:9px;border-radius:50%;background:#2ecc71;display:inline-block}
+.sns{display:flex;justify-content:center;gap:14px;padding:26px 0 90px}
+.sns span{width:42px;height:42px;border-radius:50%;background:#111;display:block}
+.bn{position:absolute;left:0;right:0;bottom:0;height:56px;background:#000}
+.bn i{position:absolute;left:50%;margin-left:-60px;width:120px;height:26px;top:-16px;background:#000;border-radius:18px 18px 0 0}
+.bn b{position:absolute;left:50%;margin-left:-10px;top:-12px;color:#7a3cff;font-size:22px}
+/* M1 */
+.M1 .cardrow{margin-top:-90px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;height:230px}
+/* M2 */
+.M2 .cardrow{margin-top:36px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.M2 .c{height:210px}
+/* M3 */
+.M3 .cardrow{margin-top:36px;display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:200px 200px;gap:16px}
+.M3 .big{grid-row:span 2}
+/* M4 */
+.M4 .cardrow{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.M4 .wide{grid-column:span 3;height:170px}
+.M4 .sm{height:190px}
+</style>
+</head>
+<body>
+
+<div class="tag">시안 1 — 슬라이드 아래로 카드 4개가 걸쳐 올라옴</div>
+<div class="frame M1">
+  <div class="hero"><img src="../assets/main_hero1.png" alt=""><div class="ttl"><small>FREELANCE ARTIST</small><h1>Patohsi</h1><p>게임 · 일러스트 · 3D</p></div><div class="timer"></div></div>
+  <div class="cardrow">
+    <div class="c"><img src="../assets/profile.jpg" alt=""><span class="k">01</span><span class="n">PROFILE</span><span class="d">소개 · 툴 · 이력</span></div>
+    <div class="c"><img src="../portfolio/assets/2026/13.jpg" alt=""><span class="k">02</span><span class="n">PORTFOLIO</span><span class="d">아트 · 개발 작업</span></div>
+    <div class="c"><img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt=""><span class="k">03</span><span class="n">BLOG</span><span class="d">제작 메모 · 개발 일지</span></div>
+    <div class="c"><img src="../assets/commission_art.jpg" alt=""><span class="k">04</span><span class="n">COMMISSION</span><span class="d">가격표 · 신청</span></div>
+  </div>
+  <div class="sns"><span></span><span></span><span></span><span></span></div>
+  <div class="bn"><i></i><b>✦</b></div>
+</div>
+
+<div class="tag">시안 2 — 큰 카드 2×2 (설명 포함)</div>
+<div class="frame M2">
+  <div class="hero"><img src="../assets/main_hero1.png" alt=""><div class="ttl"><small>FREELANCE ARTIST</small><h1>Patohsi</h1><p>게임 · 일러스트 · 3D</p></div><div class="side"><div><b>01</b>PROFILE</div><div><b>02</b>PORTFOLIO</div><div><b>03</b>BLOG</div><div><b>04</b>COMMISSION</div></div><div class="timer"></div></div>
+  <div class="cardrow">
+    <div class="c"><img src="../assets/profile.jpg" alt=""><span class="k">01</span><span class="n">PROFILE</span><span class="d">안녕하세요 파토입니다. 툴과 작업 이력을 소개합니다.</span></div>
+    <div class="c"><img src="../portfolio/assets/2026/13.jpg" alt=""><span class="k">02</span><span class="n">PORTFOLIO</span><span class="d">아트 아카이브와 개발 작업 모음</span></div>
+    <div class="c"><img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt=""><span class="k">03</span><span class="n">BLOG</span><span class="d">제작 메모와 개발 일지</span></div>
+    <div class="c"><img src="../assets/commission_art.jpg" alt=""><span class="k">04</span><span class="n">COMMISSION</span><span class="d">가격표 확인과 커미션 신청</span></div>
+  </div>
+  <div class="sns"><span></span><span></span><span></span><span></span></div>
+  <div class="bn"><i></i><b>✦</b></div>
+</div>
+
+<div class="tag">시안 3 — 비대칭 (포트폴리오가 크게)</div>
+<div class="frame M3">
+  <div class="hero"><img src="../assets/main_hero1.png" alt=""><div class="ttl"><small>FREELANCE ARTIST</small><h1>Patohsi</h1><p>게임 · 일러스트 · 3D</p></div><div class="timer"></div></div>
+  <div class="cardrow">
+    <div class="c big"><img src="../portfolio/assets/2026/13.jpg" alt=""><span class="k">02</span><span class="n">PORTFOLIO</span><span class="d">아트 아카이브 · 개발 작업 · 2026 신작</span></div>
+    <div class="c"><img src="../assets/profile.jpg" alt=""><span class="k">01</span><span class="n">PROFILE</span><span class="d">소개 · 이력</span></div>
+    <div class="c"><img src="../assets/commission_art.jpg" alt=""><span class="k">04</span><span class="n">COMMISSION</span><span class="d">오픈 중</span></div>
+    <div class="c" style="grid-column:span 2"><img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt=""><span class="k">03</span><span class="n">BLOG</span><span class="d">제작 메모 · 개발 일지</span></div>
+  </div>
+  <div class="sns"><span></span><span></span><span></span><span></span></div>
+  <div class="bn"><i></i><b>✦</b></div>
+</div>
+
+<div class="tag">시안 4 — 커미션 와이드 배너 + 카드 3개</div>
+<div class="frame M4">
+  <div class="hero"><img src="../assets/main_hero1.png" alt=""><div class="ttl"><small>FREELANCE ARTIST</small><h1>Patohsi</h1><p>게임 · 일러스트 · 3D</p></div><div class="timer"></div></div>
+  <div class="cardrow">
+    <div class="c wide"><img src="../assets/commission_art.jpg" alt=""><span class="k">COMMISSION</span><span class="n" style="bottom:70px"><span class="st"><u></u>커미션 오픈 중</span></span><span class="n">가격표 &amp; 신청 보기</span><span class="d">빠른 작업을 위해 가격표를 먼저 확인해 주세요.</span></div>
+    <div class="c sm"><img src="../assets/profile.jpg" alt=""><span class="k">01</span><span class="n">PROFILE</span><span class="d">소개 · 툴 · 이력</span></div>
+    <div class="c sm"><img src="../portfolio/assets/2026/13.jpg" alt=""><span class="k">02</span><span class="n">PORTFOLIO</span><span class="d">아트 · 개발 작업</span></div>
+    <div class="c sm"><img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt=""><span class="k">03</span><span class="n">BLOG</span><span class="d">제작 메모 · 일지</span></div>
+  </div>
+  <div class="sns"><span></span><span></span><span></span><span></span></div>
+  <div class="bn"><i></i><b>✦</b></div>
+</div>
+
+</body>
+</html>

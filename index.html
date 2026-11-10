@@ -9,61 +9,182 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="assets/nav_peek.css">
 </head>
 <body>
 
     <!-- 1. 메인 히어로 영역 -->
     <header class="hero-section">
+        <!--
+            첫 화면 슬라이드: 슬라이드마다 이미지(또는 영상) + 글 + 보러가기 버튼이 함께 바뀝니다.
+            - 이미지를 영상으로 바꾸려면 <img class="hero-img" ...> 대신
+              <video class="hero-img" src="영상경로.mp4" muted loop playsinline preload="metadata"></video> 를 넣으세요.
+              (영상은 소리 없이 자동 재생되고, 슬라이드가 넘어가면 멈춥니다.)
+            - data-duration="8000" 처럼 적으면 그 슬라이드만 머무는 시간(ms)을 바꿀 수 있습니다. (기본 6000)
+            - 슬라이드를 늘리려면 .slide 블록과 아래 .hero-dot 버튼을 하나씩 추가하세요.
+        -->
         <div class="slideshow-container">
-            <div class="slide active"><img src="assets/main_hero.jpg" class="hero-img"></div>
-            <div class="slide"><img src="assets/main_hero1.png" class="hero-img"></div>
+            <div class="slide active">
+                <img src="assets/main_hero1.png" class="hero-img" alt="">
+                <div class="hero-overlay slide-copy">
+                    <span class="hero-role">배경 모델러 · GAME</span>
+                    <h1 class="hero-title kr">小鈴の里日記</h1>
+                    <p class="hero-tagline">HD2D 게임 졸업작품</p>
+                    <p class="hero-text">
+                        게임 기획, 3D 모델, 개발, UI에 참여했습니다.<br>
+                        모듈러 킷과 텍스쳐 모듈화로 리소스를 아끼는 배경을 만들었습니다.
+                    </p>
+                    <a class="slide-btn" href="intro/game.html">보러가기 <i>→</i></a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="portfolio/assets/2026/19-2.jpg" class="hero-img" alt="">
+                <div class="hero-overlay slide-copy">
+                    <span class="hero-role">배경 모델러 · MODELING</span>
+                    <h1 class="hero-title kr">3D 모델링</h1>
+                    <p class="hero-tagline">공방처럼 설계하고 쌓아가는 모델링 아티스트</p>
+                    <p class="hero-text">
+                        모듈러 킷, 하이-로우 토폴로지, PBR 최적화, 폴리지 제작까지<br>
+                        여러 도구를 하나의 파이프라인으로 연결합니다.
+                    </p>
+                    <a class="slide-btn" href="intro/modeling.html">보러가기 <i>→</i></a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="portfolio/assets/2026/6.png" class="hero-img" alt="">
+                <div class="hero-overlay slide-copy">
+                    <span class="hero-role">배경 모델러 · EVENT BOOTH</span>
+                    <h1 class="hero-title kr">행사 부스</h1>
+                    <p class="hero-tagline">굿즈 · 포스터 · 부스 소품</p>
+                    <p class="hero-text">
+                        동방 온리전, 환상일주 등 외부 행사에 부스로 참가했습니다.<br>
+                        직접 만든 굿즈와 안내물을 모아 두었습니다.
+                    </p>
+                    <a class="slide-btn" href="intro/booth.html">보러가기 <i>→</i></a>
+                </div>
+            </div>
         </div>
+
         <div class="timer-bar-container">
             <div class="timer-bar"></div>
         </div>
+
+        <nav class="hero-index" aria-label="바로가기">
+            <a href="profile/index.html"><b>01</b>PROFILE</a>
+            <a href="portfolio/index.html"><b>02</b>PORTFOLIO</a>
+            <a href="blog/index.html"><b>03</b>BLOG</a>
+            <a href="commission/index.html"><b>04</b>COMMISSION</a>
+        </nav>
+        <ul class="hero-info">
+            <li><b>NAME</b>Patohsi</li>
+            <li><b>EDU</b>용인대학교 미디어디자인학과 (졸)</li>
+            <li><b>MAIL</b><a href="mailto:aoiusagi1203@gmail.com">aoiusagi1203@gmail.com</a></li>
+            <li><b>TOOLS</b>UE5.3 · C++ · Blender · Substance Painter</li>
+        </ul>
+        <div class="hero-dots" role="tablist" aria-label="슬라이드">
+            <button type="button" class="hero-dot active" data-slide="0">01 GAME</button>
+            <button type="button" class="hero-dot" data-slide="1">02 MODELING</button>
+            <button type="button" class="hero-dot" data-slide="2">03 BOOTH</button>
+        </div>
+        <div class="hero-scroll">SCROLL</div>
     </header>
 
-    <!-- 2. 커미션 카드 영역 -->
-    <main class="content-section">
-        <a href="commission/index.html" class="commission-card">
-            <div class="commission-strip">
-                <img src="assets/commission_art.jpg" onerror="this.style.display='none'">
+    <!-- 2. 이름 · 정보 · 히스토리 (첫 화면 바로 아래) (최근 이력이 위) -->
+    <section class="about-section">
+        <div class="about-grid profile-inner">
+            <div class="about-me">
+                <div class="about-photo fx"><img src="assets/profile.jpg" alt="Patohsi" onerror="this.style.display='none'"></div>
+                <h2 class="about-name fx d1">Patohsi</h2>
+                <p class="about-desc fx d2">
+                    안녕하세요, 파토입니다. 편하게 파토씨, 파토님이라고 불러주세요.<br>
+                    새로운 기법을 발견하면 문서로 정리해 작업에 적용하고, 서로 다른 도구를 하나의 워크플로우로 엮으며 만들고, 기록하고, 다시 새로운 도구로 이어가는 과정에서 성장하고 있습니다.
+                </p>
+                <div class="about-sns fx d4">
+                    <a href="https://www.instagram.com/patohsi/"><img src="assets/sns_insta.png" alt="Instagram"></a>
+                    <a href="https://x.com/aoiusagi_cm"><img src="assets/sns_x.png" alt="X"></a>
+                    <a href="https://www.youtube.com/@patohsi"><img src="assets/sns_yt.png" alt="YouTube"></a>
+                    <a href="https://github.com/patohsh"><img src="assets/sns_git.png" alt="GitHub"></a>
+                </div>
             </div>
 
-            <div class="commission-body">
-                <div class="commission-status">
-                    <span class="status-dot"></span>
-                    커미션 오픈 중
+            <div class="about-history">
+                <p class="section-kicker fx">HISTORY</p>
+                <p class="history-note fx">최근 이력이 위에 옵니다</p>
+                <!-- 이력은 최신순. 새 이력은 맨 위에 .tl-item 을 추가하세요. -->
+                <div class="timeline">
+                    <div class="tl-item fx d1">
+                        <div class="tl-year">2026</div>
+                        <div class="tl-title">행사 부스 참가</div>
+                        <div class="tl-desc">환상일주 1·2회 · 동방 온리전 2·3회<br><a href="portfolio/art.html?section=booth">부스 작업 보기 →</a></div>
+                    </div>
+                    <div class="tl-item fx d2">
+                        <div class="tl-year">2024</div>
+                        <div class="tl-title">潮汕THO 2nd 서브 포스터</div>
+                        <div class="tl-desc">중국 潮汕THO 2nd 행사 포스터 일러스트 제작<br><a href="portfolio/2024/work_11.html">작품 보기 →</a></div>
+                    </div>
+                    <div class="tl-item fx d3">
+                        <div class="tl-year">2024 - 현재</div>
+                        <div class="tl-title">프리랜서 일러스트레이터 / 3D 아티스트</div>
+                        <div class="tl-desc">커미션, 게임 리소스, 부스 소품 제작 등</div>
+                    </div>
                 </div>
-                <h3>커미션 페이지 입니다.</h3>
-                <p>
-                    빠른 작업을 위해 가격표를 먼저 확인해 주세요.
-                    이메일로 먼저 문의 주시면 빠르게 진행 가능합니다.
-                </p>
-                <span class="commission-link">
-                    가격표 &amp; 상담 보기 <i class="fa-solid fa-chevron-right"></i>
-                </span>
             </div>
-        </a>
+            <div class="about-actions fx d3">
+                <span class="about-team"><b>少女食事中</b> · 1인 서클</span>
+                <a class="about-btn" href="profile/index.html#resume">이력서 보기 ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 포트폴리오 + 최신 탭 (스크롤하면 아래에서 위로 페이드인) -->
+    <main class="menu-section">
+        <div class="menu-inner">
+            <p class="section-kicker fx">PORTFOLIO</p>
+            <div class="menu-portfolio">
+                <a href="portfolio/index.html" class="menu-card big fx d1">
+                    <img src="portfolio/assets/2026/13.jpg" alt="" onerror="this.style.display='none'">
+                    <span class="menu-no">02</span>
+                    <span class="menu-name">PORTFOLIO</span>
+                    <span class="menu-desc">ART · 3D · DEV</span>
+                </a>
+
+                <!-- 그림 / 3D / 개발 최신 (main.js 가 portfolio 페이지에서 최신 항목을 읽어 갱신한다) -->
+                <div class="latest-col">
+                    <a href="portfolio/art.html?section=art" class="latest-tile fx d2" id="latestArt">
+                        <img src="portfolio/assets/2026/16.jpg" alt="" onerror="this.style.display='none'">
+                        <span class="lt-kind">ART · 최신</span>
+                        <span class="lt-title">Artwork 80</span>
+                        <span class="lt-meta">2026.07.07</span>
+                    </a>
+                    <a href="portfolio/art.html?section=3d" class="latest-tile fx d3" id="latest3d">
+                        <img src="portfolio/assets/2026/20-1.jpg" alt="" onerror="this.style.display='none'">
+                        <span class="lt-kind">3D · 최신</span>
+                        <span class="lt-title">동양풍 부스 3D 소품 모음</span>
+                        <span class="lt-meta">2026.09.12</span>
+                    </a>
+                    <a href="portfolio/dev.html" class="latest-tile fx d4" id="latestDev">
+                        <img src="blog/post/assets/obsidian/Pasted image 20240730233408.png" alt="" onerror="this.style.display='none'">
+                        <span class="lt-kind">DEV · 최신</span>
+                        <span class="lt-title">퀘스트 시스템</span>
+                        <span class="lt-meta">개발 일지</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <!-- 3. 프로필 영역 (흰색 배경) -->
-    <!-- 여기서 곡선을 만들지 않고 직사각형으로 끝냅니다 -->
-    <section class="profile-section">
-        <div class="profile-content">
-            <div class="profile-img-box placeholder-bg">
-                <img src="assets/profile.jpg" alt="Profile" onerror="this.style.display='none'">
-            </div>
-            <h2 class="profile-name">Patohsi</h2>
-            <p class="profile-desc">안녕하세요 파토입니다. 편하게 파토씨, 파토님 이라고 불러주세요.</p>
-
-            <!-- SNS 아이콘 (이미지) -->
-            <div class="social-links">
-                <a href="https://www.instagram.com/patohsi/"><img src="assets/sns_insta.png" alt="Insta"></a>
-                <a href="https://x.com/aoiusagi_cm"><img src="assets/sns_x.png" alt="X"></a>
-                <a href="https://www.youtube.com/@patohsi"><img src="assets/sns_yt.png" alt="Youtube"></a>
-                <a href="https://github.com/patohsh"><img src="assets/sns_git.png" alt="Github"></a>
-            </div>
+    <!-- 커미션 (프로필 바로 위) -->
+    <section class="commission-band">
+        <div class="menu-inner">
+            <a href="commission/index.html" class="menu-card commission fx">
+                <img src="assets/commission_art.jpg" alt="" onerror="this.style.display='none'">
+                <span class="menu-no">04</span>
+                <span class="menu-name">COMMISSION</span>
+                <span class="menu-desc"><i class="menu-dot"></i>커미션 오픈 중 · 가격표 &amp; 상담 보기 →</span>
+            </a>
         </div>
     </section>
 
@@ -105,7 +226,7 @@
             <ul class="nav-links">
                 <li class="nav-item"><a href="profile/index.html">PROFILE</a></li>
                 <li class="nav-item"><a href="portfolio/index.html">PORTFOLIO</a></li>
-                <li class="spacer"></li>
+                <li class="nav-item center-home"><a href="index.html" class="home-link-text">PATOHSI</a></li>
                 <li class="nav-item"><a href="blog/index.html">BLOG</a></li>
                 <li class="nav-item"><a href="commission/index.html">COMMISSION</a></li>
             </ul>
@@ -114,5 +235,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="script.js"></script>
+    <script src="main.js"></script>
+    <script src="assets/nav_peek.js"></script>
 </body>
 </html>

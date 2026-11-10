@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patohsi - 小鈴の里日記</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="intro.css">
+    <link rel="stylesheet" href="../assets/nav_peek.css">
+</head>
+<body>
+    <a href="../index.html" class="intro-back"><span aria-hidden="true">←</span> 뒤로가기</a>
+
+    <main class="as-wrap">
+        <header class="as-head">
+            <h1 class="as-title">小鈴の里日記</h1>
+            <div class="as-artist">
+                <img class="as-avatar" src="../assets/profile.jpg" alt="">
+                <div><b>Patohsi</b><span>배경 모델러</span></div>
+                <span class="as-year">2027</span>
+            </div>
+            <div class="as-tags"><span class="as-tag">#HD2D</span><span class="as-tag">#UE5.3</span><span class="as-tag">#Game</span><span class="as-tag">#Environment</span><span class="as-tag">#졸업작품</span></div>
+        </header>
+
+        <section class="as-info">
+            <div class="as-desc"><p>졸업작품으로 HD2D 게임 「小鈴の里日記」를 제작하며 배경과 레벨을 직접 구현했습니다.</p><p>제한된 리소스 안에서 시각적 완성도와 성능을 함께 확보하기 위해, 모듈러 키트와 텍스쳐 모듈화를 중심으로 재사용할 수 있는 구조를 만들었습니다.</p><p>PBR을 이용한 텍스쳐 자동화와 거리 기반 텍스쳐 변환으로 메모리를 절약하고, 모듈식 텍스쳐로 작업 시간을 줄였습니다.</p></div>
+            <aside>
+                <p class="as-side-label">SOFTWARE</p>
+                <div class="as-tools"><img src="../profile/assets/tool_blender.png" alt="Blender" title="Blender"><img src="../profile/assets/color/substance_zoom.png" alt="Substance Painter" title="Substance Painter"><img src="../profile/assets/tool_speedtree.png" alt="SpeedTree" title="SpeedTree"><img src="../profile/assets/tool_photoshop.webp" alt="Photoshop" title="Photoshop"><img src="../profile/assets/color/cpp.svg" alt="C++" title="C++"></div>
+                <p class="as-side-label">ROLE</p>
+                <ul class="as-roles"><li>게임 기획</li><li>3D 모델 (배경 · 프랍)</li><li>개발 (UE5.3 · C++)</li><li>UI</li><li>레벨 · 환경 제작</li></ul>
+            </aside>
+        </section>
+
+        <!-- 아래는 큰 이미지/영상을 세로로 나열하는 영역입니다.
+             영상을 넣으려면 <figure><video src="영상경로.mp4" controls muted loop playsinline></video><figcaption>설명</figcaption></figure> -->
+        <section class="as-media">
+            <figure><img src="../assets/main_hero1.png" alt="小鈴の里日記 키 비주얼" loading="lazy"><figcaption>小鈴の里日記 키 비주얼</figcaption></figure>
+            <div class="as-block"><h2>프롭 제작</h2><p>게임에 들어가는 소품은 하이폴리로 먼저 만든 뒤 텍스쳐를 만들고 로우폴리로 정리했습니다.</p></div>
+            <figure><img src="../blog/post/assets/2026/프롭제작0.jpg" alt="프롭 제작" loading="lazy"><figcaption>프롭 제작</figcaption></figure>
+            <figure><img src="../blog/post/assets/2026/프롭제작3MT.jpg" alt="프롭 머티리얼 구성" loading="lazy"><figcaption>프롭 머티리얼 구성</figcaption></figure>
+            <figure><img src="../blog/post/assets/2026/프롭제작4.jpg" alt="프롭 제작 과정" loading="lazy"><figcaption>프롭 제작 과정</figcaption></figure>
+            <div class="as-block"><h2>모듈식 텍스쳐 · 4x4 UV</h2><p>트림 시트 대신 텍스쳐를 격자로 모듈화해 필요한 부분을 에셋마다 불러 쓰는 머티리얼 함수를 만들었습니다. 하나의 텍스쳐를 여러 에셋에 적용하면서 화질을 지키고 작업 시간을 줄였습니다.</p></div>
+            <figure><img src="../blog/post/assets/2026/돌계단_4x4uv1.jpg" alt="4x4 UV 텍스쳐링" loading="lazy"><figcaption>4x4 UV 텍스쳐링</figcaption></figure>
+            <figure><img src="../blog/post/assets/2026/돌계단_4x4uv_MT.jpg" alt="머티리얼 함수 구성" loading="lazy"><figcaption>머티리얼 함수 구성</figcaption></figure>
+            <figure><img src="../blog/post/assets/2026/랜덤값_보도블럭MT1.jpg" alt="랜덤값을 이용한 보도블럭 머티리얼" loading="lazy"><figcaption>랜덤값을 이용한 보도블럭 머티리얼</figcaption></figure>
+            <div class="as-block"><h2>환경 폴리지 · SpeedTree</h2><p>필요한 자연물과 절벽 등은 SpeedTree로 프로젝트 분위기에 맞게 새로 만들거나 수정했습니다.</p></div>
+            <figure><img src="../blog/post/assets/2026/speed_tree1.jpg" alt="SpeedTree 폴리지" loading="lazy"><figcaption>SpeedTree 폴리지</figcaption></figure>
+            <figure><img src="../blog/post/assets/2026/개조한_스피드_트리_노드.jpg" alt="SpeedTree 노드 구성" loading="lazy"><figcaption>SpeedTree 노드 구성</figcaption></figure>
+            <div class="as-block"><h2>거리 기반 텍스쳐 변환</h2><p>PBR 텍스쳐를 자동화하고, 거리 기반 텍스쳐 변환으로 멀리 떨어진 영역의 리소스를 줄였습니다.</p></div>
+            <figure><img src="../blog/post/assets/2026/landscape_MT1.jpg" alt="랜드스케이프 머티리얼" loading="lazy"><figcaption>랜드스케이프 머티리얼</figcaption></figure>
+        </section>
+
+        <div class="as-links"><a class="as-link" href="../blog/post/2026/3d/언리얼을_이용한_HD2D_모델링.html">HD2D 모델링 글 보기 →</a><a class="as-link line" href="../portfolio/dev.html">개발 일지 →</a></div>
+
+        <section class="as-more">
+            <h2 class="as-more-title">More from Patohsi</h2>
+            <div class="as-more-grid"><a class="as-more-card" href="modeling.html"><img src="../portfolio/assets/2026/19-2.jpg" alt=""><span>3D 모델링</span></a><a class="as-more-card" href="booth.html"><img src="../portfolio/assets/2026/6.png" alt=""><span>행사 부스</span></a><a class="as-more-card" href="../portfolio/art.html?section=3d"><img src="../portfolio/assets/2026/20-1.jpg" alt=""><span>3D 작업 모아보기</span></a></div>
+        </section>
+    </main>
+
+    <div id="scroll-top-btn" onclick="scrollToTop()">
+        <img src="../assets/top_btn.png" class="top-btn-img" alt="Top">
+    </div>
+
+    <div class="bottom-nav-wrapper inverted-nav">
+        <div class="nav-glow"></div>
+        <nav id="main-nav" class="nav-bar">
+            <div class="nav-bump-svg-container" onclick="toggleNav()">
+                <svg viewBox="0 0 400 60" preserveAspectRatio="none" class="bump-svg">
+                    <path d="M0,60 L110,60 Q140,60 150,40 L160,15 Q165,0 185,0 L215,0 Q235,0 240,15 L250,40 Q260,60 290,60 L400,60 Z"></path>
+                </svg>
+                <img src="../assets/star_icon.png" alt="Toggle" class="trigger-icon">
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item"><a href="../profile/index.html">PROFILE</a></li>
+                <li class="nav-item"><a href="../portfolio/index.html">PORTFOLIO</a></li>
+                <li class="nav-item center-home"><a href="../index.html" class="home-link-text">PATOHSI</a></li>
+                <li class="nav-item"><a href="../blog/index.html">BLOG</a></li>
+                <li class="nav-item"><a href="../commission/index.html">COMMISSION</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="as-lightbox" id="asLightbox"><img alt=""></div>
+    <script>
+        function toggleNav() { document.getElementById('main-nav').classList.toggle('active'); }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        document.addEventListener('click', function (event) {
+            var wrapper = document.querySelector('.bottom-nav-wrapper');
+            var nav = document.getElementById('main-nav');
+            if (wrapper && !wrapper.contains(event.target) && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
+        });
+        // 큰 이미지를 누르면 화면 가득 확대, 다시 누르거나 Esc 로 닫기
+        (function () {
+            var box = document.getElementById('asLightbox');
+            var big = box.querySelector('img');
+            document.querySelectorAll('.as-media img').forEach(function (img) {
+                img.addEventListener('click', function () { big.src = img.src; box.classList.add('open'); });
+            });
+            box.addEventListener('click', function () { box.classList.remove('open'); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') box.classList.remove('open'); });
+        })();
+    </script>
+    <script src="../assets/nav_peek.js"></script>
+    <script src="../assets/smart_back.js"></script>
+</body>
+</html>

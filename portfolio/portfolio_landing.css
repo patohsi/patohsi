@@ -1,214 +1,196 @@
+/* ===================================================================
+   포트폴리오 선택 페이지 (portfolio/index.html)
+   - ART / 3D / DEV 큰 카드 3개 + 링크(봇, 토람, pixiv, X) 한 줄
+   =================================================================== */
 body {
     min-height: 100vh;
-    background:
-        radial-gradient(circle at top left, rgba(161, 196, 253, 0.65), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(242, 207, 165, 0.7), transparent 30%),
-        #f7f4ef;
+    background: #fff;
     color: #111;
 }
 
-.portfolio-hub {
-    min-height: calc(100vh - 150px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 24px 40px;
-    position: relative;
-    overflow: hidden;
+.hub-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 70px clamp(16px, 4vw, 56px) 150px;
 }
 
-.hub-bg {
-    position: absolute;
-    border-radius: 999px;
-    filter: blur(10px);
-    opacity: 0.55;
-}
-
-.hub-bg-left {
-    width: 280px;
-    height: 280px;
-    top: 90px;
-    left: -90px;
-    background: linear-gradient(180deg, #9ec1ff, #d7e7ff);
-}
-
-.hub-bg-right {
-    width: 340px;
-    height: 340px;
-    right: -110px;
-    bottom: 80px;
-    background: linear-gradient(180deg, #f0c392, #ffe5c6);
-}
-
-.hub-card {
-    width: min(760px, 100%);
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: 36px;
-    padding: 48px;
-    box-shadow: 0 24px 80px rgba(17, 17, 17, 0.12);
-    backdrop-filter: blur(18px);
-    position: relative;
-    z-index: 1;
-}
-
-.hub-kicker,
-.archive-label {
-    font-family: 'Fredoka One', cursive;
-    letter-spacing: 0.08em;
-    font-size: 0.9rem;
-    color: #5488d5;
+.hub-kicker {
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: #304ffe;
 }
 
 .hub-title {
-    margin-top: 14px;
-    font-size: clamp(2rem, 5vw, 3.4rem);
-    line-height: 1.05;
-    color: #111;
+    margin: 6px 0 6px;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 800;
 }
 
 .hub-copy {
-    margin-top: 18px;
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #4b4b4b;
+    font-size: 0.9rem;
+    color: #777;
 }
 
-.hub-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 34px;
+/* ---------- 큰 카드 3개 ---------- */
+.hub-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 40px;
 }
 
-/* 일렬 배너형 카드: 대표 이미지를 배경으로 깔고 텍스트를 그 위에 오버레이 */
-.hub-link {
+.hub-card-link {
     position: relative;
-    min-height: 108px;
-    padding: 20px 28px;
-    border-radius: 22px;
+    display: block;
+    height: 300px;
+    border-radius: 24px;
     overflow: hidden;
-    text-decoration: none;
+    background: #111;
     color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 3px;
-    box-shadow: 0 14px 32px rgba(17, 17, 17, 0.12);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    text-decoration: none;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+    transition: transform 0.35s, box-shadow 0.35s;
 }
 
-.hub-link-bg {
+.hub-card-link:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.3);
+}
+
+.hub-card-link img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 0;
+    opacity: 0.6;
+    transition: transform 0.5s, opacity 0.3s;
 }
 
-.hub-link::after {
+.hub-card-link:hover img {
+    transform: scale(1.06);
+    opacity: 0.78;
+}
+
+.hub-card-link::after {
     content: "";
     position: absolute;
     inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.78));
+}
+
+.hub-card-no {
+    position: absolute;
+    left: 24px;
+    top: 22px;
     z-index: 1;
-    background: linear-gradient(90deg, rgba(10, 8, 6, 0.85) 0%, rgba(10, 8, 6, 0.45) 55%, rgba(10, 8, 6, 0.1) 100%);
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    color: #a1c4fd;
 }
 
-.hub-link > *:not(.hub-link-bg) {
-    position: relative;
-    z-index: 2;
+.hub-card-name {
+    position: absolute;
+    left: 24px;
+    bottom: 76px;
+    z-index: 1;
+    font-weight: 800;
+    font-size: 2rem;
 }
 
-a.hub-link:hover {
-    transform: translateY(-4px) scale(1.015);
-    box-shadow: 0 20px 44px rgba(17, 17, 17, 0.18);
-}
-
-.hub-link-kicker {
-    font-family: 'Fredoka One', cursive;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-size: 0.68rem;
-    color: #ffc7e2;
-}
-
-.hub-link-label {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1.4rem;
-    letter-spacing: 0.04em;
-}
-
-.hub-link-desc {
-    font-size: 0.88rem;
-    opacity: 0.88;
-}
-
-/* 비활성(운영 중단) 카드 */
-.hub-link.disabled {
-    cursor: default;
-    filter: grayscale(0.85);
-}
-
-.hub-link.disabled::after {
-    background: linear-gradient(90deg, rgba(20, 18, 16, 0.9) 0%, rgba(20, 18, 16, 0.6) 60%, rgba(20, 18, 16, 0.25) 100%);
-}
-
-.hub-link.disabled .hub-link-label {
-    color: #d8d1c8;
-}
-
-.hub-link.disabled .hub-link-kicker {
-    color: #9a8f83;
-}
-
-.hub-link.disabled:hover {
-    transform: none;
-    box-shadow: 0 14px 32px rgba(17, 17, 17, 0.12);
-}
-
-.hub-link-offline {
-    display: inline-flex;
-    align-items: center;
+.hub-card-tags {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
     gap: 6px;
-    margin-top: 4px;
+}
+
+.hub-tag {
+    background: rgba(255, 255, 255, 0.92);
+    color: #111;
     font-size: 0.72rem;
     font-weight: 700;
-    color: #cfc7bd;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: 999px;
-    width: fit-content;
 }
 
-.offline-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #e5484d;
-    flex: none;
+.hub-tag.blue {
+    background: #304ffe;
+    color: #fff;
 }
 
-.archive-entry {
-    margin-top: 28px;
-    padding-top: 22px;
-    border-top: 1px solid rgba(17, 17, 17, 0.08);
+/* ---------- 링크 버튼 한 줄 ---------- */
+.hub-links-label {
+    margin: 36px 0 10px;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: #888;
+}
+
+.hub-links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.hub-btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.archive-link {
-    color: #111;
+    gap: 10px;
+    min-height: 64px;
+    padding: 0 22px;
+    border-radius: 16px;
+    background: #111;
+    color: #fff;
     text-decoration: none;
-    font-weight: 700;
-    border-bottom: 2px solid #f2cfa5;
-    padding-bottom: 3px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+    transition: transform 0.25s, background 0.25s;
 }
 
+.hub-btn:hover {
+    transform: translateY(-3px);
+    background: #304ffe;
+}
+
+.hub-btn b {
+    display: block;
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.hub-btn small {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.72rem;
+    opacity: 0.75;
+}
+
+.hub-btn i {
+    font-style: normal;
+    font-size: 1rem;
+}
+
+.hub-btn.line {
+    background: #fff;
+    color: #111;
+    border: 2px solid #111;
+    box-shadow: none;
+}
+
+.hub-btn.line:hover {
+    background: #111;
+    color: #fff;
+}
+
+/* ---------- 네비게이션 반전 / 공통 ---------- */
 .inverted-nav .nav-bar {
     background-color: #000 !important;
 }
@@ -237,22 +219,8 @@ a.hub-link:hover {
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
 }
 
-@media (max-width: 768px) {
-    .portfolio-hub {
-        padding-top: 100px;
-    }
-
-    .hub-card {
-        padding: 32px 22px;
-        border-radius: 28px;
-    }
-
-    .hub-link {
-        min-height: 92px;
-        padding: 16px 20px;
-    }
-
-    .hub-link-label {
-        font-size: 1.15rem;
-    }
+@media (max-width: 900px) {
+    .hub-cards { grid-template-columns: 1fr; }
+    .hub-card-link { height: 220px; }
+    .hub-links { grid-template-columns: 1fr 1fr; }
 }

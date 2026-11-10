@@ -1,5 +1,5 @@
 // --- 전역 변수 설정 ---
-const itemsPerPage = 5; // 페이지당 5개
+const itemsPerPage = 8; // 페이지당 8개
 let currentPage = 1;
 let currentCategory = 'all';
 let currentYear = 'all';
@@ -9,6 +9,7 @@ let allPostElements = []; // 모든 포스트 요소를 저장할 배열
 document.addEventListener('DOMContentLoaded', () => {
     // DOM에서 모든 포스트 가져와서 배열로 저장
     allPostElements = Array.from(document.querySelectorAll('.post-item'));
+    addCategoryLabels();
 
     // 초기 렌더링
     renderPosts();
@@ -19,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function setFilter(value, type) {
     if (type === 'category') {
         currentCategory = value;
+        document.querySelectorAll('.cat-pill').forEach(pill => {
+            pill.classList.toggle('active', pill.dataset.cat === value);
+        });
     } else if (type === 'year') {
         currentYear = value;
         // 연도 버튼 스타일 업데이트
@@ -153,3 +157,19 @@ document.addEventListener('click', function (event) {
         navBar.classList.remove('active');
     }
 });
+
+
+// 카드 제목 위에 분류 라벨(UNREAL / 3D / UI / DEV LOG)을 붙인다
+const CATEGORY_LABELS = { unreal: 'UNREAL', '3d': '3D', ui: 'UI', devlog: 'DEV LOG' };
+
+function addCategoryLabels() {
+    allPostElements.forEach(item => {
+        const info = item.querySelector('.post-info');
+        const label = CATEGORY_LABELS[item.dataset.category];
+        if (!info || !label || info.querySelector('.post-cat')) return;
+        const tag = document.createElement('span');
+        tag.className = 'post-cat';
+        tag.textContent = label;
+        info.insertBefore(tag, info.firstChild);
+    });
+}

@@ -434,6 +434,7 @@ TEMPLATE = """<!DOCTYPE html>
     <link rel="stylesheet" href="../../../style.css">
     <link rel="stylesheet" href="../../post_style.css">
     <link rel="stylesheet" href="devlog.css">
+    <link rel="stylesheet" href="../../../../assets/nav_peek.css">
 </head>
 <body>
     <a href="../../../index.html" class="post-back-btn"><span aria-hidden="true">←</span> 목록으로</a>
@@ -469,6 +470,8 @@ TEMPLATE = """<!DOCTYPE html>
 
     <script src="../../post_script.js"></script>
     <script src="devlog.js"></script>
+    <script src="../../../../assets/nav_peek.js"></script>
+    <script src="../../../../assets/smart_back.js"></script>
 </body>
 </html>
 """

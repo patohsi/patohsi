@@ -1,0 +1,347 @@
+/* ===================================================================
+   설명 페이지 (intro/game.html, modeling.html, booth.html)
+   아트스테이션 프로젝트 페이지 구성: 제목 → 작성자 → 사용 툴 → 설명 → 큰 이미지/영상 세로 나열 → 다른 프로젝트
+   =================================================================== */
+body {
+    margin: 0;
+    background: #0e0e10;
+    color: #e8e8ea;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding-bottom: 150px;
+}
+
+a { color: inherit; }
+
+.intro-back {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px 9px 14px;
+    border: 1px solid #2c2c31;
+    border-radius: 999px;
+    background: rgba(20, 20, 23, 0.88);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.intro-back:hover { transform: translateX(-3px); background: #304ffe; }
+
+.as-wrap {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding-top: 84px;
+}
+
+/* ---------- 머리말: 제목 / 작성자 / 태그 ---------- */
+.as-head { margin-bottom: 26px; }
+
+.as-title {
+    margin: 0 0 18px;
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+
+.as-artist {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.as-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #222;
+}
+
+.as-artist b { display: block; font-size: 0.98rem; color: #fff; }
+.as-artist span { font-size: 0.8rem; color: #9a9aa2; }
+.as-artist .as-year { margin-left: auto; font-family: 'Fredoka One', sans-serif; letter-spacing: 0.1em; color: #6b7cff; }
+
+.as-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.as-tag {
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: #1c1c21;
+    border: 1px solid #2c2c31;
+    color: #bdbdc6;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+/* ---------- 설명 + 사용 툴 ---------- */
+.as-info {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 32px;
+    margin-bottom: 40px;
+    padding: 26px 28px;
+    border-radius: 18px;
+    background: #16161a;
+}
+
+.as-desc p {
+    margin: 0 0 12px;
+    font-size: 0.98rem;
+    line-height: 1.95;
+    color: #d6d6dc;
+}
+
+.as-desc p:last-child { margin-bottom: 0; }
+
+.as-side-label {
+    margin: 0 0 12px;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.24em;
+    color: #6b7cff;
+}
+
+.as-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.as-tools img {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    object-fit: contain;
+    background: #fff;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.as-roles {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.86rem;
+    line-height: 1.9;
+    color: #c4c4cc;
+}
+
+/* ---------- 큰 이미지/영상: 세로로 쭉 ---------- */
+.as-media { display: block; }
+
+.as-media figure {
+    margin: 0 0 22px;
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* 영상으로 바꾸려면 <img> 대신 <video controls muted loop playsinline src="..."></video> 를 넣으세요. */
+.as-media img,
+.as-media video {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: zoom-in;
+}
+
+.as-media video { cursor: auto; }
+
+.as-media figcaption {
+    padding: 10px 16px 12px;
+    background: #16161a;
+    color: #9a9aa2;
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+/* 이미지 사이에 들어가는 설명 블록 */
+.as-block {
+    margin: 36px 0 22px;
+    padding: 0 4px;
+}
+
+.as-block h2 {
+    margin: 0 0 8px;
+    font-size: 1.35rem;
+    color: #fff;
+}
+
+.as-block p {
+    margin: 0;
+    max-width: 780px;
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #c4c4cc;
+}
+
+.as-steps {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.as-steps li {
+    display: flex;
+    gap: 16px;
+    padding: 16px 20px;
+    border-radius: 14px;
+    background: #16161a;
+}
+
+.as-steps b {
+    flex: 0 0 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #304ffe;
+    color: #fff;
+    text-align: center;
+    line-height: 36px;
+    font-family: 'Fredoka One', sans-serif;
+    font-weight: 400;
+}
+
+.as-steps h3 { margin: 0 0 3px; font-size: 1rem; color: #fff; }
+.as-steps p { margin: 0; font-size: 0.86rem; line-height: 1.75; color: #aeaeb8; }
+
+.as-list {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.as-list li { padding: 12px 16px; border-radius: 12px; background: #16161a; }
+.as-list b { display: block; color: #fff; font-size: 0.95rem; }
+.as-list span { font-size: 0.82rem; color: #9a9aa2; }
+.as-list a { color: #8fa0ff; font-weight: 700; text-decoration: none; }
+
+/* ---------- 관련 링크 / 다른 프로젝트 ---------- */
+.as-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 36px 0 10px;
+}
+
+.as-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    background: #304ffe;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.25s, background 0.25s;
+}
+
+.as-link:hover { transform: translateY(-3px); background: #4a64ff; }
+.as-link.line { background: transparent; border: 2px solid #3a3a42; color: #e8e8ea; }
+.as-link.line:hover { border-color: #fff; background: transparent; }
+
+.as-more { margin-top: 56px; }
+
+.as-more-title {
+    margin: 0 0 14px;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.as-more-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.as-more-card {
+    position: relative;
+    display: block;
+    height: 190px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #16161a;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+
+.as-more-card:hover { transform: translateY(-5px); }
+
+.as-more-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.75;
+    transition: transform 0.5s, opacity 0.3s;
+}
+
+.as-more-card:hover img { transform: scale(1.06); opacity: 1; }
+
+.as-more-card span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30px 16px 12px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.82), transparent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.95rem;
+}
+
+/* ---------- 이미지 확대 ---------- */
+.as-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.94);
+    cursor: zoom-out;
+}
+
+.as-lightbox.open { display: flex; }
+.as-lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+/* ---------- 하단 네비게이션 반전 ---------- */
+.inverted-nav .nav-bar { background-color: #000 !important; }
+.inverted-nav .bump-svg path { fill: #000 !important; }
+.inverted-nav .nav-links a { color: #fff !important; }
+.inverted-nav .nav-links a:hover { color: #ff4da6 !important; }
+.inverted-nav .home-link-text { color: #fff !important; }
+#scroll-top-btn { filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5)); }
+
+@media (max-width: 860px) {
+    .as-info { grid-template-columns: 1fr; padding: 20px; }
+    .as-more-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+    .as-more-grid { grid-template-columns: 1fr; }
+    .intro-back { top: 12px; left: 12px; }
+}

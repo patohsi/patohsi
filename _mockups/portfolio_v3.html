@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>포트폴리오 시안 (벤토 + 연도 사이드바)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111}
+img{display:block;object-fit:cover}
+.page{max-width:1280px;margin:0 auto;padding:44px clamp(16px,4vw,56px) 110px}
+.kick{font:400 13px 'Fredoka One';letter-spacing:.3em;color:#304ffe}
+h1{font:800 clamp(24px,3vw,34px) 'Noto Sans KR';margin:4px 0 6px}
+.sub{font-size:14px;color:#777}
+.back{display:inline-block;margin-bottom:18px;font-size:13px;font-weight:800;color:#111;text-decoration:none;border:2px solid #111;border-radius:999px;padding:6px 16px}
+/* 위: 최신작 벤토 */
+.bento{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,minmax(130px,17vw));max-height:none;gap:12px;margin:24px 0 46px}
+.bento .big{grid-column:span 2;grid-row:span 2}
+.th{position:relative;border-radius:14px;overflow:hidden;background:#222;cursor:pointer}
+.th img{width:100%;height:100%;transition:transform .5s}
+.th:hover img{transform:scale(1.06)}
+.th span{position:absolute;left:10px;bottom:8px;color:#fff;font-size:11px;font-weight:700;text-shadow:0 1px 4px #000}
+.th em{position:absolute;right:8px;top:8px;background:#fff;color:#111;font:700 10px 'Noto Sans KR';padding:2px 9px;border-radius:999px;font-style:normal}
+/* 아래: 왼쪽 연도 + 오른쪽 필터/작품 */
+.wrap{display:grid;grid-template-columns:190px 1fr;gap:34px;align-items:start}
+.side{position:sticky;top:18px;display:flex;flex-direction:column}
+.y{font:400 clamp(34px,4vw,48px) 'Fredoka One';color:#d0d0d0;line-height:1.1;cursor:pointer;transition:color .25s;background:none;border:0;text-align:left;padding:0}
+.y:hover{color:#888}
+.y.on{color:#111}
+.cnt{font-size:12px;color:#888;margin:0 0 14px;font-weight:700}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
+.pill{padding:8px 18px;border-radius:999px;border:2px solid #111;font-weight:800;font-size:13px;background:#fff;cursor:pointer;font-family:inherit}
+.pill.on{background:#111;color:#fff}
+.pill.soft{border-color:#ddd;color:#666}
+.pill.soft.on{background:#111;color:#fff;border-color:#111}
+.view{margin-left:auto;display:flex;gap:6px}
+.sec{margin-bottom:34px}
+.sec h3{font:400 22px 'Fredoka One';margin-bottom:12px;display:flex;align-items:baseline;gap:10px}
+.sec h3 small{font:700 12px 'Noto Sans KR';color:#888}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.grid .th{aspect-ratio:1/1}
+.mas{columns:4;column-gap:10px}
+.mas .th{margin-bottom:10px}
+.hide{display:none}
+.bn{position:fixed;left:0;right:0;bottom:0;height:56px;background:#000;z-index:50}
+.bn i{position:absolute;left:50%;margin-left:-60px;width:120px;height:26px;top:-16px;background:#000;border-radius:18px 18px 0 0}
+.bn b{position:absolute;left:50%;margin-left:-10px;top:-12px;color:#7a3cff;font-size:22px}
+.fx{opacity:0;transform:translateY(40px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.fx.in{opacity:1;transform:none}
+@media(max-width:820px){
+ .bento{grid-template-columns:repeat(2,1fr);grid-template-rows:none;grid-auto-rows:150px}
+ .bento .big{grid-column:span 2;grid-row:span 2}
+ .wrap{grid-template-columns:1fr}
+ .side{position:static;flex-direction:row;gap:18px;align-items:baseline;overflow-x:auto}
+ .cnt{display:none}
+ .grid{grid-template-columns:repeat(2,1fr)}.mas{columns:2}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="back" href="#">← 포트폴리오 선택 페이지</a><br>
+  <span class="kick">ON-SITE ARCHIVE</span>
+  <h1>사이트 내부 포트폴리오</h1>
+  <p class="sub">최신 작업을 먼저 크게 보고, 아래에서 연도와 분류로 찾아보세요.</p>
+
+  <!-- 위: 최신작 벤토 -->
+  <div class="bento">
+    <div class="th big fx"><img src="../portfolio/assets/2026/13.jpg" alt=""><span>2026 신작</span><em>그림</em></div>
+    <div class="th fx"><img src="../portfolio/assets/2026/7.png" alt=""><em>3D</em></div>
+    <div class="th fx"><img src="../portfolio/assets/2026/18.jpg" alt=""></div>
+    <div class="th fx"><img src="../portfolio/assets/2026/10.jpg" alt=""></div>
+    <div class="th fx"><img src="../portfolio/assets/2026/14.jpg" alt=""></div>
+    <div class="th fx"><img src="../portfolio/assets/2026/15.jpg" alt=""></div>
+    <div class="th fx"><img src="../portfolio/assets/2026/16.jpg" alt=""></div>
+  </div>
+
+  <!-- 아래: 연도 사이드바 + 필터 + 작품 -->
+  <div class="wrap">
+    <div class="side">
+      <button class="y on" data-y="2026">2026</button><p class="cnt">19 works</p>
+      <button class="y" data-y="2025">2025</button><p class="cnt">24 works</p>
+      <button class="y" data-y="2024">2024</button><p class="cnt">31 works</p>
+    </div>
+    <div>
+      <div class="row">
+        <button class="pill on">ALL</button><button class="pill">그림</button><button class="pill">3D</button><button class="pill soft">UNREAL</button><button class="pill soft">부스</button>
+        <div class="view"><button class="pill soft" id="vm">모아보기</button><button class="pill soft on" id="vl">목록</button></div>
+      </div>
+
+      <section class="sec" data-sec="2026">
+        <h3>2026 <small>19 works</small></h3>
+        <div class="grid" data-grid>
+          <div class="th"><img src="../portfolio/assets/2026/1.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2026/10.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2026/14.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2026/15.jpg" alt=""></div>
+          <div class="th"><img src="../portfolio/assets/2026/16.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2026/18.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2026/7.png" alt=""></div><div class="th"><img src="../portfolio/assets/2026/13.jpg" alt=""></div>
+        </div>
+      </section>
+      <section class="sec" data-sec="2025">
+        <h3>2025 <small>24 works</small></h3>
+        <div class="grid" data-grid>
+          <div class="th"><img src="../portfolio/assets/2025/1.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2025/2.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2025/3.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2025/4.jpg" alt=""></div>
+          <div class="th"><img src="../portfolio/assets/2025/5.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2025/6.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2025/7.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2025/8.jpg" alt=""></div>
+        </div>
+      </section>
+      <section class="sec" data-sec="2024">
+        <h3>2024 <small>31 works</small></h3>
+        <div class="grid" data-grid>
+          <div class="th"><img src="../portfolio/assets/2024/1.png" alt=""></div><div class="th"><img src="../portfolio/assets/2024/10.png" alt=""></div><div class="th"><img src="../portfolio/assets/2024/11.jpg" alt=""></div><div class="th"><img src="../portfolio/assets/2024/12.jpg" alt=""></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<div class="bn"><i></i><b>✦</b></div>
+
+<script>
+// 연도 클릭 -> 해당 연도 구간으로 이동, 스크롤하면 연도 하이라이트
+var years=[].slice.call(document.querySelectorAll('.y'));
+years.forEach(function(b){b.addEventListener('click',function(){
+  document.querySelector('[data-sec="'+b.dataset.y+'"]').scrollIntoView({behavior:'smooth',block:'start'});
+})});
+var secIO=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting){years.forEach(function(b){b.classList.toggle('on',b.dataset.y===e.target.dataset.sec)})}
+})},{rootMargin:'-30% 0px -60% 0px'});
+[].forEach.call(document.querySelectorAll('[data-sec]'),function(s){secIO.observe(s)});
+// 모아보기/목록 전환
+var vm=document.getElementById('vm'),vl=document.getElementById('vl');
+function setView(m){
+  vm.classList.toggle('on',m==='m');vl.classList.toggle('on',m==='l');
+  [].forEach.call(document.querySelectorAll('[data-grid]'),function(g){g.className=m==='m'?'mas':'grid';});
+}
+vm.onclick=function(){setView('m')};vl.onclick=function(){setView('l')};
+// 벤토 페이드업
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in')}})},{threshold:.1});
+[].forEach.call(document.querySelectorAll('.fx'),function(el,i){el.style.transitionDelay=(i*0.06)+'s';io.observe(el)});
+</script>
+</body>
+</html>

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../style.css">
     <!-- 프로필 전용 스타일 -->
     <link rel="stylesheet" href="profile_style.css">
+    <link rel="stylesheet" href="../assets/nav_peek.css">
 </head>
 <body>
 
@@ -42,25 +43,35 @@
             <img src="../assets/profile.jpg" alt="Patohsi Profile">
         </div>
 
-        <!-- 파란색 소개 박스 -->
-        <div class="intro-box">
-            <p>
-                안녕하세요 patohsi 입니다.<br>
-                게임, 일러스트 등 프리로 활동중에 있습니다.
+        <!-- 소개 박스 (이력서 내용) -->
+        <div class="intro-box resume-intro">
+            <p class="intro-role"><span class="role-chip">배경 모델러</span></p>
+            <h1 class="intro-name">Patohsi</h1>
+            <p class="intro-tagline">공방처럼 설계하고 쌓아가는 모델링 아티스트</p>
+            <p class="intro-edu">용인대학교 미디어디자인학과 (졸) · <a href="mailto:aoiusagi1203@gmail.com">aoiusagi1203@gmail.com</a></p>
+            <p class="intro-text">
+                저는 새로운 기법을 발견하면 문서로 정리하고 작업에 적용합니다. 최신 툴을 기존 디자인에 접목해 새로운 결과물을 만들고,
+                서로 다른 도구를 하나의 워크플로우로 엮어내는 과정에서 가장 큰 배움을 얻습니다. 이렇게 축적한 도구와 노하우는 다음 작업의 기반이 됩니다.
+                만들고, 기록하고, 다시 새로운 도구로 이어가는 이 순환 속에서 끊임없이 성장하는 아티스트가 되겠습니다.
             </p>
+            <div class="ai-notice" role="note">
+                <p lang="ko"><span>KR</span>제 그림에는 절대 AI를 사용하지 않습니다.</p>
+                <p lang="zh"><span>CN</span>我的画作绝不使用AI。</p>
+                <p lang="ja"><span>JP</span>私の絵には、AIを一切使用していません。</p>
+                <p lang="en"><span>EN</span>I never use AI in my artwork.</p>
+            </div>
+            <button type="button" class="resume-btn resume-btn-intro" onclick="openResume()">이력서 보기</button>
         </div>
 
-        <!-- AI 미사용 선언 (한·중·일·영) -->
-        <div class="ai-notice" role="note">
-            <p lang="ko"><span>KR</span>제 그림에는 절대 AI를 사용하지 않습니다.</p>
-            <p lang="zh"><span>CN</span>我的画作绝不使用AI。</p>
-            <p lang="ja"><span>JP</span>私の絵には、AIを一切使用していません。</p>
-            <p lang="en"><span>EN</span>I never use AI in my artwork.</p>
+        <!-- 프로필 탭: HISTORY / PIPELINE / TOOLS -->
+        <div class="profile-tabs" role="tablist" aria-label="프로필 정보">
+            <button type="button" class="ptab active" role="tab" data-tab="history">HISTORY</button>
+            <button type="button" class="ptab" role="tab" data-tab="pipeline">PIPELINE</button>
+            <button type="button" class="ptab" role="tab" data-tab="tools">TOOLS</button>
         </div>
 
-        <!-- 사용 가능 툴 섹션 (숙련도 3단계) -->
-        <div class="tools-section">
-            <h2 class="section-title">사용 가능 툴</h2>
+        <!-- TOOLS: 사용 가능 툴 (숙련도 3단계) -->
+        <div class="tools-section tab-panel" data-panel="tools">
 
             <!-- 메인 툴: 가장 주력으로 쓰는 두 툴을 가로 배너로 맨 위에 고정 -->
             <div class="tool-main-banners">
@@ -123,9 +134,20 @@
                     </div>
                 </section>
             </div>
+        </div>
 
-            <!-- 작업 파이프라인 -->
-            <h3 class="pipeline-title">작업 파이프라인</h3>
+        <!-- PIPELINE: 작업 파이프라인 -->
+        <div class="tools-section tab-panel" data-panel="pipeline">
+            <h3 class="pipeline-title">WORK PIPELINE</h3>
+            <ol class="wp-list">
+                <li class="wp-item"><b>01</b><div><h4>모듈러 킷 제작</h4><p>건물 파츠를 모듈러 단위로 나누어 조합 가능한 킷으로 제작. 절차적 도시 파츠의 규격을 설정하고 규격에 맞추어 제작</p></div></li>
+                <li class="wp-item"><b>02</b><div><h4>하이-로우 토폴로지 작업</h4><p>간단한 자료 수집 → 3D 모델링과 컬러링 → 하이폴리를 먼저 제작 → 텍스쳐 제작 → 로우폴리 토폴로지 작업</p></div></li>
+                <li class="wp-item"><b>03</b><div><h4>UE5 적용과 PBR 최적화</h4><p>PBR 드로우 콜을 하드하게 관리. 트림 시트가 아닌 텍스쳐 모듈화를 통해 4x4 텍스쳐링 방식 사용으로 작업</p></div></li>
+                <li class="wp-item"><b>04</b><div><h4>텍스쳐 파이프라인 간소화</h4><p>Substance Painter로 제작 후 텍스쳐 패킹을 통한 관리, LOD 관리를 통한 구조적 최적화 가능</p></div></li>
+                <li class="wp-item"><b>05</b><div><h4>폴리지 제작</h4><p>필요한 자연물, 절벽 등 SpeedTree, Quixel 에셋들을 이용해 환경 프랍을 수정 또는 제작</p></div></li>
+            </ol>
+
+            <h3 class="pipeline-title">도구별 파이프라인</h3>
             <div class="pipelines">
                 <section class="pipe-line">
                     <div class="pipe-line-head"><span class="pipe-line-en">MODELING</span><span class="pipe-line-ko">모델링</span></div>
@@ -163,21 +185,34 @@
             </div>
         </div>
 
-        <!-- 작업 이력 섹션 -->
-        <div class="career-section">
-            <h2 class="section-title">작업 이력</h2>
-
-            <ul class="career-list">
-                <li class="career-item">
-                    <span class="career-period">2024 - 현재</span>
-                    <span class="career-role">프리랜서 일러스트레이터 / 3D 아티스트</span>
-                    <span class="career-desc">커미션, 게임 리소스, 부스 소품 제작 등</span>
-                </li>
+        <!-- HISTORY: 이력서 보기 / 활동 / 프로젝트 -->
+        <div class="career-section tab-panel active" data-panel="history">
+            <h2 class="section-title">ACTIVITY</h2>
+            <ul class="hist-list">
+                <li class="hist-year">2026</li>
+                <li class="hist-item"><b>환상일주 2회</b><span>행사 부스 참가 · 즉매회 1인 참가</span></li>
+                <li class="hist-item"><b>환상일주 1회</b><span>행사 부스 참가 · 즉매회 1인 참가</span></li>
+                <li class="hist-item"><b>동방 온리전 3회</b><span>행사 부스 참여 · 굿즈 판매회 2인 참가</span></li>
+                <li class="hist-item"><b>동방 온리전 2회</b><span>행사 부스 참여 · 굿즈 판매회 1인 참가</span></li>
+                <li class="hist-year">2024</li>
+                <li class="hist-item"><b>潮汕THO 2nd 서브 포스터</b><span>중국 潮汕THO 2nd 행사 포스터 일러스트 제작 · <a href="../portfolio/2024/work_11.html">작품 보기 →</a></span></li>
             </ul>
 
-            <button type="button" class="resume-btn" onclick="openResume()">
-                이력서 보기
-            </button>
+            <h2 class="section-title">PROJECT</h2>
+            <article class="project-card">
+                <div class="project-head">
+                    <h3>小鈴の里日記</h3>
+                    <span class="project-tag">HD2D 게임 · 2027</span>
+                </div>
+                <p class="project-sub">UE5.3 · C++ / Modeling</p>
+                <ul>
+                    <li>게임 기획, 3D 모델, 개발, UI 참가</li>
+                    <li>PBR을 이용한 텍스쳐 자동화와 거리 기반 텍스쳐 변환을 통한 메모리 절약</li>
+                    <li>모듈식 텍스쳐를 이용해 작업 시간 축소</li>
+                    <li>텍스쳐 한계로 인한 분리 모델링과 로우폴리 작업, 필요에 의한 UE 내부 모델링</li>
+                    <li>SpeedTree를 이용한 환경 폴리지 제작</li>
+                </ul>
+            </article>
         </div>
 
         <!-- SNS 아이콘 (하단 2줄) -->
@@ -203,12 +238,34 @@
             <button type="button" class="resume-modal-close" onclick="closeResume()" aria-label="닫기">×</button>
             <h3>이력서</h3>
             <div class="resume-modal-body">
-                <p>이력서가 아직 준비 중입니다.<br>곧 업데이트될 예정입니다.</p>
-                <!--
-                    이력서 파일이 준비되면 아래 주석을 해제하고 경로를 넣어주세요.
-                    이미지: <img src="assets/resume.jpg" alt="이력서" class="resume-img">
-                    PDF   : <iframe src="assets/resume.pdf" class="resume-pdf"></iframe>
-                -->
+                <div class="rs-head">
+                    <img src="../assets/profile.jpg" alt="" class="rs-photo">
+                    <div>
+                        <h4>Patohsi <span class="role-chip">배경 모델러</span></h4>
+                        <p>용인대학교 미디어디자인학과 (졸)<br><a href="mailto:aoiusagi1203@gmail.com">aoiusagi1203@gmail.com</a></p>
+                    </div>
+                </div>
+                <p class="rs-tag">공방처럼 설계하고 쌓아가는 모델링 아티스트</p>
+                <p>저는 새로운 기법을 발견하면 문서로 정리하고 작업에 적용합니다. 최신 툴을 기존 디자인에 접목해 새로운 결과물을 만들고, 서로 다른 도구를 하나의 워크플로우로 엮어내는 과정에서 가장 큰 배움을 얻습니다. 이렇게 축적한 도구와 노하우는 다음 작업의 기반이 됩니다.</p>
+
+                <h5>PROGRAM SKILLS</h5>
+                <p><b>Main</b> UE5.3 · C++ / Modeling<br>
+                <b>3D Modeling</b> Blender, Cinema 4D, Maya, SketchUp, SpeedTree, Gaea, ZBrush, Marvelous Designer, RealityScan<br>
+                <b>Texturing</b> Substance Painter, Substance Designer, Quixel Mixer, Photoshop, Illustrator<br>
+                <b>VFX</b> Houdini, Unreal VFX<br>
+                <b>Video</b> Premiere, After Effects<br>
+                <b>AI</b> Claude, ComfyUI, Tripo Studio, Meshy</p>
+
+                <h5>PROJECT</h5>
+                <p><b>小鈴の里日記</b> · HD2D 게임 · 2027<br>
+                게임 기획, 3D 모델, 개발, UI 참가 / PBR 텍스쳐 자동화와 거리 기반 텍스쳐 변환으로 메모리 절약 / 모듈식 텍스쳐로 작업 시간 축소 / SpeedTree 환경 폴리지 제작</p>
+
+                <h5>WORK PIPELINE</h5>
+                <p>01 모듈러 킷 제작 · 02 하이-로우 토폴로지 작업 · 03 UE5 적용과 PBR 최적화 · 04 텍스쳐 파이프라인 간소화 · 05 폴리지 제작</p>
+
+                <h5>ACTIVITY</h5>
+                <p>2026 환상일주 1·2회 행사 부스 참가 / 동방 온리전 2·3회 행사 부스 참여<br>
+                2024 潮汕THO 2nd 서브 포스터 (중국 행사 포스터 일러스트 제작)</p>
             </div>
         </div>
     </div>
@@ -249,5 +306,6 @@
 
     <!-- 프로필 전용 JS -->
     <script src="profile_script.js"></script>
+    <script src="../assets/nav_peek.js"></script>
 </body>
 </html>

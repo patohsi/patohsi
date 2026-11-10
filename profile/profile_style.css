@@ -624,3 +624,320 @@ body {
     letter-spacing: 0.05em;
     color: #304ffe;
 }
+
+
+/* --- 프로필 탭 (TOOLS / PIPELINE / HISTORY) --- */
+.profile-tabs {
+    display: flex;
+    gap: 6px;
+    margin: 0 auto 34px;
+    padding: 5px;
+    border-radius: 999px;
+    background: #f1f1f1;
+    align-self: center;
+}
+
+.ptab {
+    padding: 10px 26px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #666;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.ptab:hover { color: #111; }
+.ptab.active { background: #111; color: #fff; }
+
+.tab-panel:not(.active) { display: none; }
+
+.tools-section.tab-panel .pipeline-title:first-child { margin-top: 0; }
+
+
+/* ===================================================================
+   PROFILE_RESUME: 이력서 내용 구성 (소개 / 사용 툴 / HISTORY / PIPELINE)
+   =================================================================== */
+/* AI 미사용 문구는 소개 박스 안에서 보인다 (아래 .resume-intro .ai-notice) */
+
+.resume-intro {
+    text-align: left;
+    background: #fff;
+    border: 2px solid #111;
+    color: #111;
+    box-shadow: none;
+    padding: 28px 28px 26px;
+}
+
+.role-chip {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 8px;
+    background: #304ffe;
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+}
+
+.intro-role { margin: 0 0 6px; }
+
+.intro-name {
+    margin: 4px 0 6px;
+    font-family: 'Fredoka One', sans-serif;
+    font-weight: 400;
+    font-size: 2.6rem;
+    line-height: 1.1;
+    color: #111;
+}
+
+.intro-tagline {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #111;
+}
+
+.resume-intro .intro-edu {
+    margin: 0 0 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.resume-intro .intro-edu a { color: #304ffe; text-decoration: none; }
+
+.resume-intro .intro-text {
+    margin: 0;
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.85;
+    color: #333;
+}
+
+/* ---------- 사용 툴 (맨 위) ---------- */
+
+.skill-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.skill-main .skill-cat { flex: 0 0 110px; }
+
+.skill-main-img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.skill-main-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.skill-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.skill-row:last-child { border-bottom: 0; }
+
+.skill-cat {
+    flex: 0 0 110px;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: #a1c4fd;
+}
+
+.skill-icons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.skill-icons .tool-icon { flex: 0 0 46px; width: 46px; }
+.skill-icons .tool-icon img { max-width: none; border: 0; box-shadow: none; }
+.skill-icons .tool-icon span { background: #fff; color: #111; }
+.skill-icons .tool-icon span::after { border-top-color: #fff; }
+
+.skill-chip {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid #444;
+    background: #1e1e1e;
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+/* ---------- HISTORY ---------- */
+.resume-btn-top {
+    display: block;
+    margin: 0 auto 34px;
+    padding: 16px 44px;
+    font-size: 1.05rem;
+}
+
+.career-section .section-title {
+    margin: 30px 0 14px;
+    text-align: left;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    color: #304ffe;
+}
+
+.hist-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hist-year {
+    margin: 18px 0 8px;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 1.6rem;
+    color: #111;
+}
+
+.hist-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: #f6f7fb;
+    text-align: left;
+}
+
+.hist-item b { font-size: 0.98rem; color: #111; }
+.hist-item span { font-size: 0.82rem; color: #666; line-height: 1.6; }
+.hist-item a { color: #304ffe; font-weight: 700; text-decoration: none; }
+
+.project-card {
+    padding: 20px 22px;
+    border-radius: 18px;
+    background: #111;
+    color: #fff;
+    text-align: left;
+}
+
+.project-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+.project-head h3 { margin: 0; font-size: 1.3rem; }
+.project-tag { color: #a1c4fd; font-size: 0.78rem; font-weight: 700; }
+.project-sub { margin: 4px 0 10px; font-size: 0.82rem; color: #aaa; }
+.project-card ul { margin: 0; padding-left: 1.2em; font-size: 0.86rem; line-height: 1.85; color: #ddd; }
+
+/* ---------- PIPELINE: WORK PIPELINE ---------- */
+.wp-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 10px; }
+
+.wp-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 18px;
+    border-radius: 16px;
+    background: #f6f7fb;
+    text-align: left;
+}
+
+.wp-item > b {
+    flex: 0 0 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    line-height: 38px;
+    font-family: 'Fredoka One', sans-serif;
+    font-weight: 400;
+}
+
+.wp-item h4 { margin: 0 0 4px; font-size: 1rem; color: #111; }
+.wp-item p { margin: 0; font-size: 0.84rem; line-height: 1.7; color: #555; }
+
+/* ---------- 이력서 팝업 내용 ---------- */
+.rs-head { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+.rs-photo { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; }
+.rs-head h4 { margin: 0 0 4px; font-size: 1.3rem; }
+.rs-head p { margin: 0; font-size: 0.82rem; color: #666; line-height: 1.6; }
+.rs-head a { color: #304ffe; text-decoration: none; }
+.rs-tag { font-weight: 800; font-size: 1rem; margin: 6px 0; }
+.resume-modal-body h5 { margin: 18px 0 6px; font-family: 'Fredoka One', sans-serif; font-weight: 400; font-size: 0.85rem; letter-spacing: 0.2em; color: #304ffe; }
+.resume-modal-body p { text-align: left; font-size: 0.86rem; line-height: 1.8; }
+
+@media (max-width: 700px) {
+    .skill-row, .skill-main { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .skill-main .skill-cat, .skill-cat { flex-basis: auto; }
+    .intro-name { font-size: 2.1rem; }
+}
+
+.resume-btn-intro {
+    display: block;
+    margin: 20px 0 0;
+    padding: 13px 34px;
+}
+
+/* 이력서 보기 버튼: 너비를 글자에 맞추고 가운데 정렬 */
+.resume-btn-top,
+.resume-btn-intro {
+    width: auto;
+    min-width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.resume-btn-intro { margin-top: 22px; }
+.resume-btn-top { margin-bottom: 34px; }
+
+/* X 장식은 항상 내용 뒤로 (글자·박스 위에 겹치지 않게) */
+.deco-group-left,
+.deco-group-right {
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 소개 박스 안의 AI 미사용 문구 (한·중·일·영) */
+.resume-intro .ai-notice {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: auto;
+    margin: 18px 0 0;
+    padding: 12px 16px;
+    border: 2px solid #111;
+    border-radius: 14px;
+    background: #fff;
+    text-align: left;
+}
+
+.resume-intro .ai-notice p {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #111;
+}
+
+.resume-intro .ai-notice span {
+    flex: 0 0 auto;
+    min-width: 2.2em;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: #304ffe;
+}

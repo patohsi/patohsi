@@ -16,10 +16,11 @@
     <!-- 2. 상세 페이지 전용 CSS (1단계 위: portfolio 폴더) -->
     <link rel="stylesheet" href="../portfolio_detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/nav_peek.css">
 </head>
 <body>
 
-    <a href="../art.html" class="detail-back-btn">
+    <a href="../art.html?section=booth" class="detail-back-btn">
         <i class="fa-solid fa-arrow-left"></i> 목록으로
     </a>
     <!-- 상세 컨텐츠 영역 -->
@@ -72,7 +73,7 @@
                 <li class="nav-item"><a href="../../profile/index.html">PROFILE</a></li>
 
                 <!-- 포트폴리오 목록으로 돌아가기 (1단계 위) -->
-                <li class="nav-item"><a href="../art.html">PORTFOLIO</a></li>
+                <li class="nav-item"><a href="../art.html?section=booth">PORTFOLIO</a></li>
 
                 <li class="nav-item center-home">
                     <a href="../../index.html" class="home-link-text">PATOHSI</a>
@@ -86,5 +87,7 @@
 
     <!-- 스크립트 -->
     <script src="../portfolio_detail.js"></script>
+    <script src="../../assets/nav_peek.js"></script>
+    <script src="../../assets/smart_back.js"></script>
 </body>
 </html>

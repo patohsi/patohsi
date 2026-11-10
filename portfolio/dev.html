@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patohsi - DEV</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="portfolio_landing.css">
+    <link rel="stylesheet" href="portfolio_dev.css">
+    <link rel="stylesheet" href="../assets/nav_peek.css">
+</head>
+<body>
+    <main class="hub-page dev-page">
+        <a href="index.html" class="dev-back">← 뒤로가기</a>
+        <p class="hub-kicker">DEV</p>
+        <h1 class="hub-title">개발 작업</h1>
+        <p class="hub-copy">연도별로 묶어서 보여줍니다. 외부 링크는 새 탭에서 열리고, 개발 일지는 블로그로 이어집니다.</p>
+
+        <div class="dev-filter" id="devFilter">
+            <button class="dev-pill active" data-type="all">ALL</button>
+            <button class="dev-pill" data-type="web">WEB</button>
+            <button class="dev-pill" data-type="bot">BOT</button>
+            <button class="dev-pill" data-type="devlog">개발 일지</button>
+        </div>
+
+        <!--
+            연도별 묶음. 새 작업은 해당 연도의 .dev-grid 안에 .dev-card 를 추가하세요.
+            data-type: web | bot | devlog   (필터에 쓰입니다)
+            새 연도는 .dev-year 블록을 맨 위에 하나 더 만들면 됩니다 (최신 연도가 위).
+        -->
+        <section class="dev-year" data-year="2026">
+            <h2 class="dev-year-title">2026</h2>
+            <div class="dev-grid">
+                <a class="dev-card" data-type="devlog" href="../blog/post/2026/devlog/quest.html">
+                    <img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt="" onerror="this.style.display='none'">
+                    <span class="dev-tags"><span class="hub-tag">개발 일지</span></span>
+                    <span class="dev-go">↗</span>
+                    <span class="dev-name">퀘스트 시스템<small>블루프린트 노드 정리 · 블로그</small></span>
+                </a>
+                <a class="dev-card" data-type="devlog" href="../blog/post/2026/devlog/shop.html">
+                    <img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt="" onerror="this.style.display='none'">
+                    <span class="dev-tags"><span class="hub-tag">개발 일지</span></span>
+                    <span class="dev-go">↗</span>
+                    <span class="dev-name">상점 · NPC<small>블루프린트 노드 정리 · 블로그</small></span>
+                </a>
+                <a class="dev-card" data-type="devlog" href="../blog/post/2026/devlog/inventory.html">
+                    <img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt="" onerror="this.style.display='none'">
+                    <span class="dev-tags"><span class="hub-tag">개발 일지</span></span>
+                    <span class="dev-go">↗</span>
+                    <span class="dev-name">인벤토리 · 핫바<small>블루프린트 노드 정리 · 블로그</small></span>
+                </a>
+                <a class="dev-card" data-type="devlog" href="../blog/post/2026/devlog/gather.html">
+                    <img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt="" onerror="this.style.display='none'">
+                    <span class="dev-tags"><span class="hub-tag">개발 일지</span></span>
+                    <span class="dev-go">↗</span>
+                    <span class="dev-name">채집 · 낚시<small>블루프린트 노드 정리 · 블로그</small></span>
+                </a>
+                <a class="dev-card" data-type="devlog" href="../blog/post/2026/devlog/dialogue.html">
+                    <img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt="" onerror="this.style.display='none'">
+                    <span class="dev-tags"><span class="hub-tag">개발 일지</span></span>
+                    <span class="dev-go">↗</span>
+                    <span class="dev-name">대화 · 엔딩 · 튜토리얼<small>블루프린트 노드 정리 · 블로그</small></span>
+                </a>
+                <a class="dev-card" data-type="devlog" href="../blog/post/2026/devlog/system.html">
+                    <img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt="" onerror="this.style.display='none'">
+                    <span class="dev-tags"><span class="hub-tag">개발 일지</span></span>
+                    <span class="dev-go">↗</span>
+                    <span class="dev-name">게임 시스템<small>블루프린트 노드 정리 · 블로그</small></span>
+                </a>
+                <a class="dev-card" data-type="bot" href="https://touhou-music-bot.onrender.com" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/2026/7.png" alt="" onerror="this.style.display='none'">
+                    <span class="dev-tags"><span class="hub-tag blue">BOT</span></span>
+                    <span class="dev-go">↗</span>
+                    <span class="dev-name">Discord Bot Page<small>디스코드 봇 페이지 · 외부 링크</small></span>
+                </a>
+                <a class="dev-card" data-type="web" href="https://toramremote.netlify.app/" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/2026/18.jpg" alt="" onerror="this.style.display='none'">
+                    <span class="dev-tags"><span class="hub-tag blue">WEB</span></span>
+                    <span class="dev-go">↗</span>
+                    <span class="dev-name">toram game Archive<small>토람 게임정보 정리 페이지 · 외부 링크</small></span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div id="scroll-top-btn" onclick="scrollToTop()">
+        <img src="../assets/top_btn.png" class="top-btn-img" alt="Top">
+    </div>
+
+    <div class="bottom-nav-wrapper inverted-nav">
+        <div class="nav-glow"></div>
+        <nav id="main-nav" class="nav-bar">
+            <div class="nav-bump-svg-container" onclick="toggleNav()">
+                <svg viewBox="0 0 400 60" preserveAspectRatio="none" class="bump-svg">
+                    <path d="M0,60 L110,60 Q140,60 150,40 L160,15 Q165,0 185,0 L215,0 Q235,0 240,15 L250,40 Q260,60 290,60 L400,60 Z"></path>
+                </svg>
+                <img src="../assets/star_icon.png" alt="Toggle" class="trigger-icon">
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item"><a href="../profile/index.html">PROFILE</a></li>
+                <li class="nav-item"><a href="index.html">PORTFOLIO</a></li>
+                <li class="nav-item center-home"><a href="../index.html" class="home-link-text">PATOHSI</a></li>
+                <li class="nav-item"><a href="../blog/index.html">BLOG</a></li>
+                <li class="nav-item"><a href="../commission/index.html">COMMISSION</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="portfolio_landing.js"></script>
+    <script>
+        // 필터: ALL / WEB / BOT / 개발 일지 — 맞는 카드가 없는 연도 블록은 숨긴다
+        (function () {
+            var pills = document.querySelectorAll('.dev-pill');
+            var cards = document.querySelectorAll('.dev-card');
+            var years = document.querySelectorAll('.dev-year');
+            pills.forEach(function (pill) {
+                pill.addEventListener('click', function () {
+                    var type = pill.dataset.type;
+                    pills.forEach(function (p) { p.classList.toggle('active', p === pill); });
+                    cards.forEach(function (c) { c.hidden = !(type === 'all' || c.dataset.type === type); });
+                    years.forEach(function (y) { y.hidden = !y.querySelector('.dev-card:not([hidden])'); });
+                });
+            });
+        })();
+    </script>
+    <script src="../assets/nav_peek.js"></script>
+    <script src="../assets/smart_back.js"></script>
+</body>
+</html>

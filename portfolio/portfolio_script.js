@@ -1,18 +1,85 @@
-const GALLERY_STATE_KEY = 'patohsi_gallery_state';
+/* ===================================================================
+   포트폴리오 갤러리 (art.html)
+   - ?section=art | booth | 3d  로 구역을 나눈다 (기본: art)
+   - 구역별로 연도/태그/보기 방식을 기억해서, 작품을 보고 돌아와도 보던 자리로 돌아온다
+   =================================================================== */
+const SECTIONS = {
+    art:   { categories: ['art'],   kicker: 'ART',      title: 'ART',   desc: '일러스트 · 캐릭터 디자인 · 포스터', defaultTag: 'illust', tabs: true },
+    booth: { categories: ['booth'], kicker: 'ART',      title: 'ART',   desc: '외부 행사 부스에서 선보인 작업', defaultTag: '', tabs: true },
+    '3d':  { categories: ['3d'],    kicker: '3D WORKS', title: '3D',    desc: '3D 작업을 모아서 보여줍니다', defaultTag: '3d', tabs: false },
+};
+
+const TAG_LABELS = {
+    illust: '일러스트', character: '캐릭터 디자인', poster: '포스터',
+    unreal: 'UNREAL', unity: 'UNITY', '3d': '3D',
+};
+
+const sectionParam = new URLSearchParams(location.search).get('section');
+const CURRENT_SECTION = SECTIONS[sectionParam] ? sectionParam : 'art';
+const GALLERY_STATE_KEY = 'patohsi_gallery_state_' + CURRENT_SECTION;
 
 let currentYear = null; // 저장된 상태가 없으면 가장 최근 연도로 자동 설정됨
-let currentCategory = 'all';
+let currentCategory = 'all'; // 태그 필터 값
 let currentView = 'grid'; // 'masonry'(모아보기) | 'grid'(목록보기) — 기본값: 목록보기
 
 document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.gallery-card')) {
+        setupSection();
+        addYearCounts();
+        buildLatestBento();
+        buildTagFilter();
         restoreGalleryState();
         renderGallery();
         setupLightbox();
     }
 });
 
-// 목록으로 돌아왔을 때(뒤로가기) 또는 새로고침해도 직전에 보던 연도/카테고리/뷰를 유지한다.
+function sectionItems() {
+    const cats = SECTIONS[CURRENT_SECTION].categories;
+    return Array.from(document.querySelectorAll('.gallery-card'))
+        .filter(item => cats.includes((item.dataset.category || '').toLowerCase()));
+}
+
+function itemTags(item) {
+    const raw = (item.dataset.tags || '').trim();
+    if (raw) return raw.toLowerCase().split(/\s+/);
+    const def = SECTIONS[CURRENT_SECTION].defaultTag;
+    return def ? [def] : [];
+}
+
+// 구역 제목/설명/탭 + 이 구역에 작품이 있는 연도 버튼만 남긴다
+function setupSection() {
+    const meta = SECTIONS[CURRENT_SECTION];
+    document.getElementById('sectionKicker').textContent = meta.kicker;
+    document.getElementById('sectionTitle').textContent = meta.title;
+    document.getElementById('sectionDesc').textContent = meta.desc;
+    document.title = 'Patohsi - ' + meta.title;
+
+    const tabs = document.getElementById('sectionTabs');
+    tabs.hidden = !meta.tabs;
+    tabs.querySelectorAll('a').forEach(a => a.classList.toggle('active', a.dataset.section === CURRENT_SECTION));
+
+    const years = new Set(sectionItems().map(item => item.dataset.year));
+    document.querySelectorAll('.year-btn').forEach(btn => {
+        btn.hidden = !years.has(btn.dataset.filter);
+    });
+}
+
+// 작품의 태그(data-tags)에서 필터 버튼을 만든다. 태그가 2종류 미만이면 필터를 숨긴다.
+function buildTagFilter() {
+    const box = document.getElementById('tagFilter');
+    const tags = new Set();
+    sectionItems().forEach(item => itemTags(item).forEach(t => tags.add(t)));
+    if (tags.size < 2) {
+        box.hidden = true;
+        return;
+    }
+    const make = (value, label) => '<button class="cat-btn subtle-btn" data-filter="' + value + '" onclick="setFilter(\'' + value + '\', \'category\')">' + label + '</button>';
+    box.innerHTML = make('all', 'ALL') + Array.from(tags).map(t => make(t, TAG_LABELS[t] || t.toUpperCase())).join('');
+    box.hidden = false;
+}
+
+// 목록으로 돌아왔을 때(뒤로가기) 또는 새로고침해도 직전에 보던 연도/태그/뷰를 유지한다.
 function restoreGalleryState() {
     let saved = null;
     try {
@@ -21,8 +88,8 @@ function restoreGalleryState() {
         saved = null;
     }
 
-    const yearButtons = document.querySelectorAll('.year-btn');
-    const availableYears = Array.from(yearButtons).map(b => b.dataset.filter);
+    const yearButtons = Array.from(document.querySelectorAll('.year-btn')).filter(b => !b.hidden);
+    const availableYears = yearButtons.map(b => b.dataset.filter);
 
     if (saved && saved.year && availableYears.includes(saved.year)) {
         currentYear = saved.year;
@@ -35,13 +102,12 @@ function restoreGalleryState() {
         currentView = 'grid';
     }
 
-    updateActiveButtons('.year-btn', currentYear);
-
-    const categoryBtn = document.querySelector(`.cat-btn[data-filter="${currentCategory}"]`);
-    const group = categoryBtn ? categoryBtn.closest('.focus-filter, .category-filter') : null;
-    if (group) {
-        updateActiveButtons(group.querySelectorAll('.cat-btn'), currentCategory);
+    if (!document.querySelector('#tagFilter .cat-btn[data-filter="' + currentCategory + '"]')) {
+        currentCategory = 'all';
     }
+
+    updateActiveButtons('.year-btn', currentYear || '');
+    updateActiveButtons('#tagFilter .cat-btn', currentCategory);
 
     const galleryGrid = document.getElementById('gallery-grid');
     galleryGrid.classList.toggle('view-masonry', currentView === 'masonry');
@@ -91,12 +157,7 @@ function setFilter(value, type) {
         updateActiveButtons('.year-btn', value);
     } else if (type === 'category') {
         currentCategory = value;
-        // 그림/3D(focus-filter)와 ALL/WORK/UNREAL/부스(category-filter)는
-        // 버튼 그룹이 다르므로 각 그룹 안에서만 active를 토글한다.
-        const group = document.querySelector(`.cat-btn[data-filter="${value}"]`)?.closest('.focus-filter, .category-filter');
-        if (group) {
-            updateActiveButtons(group.querySelectorAll('.cat-btn'), value);
-        }
+        updateActiveButtons('#tagFilter .cat-btn', value);
     }
 
     saveGalleryState();
@@ -109,20 +170,15 @@ function updateActiveButtons(selectorOrElements, value) {
         : selectorOrElements;
     buttons.forEach(button => {
         const buttonValue = (button.dataset.filter || '').toLowerCase();
-        button.classList.toggle('active', buttonValue === value.toLowerCase());
+        button.classList.toggle('active', buttonValue === String(value).toLowerCase());
     });
 }
 
 function getFilteredItems() {
-    const allItems = Array.from(document.querySelectorAll('.gallery-card'));
-
-    return allItems.filter(item => {
-        const itemYear = item.dataset.year;
-        const itemCategory = (item.dataset.category || '').toLowerCase();
-        const yearMatch = itemYear === currentYear;
-        const categoryMatch = currentCategory === 'all' || itemCategory === currentCategory.toLowerCase();
-
-        return yearMatch && categoryMatch;
+    return sectionItems().filter(item => {
+        const yearMatch = item.dataset.year === currentYear;
+        const tagMatch = currentCategory === 'all' || itemTags(item).includes(currentCategory.toLowerCase());
+        return yearMatch && tagMatch;
     });
 }
 
@@ -139,6 +195,54 @@ function renderGallery() {
     allItems.forEach(item => {
         item.style.display = filteredItems.has(item) ? 'flex' : 'none';
     });
+}
+
+
+/* ---- 연도 버튼에 작품 수 표시 + 최신작 벤토 ---- */
+function addYearCounts() {
+    const items = sectionItems();
+    document.querySelectorAll('.year-btn').forEach(btn => {
+        if (btn.hidden || btn.querySelector('small')) return;
+        const n = items.filter(i => i.dataset.year === btn.dataset.filter).length;
+        const small = document.createElement('small');
+        small.textContent = n + ' works';
+        btn.appendChild(small);
+    });
+}
+
+// 카드의 날짜(2026.01.05)로 최신순 정렬해서 위쪽에 큰 1장 + 작은 6장을 보여준다.
+function buildLatestBento() {
+    const box = document.getElementById('latestBento');
+    const grid = document.getElementById('latestGrid');
+    if (!box || !grid) return;
+
+    const dateOf = item => (item.querySelector('.card-date')?.textContent || '').trim();
+    const items = sectionItems()
+        .filter(item => item.querySelector('.card-img-box img[src]'))
+        .sort((a, b) => dateOf(b).localeCompare(dateOf(a)));
+
+    if (items.length < 7) {
+        box.hidden = true;
+        return;
+    }
+
+    grid.innerHTML = '';
+    items.slice(0, 7).forEach((item, i) => {
+        const link = document.createElement('a');
+        link.className = 'latest-item' + (i === 0 ? ' big' : '');
+        link.href = item.getAttribute('href');
+        const img = document.createElement('img');
+        img.src = item.querySelector('.card-img-box img').getAttribute('src');
+        img.alt = item.dataset.title || '';
+        link.appendChild(img);
+        if (i === 0) {
+            const label = document.createElement('span');
+            label.textContent = dateOf(item).replace(/\./g, '.') + ' · 최신작';
+            link.appendChild(label);
+        }
+        grid.appendChild(link);
+    });
+    box.hidden = false;
 }
 
 /* --- 라이트박스: 모아보기(masonry) 뷰에서 카드를 클릭하면 이미지를 전체로 보여줌 --- */

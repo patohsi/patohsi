@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/nav_peek.css">
 </head>
 <body>
 
@@ -39,6 +40,20 @@
                 <span class="lang-divider">|</span>
                 <button class="lang-btn" onclick="setLanguage('en')">EN</button>
             </div>
+            <div class="blog-hero">
+                <p class="blog-kicker">BLOG</p>
+                <h1 class="blog-title lang-text" data-ko="제작 메모와 개발 일지" data-en="Notes and Dev Logs">제작 메모와 개발 일지</h1>
+                <p class="blog-sub lang-text" data-ko="작업하면서 정리한 메모입니다. 분류와 연도로 골라서 보세요." data-en="Notes from my work. Filter by category and year.">작업하면서 정리한 메모입니다. 분류와 연도로 골라서 보세요.</p>
+            </div>
+
+            <div class="cat-pills" role="group" aria-label="분류">
+                <button class="cat-pill active" data-cat="all" onclick="setFilter('all', 'category')">ALL</button>
+                <button class="cat-pill" data-cat="unreal" onclick="setFilter('unreal', 'category')">UNREAL</button>
+                <button class="cat-pill" data-cat="3d" onclick="setFilter('3d', 'category')">3D</button>
+                <button class="cat-pill" data-cat="ui" onclick="setFilter('ui', 'category')">UI</button>
+                <button class="cat-pill dev" data-cat="devlog" onclick="setFilter('devlog', 'category')">DEV LOG</button>
+            </div>
+
             <div class="header-area">
                 <div class="year-filter">
                     <span class="year-text active" onclick="setFilter('all', 'year')">ALL</span>
@@ -325,33 +340,6 @@
                 </div>
 
                 <!-- 오른쪽: 사이드바 -->
-                <aside class="sidebar-column">
-                    <div class="sidebar-buttons">
-                        <button class="side-btn" onclick="setFilter('unreal', 'category')">
-                            <img src="image/btn_unreal.png" alt="Unreal">
-                        </button>
-                        <button class="side-btn" onclick="setFilter('3d', 'category')">
-                            <img src="image/btn_3d.png" alt="3D Model">
-                        </button>
-                        <button class="side-btn" onclick="setFilter('ui', 'category')">
-                            <img src="image/btn_ui.png" alt="Game UI">
-                        </button>
-                        <button class="side-btn" onclick="setFilter('devlog', 'category')">
-                            <img src="image/btn_devlog.png" alt="Dev Log">
-                        </button>
-                        <button class="side-btn reset-btn" onclick="setFilter('all', 'category')">
-                            RESET
-                        </button>
-                    </div>
-
-                    <div class="info-gray-box">
-                        <h3>Patohsi's Archive</h3>
-                        <p>
-                            This is a personal archive for game development resources.<br><br>
-                            Feel free to explore Unreal Engine tips, 3D modeling workflows, and UI designs.
-                        </p>
-                    </div>
-                </aside>
             </div>
         </div>
     </div>
@@ -388,5 +376,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="../assets/nav_peek.js"></script>
 </body>
 </html>

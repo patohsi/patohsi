@@ -11,60 +11,51 @@
 
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="portfolio_landing.css">
+    <link rel="stylesheet" href="../assets/nav_peek.css">
 </head>
 <body>
-    <div class="portfolio-hub">
-        <div class="hub-bg hub-bg-left"></div>
-        <div class="hub-bg hub-bg-right"></div>
+    <main class="hub-page">
+        <p class="hub-kicker">PORTFOLIO</p>
+        <h1 class="hub-title">보고 싶은 작업을 골라 주세요</h1>
+        <p class="hub-copy">그림, 3D, 개발 작업을 각각 따로 모았습니다.</p>
 
-        <main class="hub-card">
-            <p class="hub-kicker">PORTFOLIO</p>
-            <h1 class="hub-title">원하는 포트폴리오로 바로 이동</h1>
-            <p class="hub-copy">
-                아트 작업은 사이트 내부 아카이브로 연결하고,
-                개발 작업은 외부 페이지로 바로 이동하도록 구성했습니다.
-            </p>
+        <div class="hub-cards">
+            <a class="hub-card-link" href="art.html?section=art">
+                <img src="assets/2026/13.jpg" alt="" onerror="this.style.display='none'">
+                <span class="hub-card-no">01 · ART</span>
+                <span class="hub-card-name">ART</span>
+                <span class="hub-card-tags"><span class="hub-tag">일러스트</span><span class="hub-tag">캐릭터 디자인</span><span class="hub-tag">포스터</span></span>
+            </a>
+            <a class="hub-card-link" href="art.html?section=3d">
+                <img src="assets/2026/20-1.jpg" alt="" onerror="this.style.display='none'">
+                <span class="hub-card-no">02 · 3D</span>
+                <span class="hub-card-name">3D Works</span>
+                <span class="hub-card-tags"><span class="hub-tag blue">UNREAL</span><span class="hub-tag blue">UNITY</span><span class="hub-tag">3D</span></span>
+            </a>
+            <a class="hub-card-link" href="dev.html">
+                <img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt="" onerror="this.style.display='none'">
+                <span class="hub-card-no">03 · DEV</span>
+                <span class="hub-card-name">DEV</span>
+                <span class="hub-card-tags"><span class="hub-tag blue">WEB</span><span class="hub-tag blue">BOT</span><span class="hub-tag">개발 일지</span></span>
+            </a>
+        </div>
 
-            <div class="hub-actions">
-                <a class="hub-link"
-                   href="art.html">
-                    <img src="assets/2026/13.jpg" alt="" class="hub-link-bg">
-                    <span class="hub-link-kicker">On-site Archive</span>
-                    <span class="hub-link-label">ART Archive</span>
-                    <span class="hub-link-desc">사이트 내부 작업 아카이브</span>
-                </a>
-
-                <a class="hub-link"
-                   href="https://touhou-music-bot.onrender.com"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                    <img src="assets/2026/7.png" alt="" class="hub-link-bg">
-                    <span class="hub-link-kicker">External Link</span>
-                    <span class="hub-link-label">Discord Bot Page</span>
-                    <span class="hub-link-desc">디스코드 봇 페이지</span>
-                </a>
-
-                <a class="hub-link"
-                   href="https://toramremote.netlify.app/"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                    <img src="assets/2026/18.jpg" alt="" class="hub-link-bg">
-                    <span class="hub-link-kicker">External Link</span>
-                    <span class="hub-link-label">toram game Archive Page</span>
-                    <span class="hub-link-desc">토람 게임정보 정리 페이지</span>
-                </a>
-            </div>
-
-            <div class="archive-entry">
-                <span class="archive-label">ON-SITE ARCHIVE</span>
-                <a href="https://www.pixiv.net/users/21872516" class="archive-link">pixiv</a>
-            </div>
-        </main>
-    </div>
-
-    <div id="scroll-top-btn" onclick="scrollToTop()">
-        <img src="../assets/top_btn.png" class="top-btn-img" alt="Top">
-    </div>
+        <p class="hub-links-label">LINKS</p>
+        <div class="hub-links">
+            <a class="hub-btn" href="https://touhou-music-bot.onrender.com" target="_blank" rel="noopener noreferrer">
+                <span><b>Discord Bot</b><small>디스코드 봇 페이지</small></span><i>↗</i>
+            </a>
+            <a class="hub-btn" href="https://toramremote.netlify.app/" target="_blank" rel="noopener noreferrer">
+                <span><b>toram Archive</b><small>토람 게임정보 페이지</small></span><i>↗</i>
+            </a>
+            <a class="hub-btn line" href="https://www.pixiv.net/users/21872516" target="_blank" rel="noopener noreferrer">
+                <span><b>pixiv</b></span><i>↗</i>
+            </a>
+            <a class="hub-btn line" href="https://x.com/aoiusagi_cm" target="_blank" rel="noopener noreferrer">
+                <span><b>X</b></span><i>↗</i>
+            </a>
+        </div>
+    </main>
 
     <div class="bottom-nav-wrapper inverted-nav">
         <div class="nav-glow"></div>
@@ -86,5 +77,6 @@
     </div>
 
     <script src="portfolio_landing.js"></script>
+    <script src="../assets/nav_peek.js"></script>
 </body>
 </html>

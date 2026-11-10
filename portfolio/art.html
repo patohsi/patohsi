@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patohsi - Art Archive</title>
+    <title>Patohsi - Portfolio</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="portfolio_style.css">
+    <link rel="stylesheet" href="../assets/nav_peek.css">
 </head>
 <body>
     <div class="deco-top-left">
@@ -28,35 +29,39 @@
 
     <div class="portfolio-container">
         <header class="archive-header">
-            <p class="archive-kicker">ON-SITE ARCHIVE</p>
+            <p class="archive-kicker" id="sectionKicker">ART</p>
             <div class="archive-header-row">
                 <div>
-                    <h1 class="archive-title">사이트 내부 포트폴리오</h1>
-                    <p class="archive-desc">카드 크기를 줄이고, 그림과 3D 작업을 빠르게 나눠서 볼 수 있게 정리했습니다.</p>
+                    <h1 class="archive-title" id="sectionTitle">ART</h1>
+                    <p class="archive-desc" id="sectionDesc">일러스트 · 캐릭터 디자인 · 포스터</p>
                 </div>
-                <a href="index.html" class="archive-home-link">포트폴리오 선택 페이지</a>
+                <a href="index.html" class="archive-home-link">← 뒤로가기</a>
+            </div>
+            <div class="section-tabs" id="sectionTabs" hidden>
+                <a href="art.html?section=art" data-section="art">ART 아카이브</a>
+                <a href="art.html?section=booth" data-section="booth">외부 행사 부스</a>
             </div>
         </header>
 
-        <div class="filter-section">
+        <!-- 최신작 (JS가 이 구역의 최신 작품 7점으로 채운다) -->
+        <section class="latest-bento" id="latestBento" hidden>
+            <p class="latest-label">LATEST</p>
+            <div class="latest-grid" id="latestGrid"></div>
+        </section>
+
+        <div class="archive-body">
+            <aside class="year-side">
             <div class="year-filter">
                 <button class="year-btn" data-filter="2026" onclick="setFilter('2026', 'year')">2026</button>
                 <button class="year-btn" data-filter="2025" onclick="setFilter('2025', 'year')">2025</button>
                 <button class="year-btn" data-filter="2024" onclick="setFilter('2024', 'year')">2024</button>
             </div>
+            </aside>
 
-            <div class="filter-row">
-                <div class="focus-filter">
-                    <button class="cat-btn focus-btn" lang="ko" data-filter="art" onclick="setFilter('art', 'category')">그림</button>
-                    <button class="cat-btn focus-btn" data-filter="3d" onclick="setFilter('3d', 'category')">3D</button>
-                </div>
-
-                <div class="category-filter">
-                    <button class="cat-btn subtle-btn active" data-filter="all" onclick="setFilter('all', 'category')">ALL</button>
-                    <button class="cat-btn subtle-btn" data-filter="work" onclick="setFilter('work', 'category')">WORK</button>
-                    <button class="cat-btn subtle-btn" data-filter="unreal" onclick="setFilter('unreal', 'category')">UNREAL</button>
-                    <button class="cat-btn subtle-btn" lang="ko" data-filter="booth" onclick="setFilter('booth', 'category')">부스</button>
-                </div>
+            <div class="archive-main">
+                <div class="filter-row">
+                <!-- 태그 필터: 작품의 data-tags 에서 자동으로 만들어진다 (태그가 2종류 이상일 때만 표시) -->
+                <div class="category-filter" id="tagFilter" hidden></div>
 
                 <div class="view-toggle">
                     <button id="viewMasonryBtn" class="view-btn" onclick="setViewMode('masonry')">
@@ -67,7 +72,6 @@
                     </button>
                 </div>
             </div>
-        </div>
 
         <div class="gallery-wrapper">
             <div id="gallery-grid" class="gallery-grid view-grid">
@@ -455,6 +459,9 @@
                 </a>
             </div>
         </div>
+            </div>
+        </div>
+
 
     </div>
 
@@ -482,5 +489,7 @@
     </div>
 
     <script src="portfolio_script.js"></script>
+    <script src="../assets/nav_peek.js"></script>
+    <script src="../assets/smart_back.js"></script>
 </body>
 </html>

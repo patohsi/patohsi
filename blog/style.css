@@ -552,3 +552,96 @@ body {
     color: #ddd;
     font-size: 0.8rem;
 }
+
+/* ===================================================================
+   블로그 메인 개편: 제목 / 분류 알약 버튼 / 2열 가로 카드
+   =================================================================== */
+.inner-content { max-width: 1120px; }
+
+.blog-hero { padding: 0 20px; margin-bottom: 22px; }
+
+.blog-kicker {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: #304ffe;
+}
+
+.blog-title {
+    margin: 4px 0 4px;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 800;
+    color: #111;
+}
+
+.blog-sub { font-size: 0.9rem; color: #777; }
+
+.cat-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 20px;
+    margin-bottom: 24px;
+}
+
+.cat-pill {
+    padding: 8px 18px;
+    border: 2px solid #111;
+    border-radius: 999px;
+    background: #fff;
+    color: #111;
+    font: 800 0.82rem 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.cat-pill:hover { background: #f1f1f1; }
+.cat-pill.active { background: #111; color: #fff; }
+.cat-pill.dev { border-color: #304ffe; color: #304ffe; }
+.cat-pill.dev.active { background: #304ffe; color: #fff; }
+
+.blog-grid { display: block; }
+.post-column { display: block; }
+
+#posts-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.post-item { margin-left: 0; }
+.post-item:hover { transform: translateY(-4px); }
+.post-year-blue { display: none; }
+
+.post-card {
+    width: 100%;
+    height: 130px;
+    border: 0;
+    border-radius: 18px;
+    background: #f6f7fb;
+    box-shadow: none;
+}
+
+.post-item { width: 100%; }
+
+.post-thumb {
+    flex: 0 0 190px;
+    width: 190px;
+}
+
+.post-info { padding: 14px 18px 12px; gap: 4px; }
+
+.post-cat {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: #304ffe;
+}
+
+.post-title { font-size: 1rem; color: #111; }
+.arrow-icon { display: none; }
+
+@media (max-width: 820px) {
+    #posts-container { grid-template-columns: 1fr; }
+    .post-thumb { flex-basis: 120px; width: 120px; }
+}

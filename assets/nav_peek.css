@@ -1,0 +1,45 @@
+/* ===================================================================
+   공용: 하단 메뉴 바 / 위로 올라가기 버튼 동작 (모든 페이지)
+   - 하단 메뉴: 평소엔 반쯤 숨고, 마우스를 아래로 가져가면 부드럽게 올라온다
+   - 올라가기 버튼: 스크롤을 조금 내려야 나타나고, 하단 메뉴와 함께 위아래로 움직인다
+   - 바 주변 글로우도 평소에는 숨겨서 좌우/하단에 색이 남지 않게 한다
+   각 페이지 CSS 보다 뒤에 불러와야 한다 (</head> 바로 앞).
+   =================================================================== */
+:root {
+    --nav-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --nav-time: 0.65s;
+}
+
+.bottom-nav-wrapper {
+    transform: translateY(30px);   /* 바 높이(60px)의 절반만 숨김 */
+    transition: transform var(--nav-time) var(--nav-ease);
+    will-change: transform;
+}
+
+.bottom-nav-wrapper.raised { transform: translateY(0); }
+
+.bottom-nav-wrapper .nav-glow {
+    opacity: 0;
+    transition: opacity var(--nav-time) ease;
+}
+
+.bottom-nav-wrapper.raised .nav-glow { opacity: 1; }
+
+#scroll-top-btn {
+    bottom: 55px;                  /* 평소: 반쯤 숨은 바 바로 위에 붙는다 */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: bottom var(--nav-time) var(--nav-ease), opacity 0.3s, transform 0.3s;
+}
+
+body.nav-raised #scroll-top-btn { bottom: 85px; }    /* 바가 올라오면 같이 올라간다 */
+body.nav-open #scroll-top-btn { bottom: 165px; }     /* 메뉴가 펼쳐지면 그 위로 */
+
+body.scrolled #scroll-top-btn {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+}
+
+body.scrolled #scroll-top-btn:hover { transform: translateY(-10px); }

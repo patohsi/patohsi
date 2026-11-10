@@ -14,22 +14,3 @@ document.addEventListener('click', function (event) {
         navBar.classList.remove('active');
     }
 });
-
-const slides = document.querySelectorAll('.slide');
-const timerBar = document.querySelector('.timer-bar');
-let currentSlide = 0;
-const slideInterval = 5000;
-
-function startSlideshow() {
-    timerBar.classList.add('timer-animate');
-    setInterval(() => {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add('active');
-
-        timerBar.classList.remove('timer-animate');
-        void timerBar.offsetWidth;
-        timerBar.classList.add('timer-animate');
-    }, slideInterval);
-}
-window.onload = startSlideshow;

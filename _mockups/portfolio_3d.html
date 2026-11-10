@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>포트폴리오 3D · 블로그 연결 시안</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111}
+img{display:block;object-fit:cover}
+a{color:inherit;text-decoration:none}
+.page{max-width:1280px;margin:0 auto;padding:44px clamp(16px,4vw,56px) 110px}
+.kick{font:400 13px 'Fredoka One';letter-spacing:.3em;color:#304ffe}
+h1{font:800 clamp(24px,3vw,34px) 'Noto Sans KR';margin:4px 0 6px}
+.sub{font-size:14px;color:#777}
+.back{display:inline-block;margin-bottom:18px;font-size:13px;font-weight:800;border:2px solid #111;border-radius:999px;padding:6px 16px;cursor:pointer;background:#fff;font-family:inherit}
+/* 화면 전환 스위치 */
+.sw{position:fixed;right:14px;top:14px;z-index:99;display:flex;gap:6px;background:rgba(255,255,255,.94);padding:6px;border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.sw button{border:0;background:transparent;padding:8px 14px;border-radius:999px;font:800 12px 'Noto Sans KR';cursor:pointer}
+.sw button.on{background:#111;color:#fff}
+.hide{display:none}
+/* 필터 */
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:26px 0 22px}
+.pill{padding:8px 18px;border-radius:999px;border:2px solid #111;font-weight:800;font-size:13px;background:#fff;cursor:pointer;font-family:inherit}
+.pill.on{background:#111;color:#fff}
+.pill.soft{border-color:#ddd;color:#666}
+/* 3D 카드 */
+.wrap{display:grid;grid-template-columns:190px 1fr;gap:34px;align-items:start}
+.side{position:sticky;top:18px;display:flex;flex-direction:column}
+.y{font:400 clamp(34px,4vw,48px) 'Fredoka One';color:#d0d0d0;line-height:1.1;background:none;border:0;text-align:left;padding:0}
+.y.on{color:#111}
+.cnt{font-size:12px;color:#888;margin:0 0 14px;font-weight:700}
+.sec{margin-bottom:34px}
+.sec h3{font:400 22px 'Fredoka One';margin-bottom:12px;display:flex;align-items:baseline;gap:10px}
+.sec h3 small{font:700 12px 'Noto Sans KR';color:#888}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{position:relative;border-radius:18px;overflow:hidden;background:#111;color:#fff;aspect-ratio:4/3;box-shadow:0 8px 20px rgba(0,0,0,.18);cursor:pointer;transition:transform .35s,box-shadow .35s}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(0,0,0,.28)}
+.card img{position:absolute;inset:0;width:100%;height:100%;opacity:.7;transition:transform .5s}
+.card:hover img{transform:scale(1.06)}
+.card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.75))}
+.card .t{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;font-weight:800;font-size:15px;line-height:1.35}
+.card .t small{display:block;font-weight:400;font-size:12px;opacity:.85;margin-top:2px}
+.card .tags{position:absolute;left:12px;top:12px;z-index:1;display:flex;gap:6px}
+.tg{background:#fff;color:#111;font:700 10px 'Noto Sans KR';padding:3px 10px;border-radius:999px}
+.tg.blue{background:#304ffe;color:#fff}
+.card .go{position:absolute;right:12px;top:12px;z-index:1;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.9);color:#111;display:flex;align-items:center;justify-content:center;font-size:13px}
+/* 상세 */
+.dt{max-width:960px;margin:0 auto}
+.dt .hero{border-radius:20px;overflow:hidden;margin:18px 0 18px;aspect-ratio:16/9}
+.dt .hero img{width:100%;height:100%}
+.dt .meta{display:flex;gap:8px;margin:10px 0 14px}
+.dt p.body{font-size:15px;line-height:1.85;color:#444;margin:12px 0 22px}
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:26px}
+.shots img{width:100%;aspect-ratio:4/3;border-radius:14px}
+.blogbtn{display:flex;align-items:center;justify-content:space-between;gap:14px;background:#111;color:#fff;border-radius:20px;padding:22px 26px;transition:transform .3s}
+.blogbtn:hover{transform:translateY(-4px)}
+.blogbtn small{display:block;font:400 12px 'Fredoka One';letter-spacing:.2em;color:#a1c4fd;margin-bottom:4px}
+.blogbtn b{font-size:18px}
+.blogbtn span{font-size:22px}
+.rel{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+.rel h4{grid-column:1/-1;font:400 20px 'Fredoka One'}
+.fx{opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.fx.in{opacity:1;transform:none}
+.bn{position:fixed;left:0;right:0;bottom:0;height:56px;background:#000;z-index:50}
+.bn i{position:absolute;left:50%;margin-left:-60px;width:120px;height:26px;top:-16px;background:#000;border-radius:18px 18px 0 0}
+.bn b{position:absolute;left:50%;margin-left:-10px;top:-12px;color:#7a3cff;font-size:22px}
+@media(max-width:820px){.wrap{grid-template-columns:1fr}.side{position:static;flex-direction:row;gap:18px;align-items:baseline}.cnt{display:none}.grid,.shots,.rel{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="sw"><button class="on" data-s="list">3D 필터 목록</button><button data-s="detail">3D 상세 페이지</button></div>
+
+<!-- ============ 화면 1: 포트폴리오 (3D 필터 선택) ============ -->
+<div class="page" id="list">
+  <span class="back">← 포트폴리오 선택 페이지</span><br>
+  <span class="kick">ON-SITE ARCHIVE</span>
+  <h1>사이트 내부 포트폴리오</h1>
+  <p class="sub">3D · UNREAL 작업은 완성 이미지와 함께 제작 과정(블로그)으로 연결됩니다.</p>
+
+  <div class="row"><span class="pill">ALL</span><span class="pill">그림</span><span class="pill on">3D</span><span class="pill soft">UNREAL</span><span class="pill soft">부스</span></div>
+
+  <div class="wrap">
+    <div class="side">
+      <button class="y on">2026</button><p class="cnt">3 works</p>
+      <button class="y">2025</button><p class="cnt">3 works</p>
+      <button class="y">2024</button><p class="cnt">0 works</p>
+    </div>
+    <div>
+      <section class="sec">
+        <h3>2026 <small>3 works</small></h3>
+        <div class="grid">
+          <a class="card fx" data-open="detail"><img src="../blog/post/assets/2026/프롭제작0.jpg" alt=""><div class="tags"><span class="tg">3D</span><span class="tg blue">UNREAL</span></div><span class="go">↗</span><div class="t">언리얼을 이용한 HD2D 모델링<small>상세 보기 · 제작 과정 포함</small></div></a>
+          <a class="card fx"><img src="../blog/post/assets/2026/landscape_MT.jpg" alt=""><div class="tags"><span class="tg blue">UNREAL</span></div><span class="go">↗</span><div class="t">가이아툴을 이용한 언리얼 맵 제작<small>랜드스케이프 · PCG</small></div></a>
+          <a class="card fx"><img src="../blog/post/assets/2026/white_line.png" alt=""><div class="tags"><span class="tg blue">UNREAL</span></div><span class="go">↗</span><div class="t">블루프린트 텍스처 혼합<small>머티리얼 · 블루프린트</small></div></a>
+        </div>
+      </section>
+      <section class="sec">
+        <h3>2025 <small>3 works</small></h3>
+        <div class="grid">
+          <a class="card fx"><img src="../blog/post/assets/obsidian/Pasted image 20240716145136.png" alt=""><div class="tags"><span class="tg">3D</span><span class="tg blue">UNREAL</span></div><span class="go">↗</span><div class="t">언리얼 모델링과 캐릭터 세팅<small>캐릭터 · 리깅</small></div></a>
+          <a class="card fx"><img src="../blog/post/assets/obsidian/Pasted image 20240610200316.png" alt=""><div class="tags"><span class="tg">3D</span></div><span class="go">↗</span><div class="t">Marvelous Designer 정리<small>의상 제작</small></div></a>
+          <a class="card fx"><img src="../blog/post/assets/2025/3d_scan.png" alt=""><div class="tags"><span class="tg">3D</span></div><span class="go">↗</span><div class="t">RealityCapture 스캔 가이드<small>포토그래메트리</small></div></a>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 화면 2: 3D 작업 상세 페이지 ============ -->
+<div class="page hide" id="detail">
+  <div class="dt">
+    <span class="back" data-open="list">← 포트폴리오 목록</span>
+    <div class="meta"><span class="tg">3D</span><span class="tg blue">UNREAL</span><span class="tg" style="background:#eee">2026</span></div>
+    <h1>언리얼을 이용한 HD2D 모델링</h1>
+    <div class="hero fx"><img src="../blog/post/assets/2026/프롭제작0.jpg" alt=""></div>
+    <p class="body fx">2D 일러스트의 느낌을 살리면서 언리얼 엔진 안에서 3D 소품을 제작한 작업입니다. (예시 문구 — 실제 한두 줄 설명으로 교체)</p>
+    <div class="shots">
+      <img class="fx" src="../blog/post/assets/2026/프롭제작1.jpg" alt=""><img class="fx" src="../blog/post/assets/2026/프롭제작.jpg" alt=""><img class="fx" src="../blog/post/assets/2026/프롭_상점.jpg" alt="">
+    </div>
+    <a class="blogbtn fx" href="#"><div><small>BLOG</small><b>제작 과정 보기</b></div><span>→</span></a>
+    <div class="rel">
+      <h4>RELATED</h4>
+      <a class="card fx"><img src="../blog/post/assets/2026/landscape_MT.jpg" alt=""><div class="tags"><span class="tg blue">UNREAL</span></div><div class="t">가이아툴을 이용한 언리얼 맵 제작</div></a>
+      <a class="card fx"><img src="../blog/post/assets/2026/white_line.png" alt=""><div class="tags"><span class="tg blue">UNREAL</span></div><div class="t">블루프린트 텍스처 혼합</div></a>
+      <a class="card fx"><img src="../blog/post/assets/obsidian/Pasted image 20240716145136.png" alt=""><div class="tags"><span class="tg">3D</span></div><div class="t">언리얼 모델링과 캐릭터 세팅</div></a>
+    </div>
+  </div>
+</div>
+
+<div class="bn"><i></i><b>✦</b></div>
+<script>
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.1});
+function arm(root){[].forEach.call(root.querySelectorAll('.fx'),function(el,i){el.classList.remove('in');el.style.transitionDelay=(i*0.07)+'s';io.unobserve(el);io.observe(el)})}
+function show(s){
+  ['list','detail'].forEach(function(id){document.getElementById(id).classList.toggle('hide',id!==s)});
+  [].forEach.call(document.querySelectorAll('.sw button'),function(b){b.classList.toggle('on',b.dataset.s===s)});
+  window.scrollTo(0,0);arm(document.getElementById(s));
+}
+[].forEach.call(document.querySelectorAll('.sw button'),function(b){b.onclick=function(){show(b.dataset.s)}});
+[].forEach.call(document.querySelectorAll('[data-open]'),function(a){a.onclick=function(){show(a.dataset.open)}});
+arm(document.getElementById('list'));
+</script>
+</body>
+</html>

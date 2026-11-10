@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메인 프로토타입 (스크롤 연출)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111}
+img{display:block;object-fit:cover}
+/* ---------- 풀스크린 히어로 ---------- */
+.hero{position:relative;height:100vh;min-height:520px;background:#000;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.6),rgba(0,0,0,0) 58%)}
+.hero .ttl{position:absolute;left:clamp(24px,6vw,90px);top:50%;transform:translateY(-58%);color:#fff;z-index:2}
+.hero small{font:400 14px 'Fredoka One';letter-spacing:.3em;color:#a1c4fd}
+.hero h1{font:400 clamp(56px,10vw,130px) 'Fredoka One';line-height:1.05}
+.hero p{font-size:clamp(15px,1.6vw,21px);font-weight:700;margin-top:6px}
+.hero .side{position:absolute;right:clamp(16px,3.5vw,48px);top:50%;transform:translateY(-50%);z-index:2;color:#fff;text-align:right;display:flex;flex-direction:column;gap:18px;font:400 15px 'Fredoka One';letter-spacing:.12em}
+.hero .side b{color:#a1c4fd;display:inline-block;width:28px}
+.hero .scroll{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);color:#fff;z-index:2;text-align:center;font:400 12px 'Fredoka One';letter-spacing:.3em}
+.hero .scroll:after{content:"";display:block;width:2px;height:46px;background:#fff;margin:8px auto 0;animation:drop 1.6s ease-in-out infinite;transform-origin:top}
+@keyframes drop{0%{transform:scaleY(0)}60%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.hero .timer{position:absolute;left:0;bottom:56px;height:4px;width:100%;z-index:2;background:rgba(255,255,255,.15)}
+.hero .timer i{display:block;height:100%;width:0;background:#304ffe;animation:bar 6s linear infinite}
+@keyframes bar{to{width:100%}}
+/* ---------- 박스 영역 ---------- */
+.sec{position:relative;padding:90px clamp(16px,4vw,56px) 70px;max-width:1280px;margin:0 auto}
+.sec h2{font:400 14px 'Fredoka One';letter-spacing:.3em;color:#304ffe;margin-bottom:22px}
+.bento{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:230px 230px;gap:16px}
+.c{position:relative;border-radius:20px;overflow:hidden;background:#111;color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.22);text-decoration:none;transition:transform .35s,box-shadow .35s}
+.c:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 18px 36px rgba(0,0,0,.3)}
+.c img{position:absolute;inset:0;width:100%;height:100%;opacity:.58;transition:transform .5s,opacity .3s}
+.c:hover img{transform:scale(1.06);opacity:.75}
+.c .k{position:absolute;left:22px;top:18px;font:400 12px 'Fredoka One';letter-spacing:.12em;color:#a1c4fd;z-index:1}
+.c .n{position:absolute;left:22px;bottom:48px;font-weight:800;font-size:clamp(20px,2.2vw,28px);z-index:1}
+.c .d{position:absolute;left:22px;bottom:20px;font-size:13px;opacity:.92;z-index:1}
+.big{grid-row:span 2}
+.wide{grid-column:span 2}
+/* 페이드업 (밑에서 위로) */
+.fx{opacity:0;transform:translateY(46px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.fx.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.28s}.d4{transition-delay:.38s}.d5{transition-delay:.48s}
+/* ---------- 프로필 영역 공통 ---------- */
+.prof{background:#f4f6ff}
+.prof .sec{padding-top:100px}
+.ai{display:flex;flex-direction:column;gap:6px;border:2px solid #111;border-radius:14px;background:#fff;padding:14px 18px;margin-top:18px;font-size:13px;font-weight:700}
+.ai span{display:inline-block;width:2.4em;font:400 11px 'Fredoka One';color:#304ffe}
+.sns{display:flex;gap:12px;margin-top:22px}
+.sns i{width:42px;height:42px;border-radius:50%;background:#111;display:block}
+/* 시안 1: 좌 소개 / 우 타임라인 */
+.pv1{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,5vw,70px);align-items:start}
+.pv1 .me{display:flex;flex-direction:column}
+.pv1 .photo{width:150px;height:150px;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.pv1 .photo img{width:100%;height:100%}
+.pv1 h3{font:400 44px 'Fredoka One';margin:18px 0 6px}
+.pv1 .intro{font-size:15px;line-height:1.8;color:#444}
+.tl{position:relative;padding-left:26px;border-left:3px solid #111}
+.tl .it{position:relative;margin-bottom:26px}
+.tl .it:before{content:"";position:absolute;left:-35px;top:6px;width:13px;height:13px;border-radius:50%;background:#304ffe;border:3px solid #f4f6ff}
+.tl .y{font:400 15px 'Fredoka One';color:#304ffe}
+.tl .t{font-weight:800;font-size:17px;margin:2px 0}
+.tl .p{font-size:13px;color:#666;line-height:1.6}
+.btn{display:inline-block;margin-top:6px;padding:13px 26px;border-radius:999px;background:#111;color:#fff;font-weight:800;font-size:14px;text-decoration:none;align-self:flex-start}
+/* 시안 2: 가운데 선언문 + 수치 + 가로 카드 */
+.pv2{text-align:center}
+.pv2 .photo{width:130px;height:130px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:4px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.pv2 .photo img{width:100%;height:100%}
+.pv2 .quote{font:800 clamp(24px,3.4vw,42px)/1.35 'Noto Sans KR'}
+.pv2 .quote em{font-style:normal;color:#304ffe}
+.pv2 .sub{margin:14px auto 0;max-width:560px;font-size:15px;line-height:1.8;color:#555}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:36px 0}
+.stat{background:#fff;border-radius:18px;padding:24px 10px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.stat b{display:block;font:400 40px 'Fredoka One';color:#111}
+.stat span{font-size:13px;color:#777;font-weight:700}
+.hc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
+.hcard{background:#111;color:#fff;border-radius:18px;padding:22px}
+.hcard .y{font:400 13px 'Fredoka One';color:#a1c4fd;letter-spacing:.1em}
+.hcard .t{font-weight:800;font-size:17px;margin:6px 0}
+.hcard .p{font-size:12.5px;line-height:1.6;opacity:.8}
+.pv2 .ai{max-width:430px;margin:26px auto 0;text-align:left}
+.pv2 .sns{justify-content:center}
+/* 전환 스위치 (시안 확인용) */
+.sw{position:fixed;right:14px;top:14px;z-index:99;display:flex;gap:6px;background:rgba(255,255,255,.92);padding:6px;border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.sw button{border:0;background:transparent;padding:8px 14px;border-radius:999px;font:800 12px 'Noto Sans KR';cursor:pointer}
+.sw button.on{background:#111;color:#fff}
+.hide{display:none}
+/* 하단 바 */
+.bn{position:fixed;left:0;right:0;bottom:0;height:56px;background:#000;z-index:50}
+.bn i{position:absolute;left:50%;margin-left:-60px;width:120px;height:26px;top:-16px;background:#000;border-radius:18px 18px 0 0}
+.bn b{position:absolute;left:50%;margin-left:-10px;top:-12px;color:#7a3cff;font-size:22px}
+.pad{height:56px}
+@media(max-width:820px){
+ .bento{grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-rows:190px}
+ .big{grid-column:span 2;grid-row:auto}.wide{grid-column:span 2}
+ .pv1{grid-template-columns:1fr}.stats,.hc{grid-template-columns:1fr}
+ .hero .side{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="sw"><button class="on" data-v="1">프로필 시안 1</button><button data-v="2">프로필 시안 2</button></div>
+
+<!-- 1. 풀스크린 히어로 -->
+<header class="hero">
+  <img src="../assets/main_hero1.png" alt="">
+  <div class="ttl"><small>FREELANCE ARTIST</small><h1>Patohsi</h1><p>게임 · 일러스트 · 3D</p></div>
+  <div class="side"><div><b>01</b>PROFILE</div><div><b>02</b>PORTFOLIO</div><div><b>03</b>BLOG</div><div><b>04</b>COMMISSION</div></div>
+  <div class="scroll">SCROLL</div>
+  <div class="timer"><i></i></div>
+</header>
+
+<!-- 2. 박스 영역 (시안 3 비대칭, 스크롤하면 밑에서 위로 페이드인) -->
+<main class="sec">
+  <h2 class="fx">MENU</h2>
+  <div class="bento">
+    <a class="c big fx d1" href="#"><img src="../portfolio/assets/2026/13.jpg" alt=""><span class="k">02</span><span class="n">PORTFOLIO</span><span class="d">아트 아카이브 · 개발 작업 · 2026 신작</span></a>
+    <a class="c fx d2" href="#"><img src="../assets/profile.jpg" alt=""><span class="k">01</span><span class="n">PROFILE</span><span class="d">소개 · 이력</span></a>
+    <a class="c fx d3" href="#"><img src="../assets/commission_art.jpg" alt=""><span class="k">04</span><span class="n">COMMISSION</span><span class="d">오픈 중</span></a>
+    <a class="c wide fx d4" href="#"><img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt=""><span class="k">03</span><span class="n">BLOG</span><span class="d">제작 메모 · 개발 일지</span></a>
+  </div>
+</main>
+
+<!-- 3. 프로필 영역 : 시안 1 -->
+<section class="prof" id="pv1">
+  <div class="sec pv1">
+    <div class="me">
+      <div class="photo fx"><img src="../assets/profile.jpg" alt=""></div>
+      <h3 class="fx d1">Patohsi</h3>
+      <p class="intro fx d2">안녕하세요 파토입니다. 편하게 파토씨, 파토님이라고 불러주세요.<br>게임, 일러스트 등 프리로 활동중에 있습니다.</p>
+      <div class="ai fx d3"><div><span>KR</span>제 그림에는 절대 AI를 사용하지 않습니다.</div><div><span>CN</span>我的画作绝不使用AI。</div><div><span>JP</span>私の絵には、AIを一切使用していません。</div><div><span>EN</span>I never use AI in my artwork.</div></div>
+      <div class="sns fx d4"><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div>
+      <h2 class="fx">HISTORY</h2>
+      <div class="tl">
+        <div class="it fx d1"><div class="y">2026</div><div class="t">(예시) 프로젝트 / 활동 이름</div><div class="p">한 줄 설명</div></div>
+        <div class="it fx d2"><div class="y">2025</div><div class="t">(예시) 프로젝트 / 활동 이름</div><div class="p">이력서 이미지를 받으면 실제 내용으로 교체합니다.</div></div>
+        <div class="it fx d3"><div class="y">2024 - 현재</div><div class="t">프리랜서 일러스트레이터 / 3D 아티스트</div><div class="p">커미션, 게임 리소스, 부스 소품 제작 등</div></div>
+      </div>
+      <a class="btn fx d4" href="#">이력서 보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 프로필 영역 : 시안 2 -->
+<section class="prof hide" id="pv2">
+  <div class="sec pv2">
+    <div class="photo fx"><img src="../assets/profile.jpg" alt=""></div>
+    <p class="quote fx d1">게임과 일러스트, 그리고 <em>3D</em>까지.<br>손으로 만드는 작업을 합니다.</p>
+    <p class="sub fx d2">안녕하세요 파토입니다. 편하게 파토씨, 파토님이라고 불러주세요. 게임, 일러스트 등 프리로 활동중에 있습니다.</p>
+    <div class="stats">
+      <div class="stat fx d1"><b>2024~</b><span>활동 시작</span></div>
+      <div class="stat fx d2"><b>30+</b><span>작업물 (예시 수치)</span></div>
+      <div class="stat fx d3"><b>28</b><span>사용 툴</span></div>
+    </div>
+    <div class="hc">
+      <div class="hcard fx d1"><div class="y">2026</div><div class="t">(예시) 활동 이름</div><div class="p">한 줄 설명</div></div>
+      <div class="hcard fx d2"><div class="y">2025</div><div class="t">(예시) 활동 이름</div><div class="p">이력서 이미지를 받으면 교체합니다.</div></div>
+      <div class="hcard fx d3"><div class="y">2024 - NOW</div><div class="t">프리랜서 일러스트 / 3D</div><div class="p">커미션, 게임 리소스, 부스 소품 제작 등</div></div>
+    </div>
+    <div class="ai fx d3"><div><span>KR</span>제 그림에는 절대 AI를 사용하지 않습니다.</div><div><span>CN</span>我的画作绝不使用AI。</div><div><span>JP</span>私の絵には、AIを一切使用していません。</div><div><span>EN</span>I never use AI in my artwork.</div></div>
+    <div class="sns fx d4"><i></i><i></i><i></i><i></i></div>
+  </div>
+</section>
+
+<div class="pad"></div>
+<div class="bn"><i></i><b>✦</b></div>
+
+<script>
+// 스크롤하면 요소가 밑에서 위로 페이드인
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');}})},{threshold:.15});
+function watch(){[].forEach.call(document.querySelectorAll('.fx'),function(el){io.observe(el)})}
+watch();
+// 프로필 시안 전환
+[].forEach.call(document.querySelectorAll('.sw button'),function(b){b.addEventListener('click',function(){
+  [].forEach.call(document.querySelectorAll('.sw button'),function(x){x.classList.toggle('on',x===b)});
+  document.getElementById('pv1').classList.toggle('hide',b.dataset.v!=='1');
+  document.getElementById('pv2').classList.toggle('hide',b.dataset.v!=='2');
+  [].forEach.call(document.querySelectorAll('#pv'+b.dataset.v+' .fx'),function(el){el.classList.remove('in');io.unobserve(el);io.observe(el)});
+  document.getElementById('pv'+b.dataset.v).scrollIntoView({behavior:'smooth'});
+})});
+</script>
+</body>
+</html>

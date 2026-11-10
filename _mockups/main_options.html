@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>메인 첫 화면 시안</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#e9e9e9;font-family:'Noto Sans KR',sans-serif;padding:24px}
+.tag{font:800 15px 'Noto Sans KR';margin:20px 0 8px;color:#111}
+.frame{width:1280px;height:760px;background:#fff;position:relative;overflow:hidden;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.18);margin-bottom:28px}
+.bn{position:absolute;left:0;right:0;bottom:0;height:56px;background:#000;display:flex;justify-content:center;align-items:flex-start}
+.bn i{width:120px;height:26px;background:#000;border-radius:18px 18px 0 0;position:absolute;top:-16px}
+.bn b{position:absolute;top:-12px;color:#7a3cff;font-size:22px}
+img{display:block;object-fit:cover}
+/* A */
+.A .hero{position:absolute;inset:0 0 260px 0}
+.A .hero img{width:100%;height:100%}
+.A .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.5))}
+.A .ttl{position:absolute;left:60px;bottom:290px;z-index:2;color:#fff}
+.A .ttl h1{font:400 84px 'Fredoka One';letter-spacing:.02em;line-height:1}
+.A .ttl p{font-size:18px;margin-top:10px;font-weight:700}
+.A .ttl .chip{display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:rgba(255,255,255,.18);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700}
+.A .ttl .chip u{width:9px;height:9px;border-radius:50%;background:#2ecc71;display:inline-block}
+.A .cards{position:absolute;left:40px;right:40px;bottom:70px;height:210px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.A .c{position:relative;border-radius:18px;overflow:hidden;background:#111;color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.A .c img{position:absolute;inset:0;width:100%;height:100%;opacity:.6}
+.A .c span{position:absolute;left:18px;bottom:14px;font-weight:800;font-size:19px;z-index:1}
+.A .c small{position:absolute;left:18px;top:14px;font:400 12px 'Fredoka One';letter-spacing:.1em;z-index:1;color:#a1c4fd}
+/* B */
+.B .hero{position:absolute;inset:0}
+.B .hero img{width:100%;height:100%}
+.B .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,0) 55%)}
+.B .ttl{position:absolute;left:80px;top:50%;transform:translateY(-60%);color:#fff;z-index:2}
+.B .ttl small{font:400 15px 'Fredoka One';letter-spacing:.3em;color:#a1c4fd}
+.B .ttl h1{font:400 110px 'Fredoka One';line-height:1.05}
+.B .ttl p{font-size:20px;font-weight:700;margin-top:8px}
+.B .side{position:absolute;right:44px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:20px;z-index:2;color:#fff;text-align:right}
+.B .side div{font:400 15px 'Fredoka One';letter-spacing:.12em;opacity:.85}
+.B .side div b{display:inline-block;width:28px;color:#a1c4fd}
+.B .scroll{position:absolute;left:50%;bottom:90px;transform:translateX(-50%);color:#fff;z-index:2;text-align:center;font:400 12px 'Fredoka One';letter-spacing:.3em}
+.B .scroll:after{content:"";display:block;width:2px;height:44px;background:#fff;margin:8px auto 0}
+.B .timer{position:absolute;left:0;bottom:56px;height:4px;width:40%;background:#304ffe;z-index:2}
+/* C */
+.C{background:#fff}
+.C .bar{position:absolute;left:0;right:0;top:0;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;z-index:2}
+.C .bar h1{font:400 30px 'Fredoka One'}
+.C .bar nav{display:flex;gap:10px}
+.C .bar nav span{padding:9px 20px;border-radius:999px;border:2px solid #111;font-weight:800;font-size:14px}
+.C .bar nav span.on{background:#111;color:#fff}
+.C .intro{position:absolute;left:48px;top:100px;font-size:15px;font-weight:700;color:#555}
+.C .grid{position:absolute;left:48px;right:48px;top:140px;bottom:76px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);gap:12px}
+.C .grid img{width:100%;height:100%;border-radius:14px}
+.C .grid .big{grid-column:span 2;grid-row:span 2}
+</style>
+</head>
+<body>
+
+<div class="tag">시안 A — 이름 + 메뉴 카드</div>
+<div class="frame A">
+  <div class="hero"><img src="../assets/main_hero.jpg" alt=""></div>
+  <div class="ttl"><h1>PATOHSI</h1><p>게임 · 일러스트 프리랜서</p><span class="chip"><u></u>커미션 오픈 중</span></div>
+  <div class="cards">
+    <div class="c"><img src="../assets/profile.jpg" alt=""><small>01</small><span>PROFILE</span></div>
+    <div class="c"><img src="../portfolio/assets/2026/13.jpg" alt=""><small>02</small><span>PORTFOLIO</span></div>
+    <div class="c"><img src="../blog/post/assets/obsidian/Pasted image 20240730233408.png" alt=""><small>03</small><span>BLOG</span></div>
+    <div class="c"><img src="../assets/commission_art.jpg" alt=""><small>04</small><span>COMMISSION</span></div>
+  </div>
+  <div class="bn"><i></i><b>✦</b></div>
+</div>
+
+<div class="tag">시안 B — 풀스크린 슬라이드 + 사이드 인덱스</div>
+<div class="frame B">
+  <div class="hero"><img src="../assets/main_hero1.png" alt=""></div>
+  <div class="ttl"><small>FREELANCE ARTIST</small><h1>Patohsi</h1><p>게임 · 일러스트 · 3D</p></div>
+  <div class="side">
+    <div><b>01</b>PROFILE</div><div><b>02</b>PORTFOLIO</div><div><b>03</b>BLOG</div><div><b>04</b>COMMISSION</div>
+  </div>
+  <div class="scroll">SCROLL</div>
+  <div class="timer"></div>
+  <div class="bn"><i></i><b>✦</b></div>
+</div>
+
+<div class="tag">시안 C — 작품 그리드 먼저</div>
+<div class="frame C">
+  <div class="bar"><h1>Patohsi</h1><nav><span>PROFILE</span><span class="on">WORKS</span><span>BLOG</span><span>COMMISSION</span></nav></div>
+  <div class="intro">최근 작업 — 게임 · 일러스트 · 3D</div>
+  <div class="grid">
+    <img class="big" src="../portfolio/assets/2026/13.jpg" alt="">
+    <img src="../portfolio/assets/2026/7.png" alt="">
+    <img src="../portfolio/assets/2026/18.jpg" alt="">
+    <img src="../portfolio/assets/2026/10.jpg" alt="">
+    <img src="../portfolio/assets/2026/14.jpg" alt="">
+    <img src="../portfolio/assets/2026/15.jpg" alt="">
+    <img src="../portfolio/assets/2026/16.jpg" alt="">
+    <img src="../portfolio/assets/2026/1.jpg" alt="">
+  </div>
+  <div class="bn"><i></i><b>✦</b></div>
+</div>
+
+</body>
+</html>
