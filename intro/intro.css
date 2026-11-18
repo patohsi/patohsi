@@ -345,3 +345,14 @@ a { color: inherit; }
     .as-more-grid { grid-template-columns: 1fr; }
     .intro-back { top: 12px; left: 12px; }
 }
+
+/* UI/UX 기획 페이지: 컬러 스와치 */
+.as-swatches { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 6px; }
+.as-swatches span { flex: 1 1 110px; min-height: 64px; padding: 8px 12px; border-radius: 12px; display: flex; align-items: flex-end; font-size: 0.78rem; }
+.as-swatches b { font-weight: 700; letter-spacing: 0.04em; }
+
+/* 확대 화면 아래 설명 */
+.as-lightbox figure { margin: 0; display: flex; flex-direction: column; align-items: center; max-width: 100%; max-height: 100%; }
+.as-lightbox img { max-height: calc(100vh - 120px); }
+.as-lightbox figcaption { margin-top: 14px; max-width: 760px; text-align: center; color: #fff; font-size: 0.95rem; line-height: 1.7; }
+.as-lightbox figcaption:empty { display: none; }

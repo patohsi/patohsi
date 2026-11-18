@@ -6,11 +6,12 @@
 const SECTIONS = {
     art:   { categories: ['art'],   kicker: 'ART',      title: 'ART',   desc: '일러스트 · 캐릭터 디자인 · 포스터', defaultTag: 'illust', tabs: true },
     booth: { categories: ['booth'], kicker: 'ART',      title: 'ART',   desc: '외부 행사 부스에서 선보인 작업', defaultTag: '', tabs: true },
+    commission: { categories: ['commission'], kicker: 'COMMISSION', title: 'COMMISSION', desc: '커미션 · 리퀘스트로 그린 작업', defaultTag: 'free', tabs: false, forceTags: ['free', 'paid'] },
     '3d':  { categories: ['3d'],    kicker: '3D WORKS', title: '3D',    desc: '3D 작업을 모아서 보여줍니다', defaultTag: '3d', tabs: false },
 };
 
 const TAG_LABELS = {
-    illust: '일러스트', character: '캐릭터 디자인', poster: '포스터',
+    free: '무료', paid: '유료', illust: '일러스트', character: '캐릭터 디자인', poster: '포스터',
     unreal: 'UNREAL', unity: 'UNITY', '3d': '3D',
 };
 
@@ -69,6 +70,7 @@ function setupSection() {
 function buildTagFilter() {
     const box = document.getElementById('tagFilter');
     const tags = new Set();
+    (SECTIONS[CURRENT_SECTION].forceTags || []).forEach(t => tags.add(t));
     sectionItems().forEach(item => itemTags(item).forEach(t => tags.add(t)));
     if (tags.size < 2) {
         box.hidden = true;
@@ -195,6 +197,18 @@ function renderGallery() {
     allItems.forEach(item => {
         item.style.display = filteredItems.has(item) ? 'flex' : 'none';
     });
+
+    // 보여줄 작품이 없는 칸(예: 유료)은 안내 문구를 띄운다
+    const grid = document.getElementById('gallery-grid');
+    let empty = document.getElementById('galleryEmpty');
+    if (!empty && grid) {
+        empty = document.createElement('p');
+        empty.id = 'galleryEmpty';
+        empty.className = 'gallery-empty';
+        empty.textContent = '작업물을 준비하고 있어요.';
+        grid.parentNode.insertBefore(empty, grid.nextSibling);
+    }
+    if (empty) empty.hidden = filteredItems.size > 0;
 }
 
 

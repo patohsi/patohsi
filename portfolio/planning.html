@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patohsi - 웹사이트 기획서</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../intro/intro.css">
+    <link rel="stylesheet" href="../assets/nav_peek.css">
+    <style>
+        .pl-tabs { display: flex; gap: 8px; margin: 4px 0 18px; }
+        .pl-tabs button { padding: 10px 22px; border: 1px solid #2c2c31; border-radius: 999px; background: #1c1c21; color: #bdbdc6; font: 700 0.88rem 'Noto Sans KR', sans-serif; cursor: pointer; transition: background .2s, color .2s; }
+        .pl-tabs button:hover { color: #fff; }
+        .pl-tabs button.on { background: #304ffe; border-color: #304ffe; color: #fff; }
+        .pl-stage { position: relative; }
+        .pl-rail { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 6px; }
+        .pl-rail::-webkit-scrollbar { display: none; }
+        .pl-slide { flex: 0 0 100%; scroll-snap-align: center; aspect-ratio: 16 / 9; background: #16161a; border-radius: 6px; overflow: hidden; }
+        .pl-slide canvas { display: block; width: 100%; height: 100%; cursor: zoom-in; }
+        .pl-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 46px; height: 46px; border-radius: 50%; border: 1px solid #2c2c31; background: rgba(20,20,23,.88); color: #fff; font-size: 1.2rem; cursor: pointer; }
+        .pl-arrow:hover { background: #304ffe; }
+        .pl-prev { left: 12px; } .pl-next { right: 12px; }
+        .pl-count { margin: 14px 0 0; text-align: center; font-family: 'Fredoka One', sans-serif; letter-spacing: .12em; color: #9a9aa2; }
+        .pl-hint { margin: 6px 0 0; text-align: center; font-size: .8rem; color: #6c6c75; }
+        .pl-lb { position: fixed; inset: 0; z-index: 3000; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,.94); cursor: zoom-out; }
+        .pl-lb.open { display: flex; }
+        .pl-lb figure { margin: 0; display: flex; flex-direction: column; align-items: center; max-width: 100%; max-height: 100%; }
+        .pl-lb img { max-width: 100%; max-height: calc(100vh - 120px); }
+        .pl-lb figcaption { margin-top: 14px; color: #fff; text-align: center; font-size: .95rem; line-height: 1.7; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="intro-back"><span aria-hidden="true">←</span> 뒤로가기</a>
+
+    <main class="as-wrap">
+        <header class="as-head">
+            <h1 class="as-title">웹사이트 기획서</h1>
+            <div class="as-artist"><img class="as-avatar" src="../assets/profile.jpg" alt=""><div><b>Patohsi</b><span>UI/UX 웹사이트 기획</span></div><span class="as-year">2025</span></div>
+            <div class="as-tags"><span class="as-tag">#UIUX</span><span class="as-tag">#WebPlanning</span><span class="as-tag">#Benchmarking</span><span class="as-tag">#DesignSystem</span></div>
+        </header>
+
+        <section class="as-info">
+            <div class="as-desc"><p>일러스트 포트폴리오 사이트(ASTRO HOTEL)와 주류 쇼핑몰 리디자인(Wine&amp;Key) 두 편의 웹사이트 서비스 기획서입니다.</p><p>사용자 분석, 벤치마킹, 메뉴 트리, 플로우 차트, 디자인 시스템, 페이지별 기능을 정리했습니다.</p></div>
+            <aside><p class="as-side-label">SOFTWARE</p><div class="as-tools"><img loading="lazy" decoding="async" src="../profile/assets/tool_figma.webp" alt="Figma" title="Figma"><img loading="lazy" decoding="async" src="../profile/assets/tool_photoshop.webp" alt="Photoshop" title="Photoshop"><img loading="lazy" decoding="async" src="../profile/assets/tool_illustrator.webp" alt="Illustrator" title="Illustrator"><img loading="lazy" decoding="async" src="../profile/assets/tool_csp.png" alt="Clip Studio" title="Clip Studio"><img loading="lazy" decoding="async" src="../profile/assets/html.png" alt="HTML" title="HTML"><img loading="lazy" decoding="async" src="../profile/assets/css.png" alt="CSS" title="CSS"><img loading="lazy" decoding="async" src="../profile/assets/js.png" alt="JavaScript" title="JavaScript"></div></aside>
+        </section>
+
+        <div class="pl-tabs" id="plTabs">
+            <button type="button" class="on" data-doc="astro">ASTRO HOTEL</button>
+            <button type="button" data-doc="wine">Wine&amp;Key</button>
+        </div>
+
+        <div class="pl-stage">
+            <button type="button" class="pl-arrow pl-prev" id="plPrev" aria-label="이전">←</button>
+            <div class="pl-rail" id="plRail"></div>
+            <button type="button" class="pl-arrow pl-next" id="plNext" aria-label="다음">→</button>
+        </div>
+        <p class="pl-count" id="plCount"></p>
+        <p class="pl-hint">좌우로 밀어서 넘기고, 화면을 누르면 크게 볼 수 있어요</p>
+    </main>
+
+    <div class="pl-lb" id="plLb"><figure><img loading="lazy" decoding="async" alt=""><figcaption id="plCap"></figcaption></figure></div>
+
+    <div id="scroll-top-btn" onclick="scrollToTop()">
+        <img src="../assets/top_btn.png" class="top-btn-img" alt="Top">
+    </div>
+
+    <div class="bottom-nav-wrapper inverted-nav">
+        <div class="nav-glow"></div>
+        <nav id="main-nav" class="nav-bar">
+            <div class="nav-bump-svg-container" onclick="toggleNav()">
+                <svg viewBox="0 0 400 60" preserveAspectRatio="none" class="bump-svg">
+                    <path d="M0,60 L110,60 Q140,60 150,40 L160,15 Q165,0 185,0 L215,0 Q235,0 240,15 L250,40 Q260,60 290,60 L400,60 Z"></path>
+                </svg>
+                <img src="../assets/star_icon.png" alt="Toggle" class="trigger-icon">
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item"><a href="../profile/index.html">PROFILE</a></li>
+                <li class="nav-item"><a href="index.html">PORTFOLIO</a></li>
+                <li class="nav-item center-home"><a href="../index.html" class="home-link-text">PATOHSI</a></li>
+                <li class="nav-item"><a href="../blog/index.html">BLOG</a></li>
+                <li class="nav-item"><a href="../commission/index.html">COMMISSION</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        (function () {
+            var DOCS = { astro: [1, 71], wine: [72, 122] };
+            var rail = document.getElementById('plRail');
+            var count = document.getElementById('plCount');
+            var lb = document.getElementById('plLb');
+            var big = lb.querySelector('img');
+            var pdfDoc = null, cur = 'astro', io = null;
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+            function draw(box) {
+                if (!box || box.dataset.done) return;
+                box.dataset.done = '1';
+                pdfDoc.getPage(+box.dataset.n).then(function (page) {
+                    var vp = page.getViewport({ scale: 1.5 });
+                    var c = document.createElement('canvas');
+                    c.width = vp.width; c.height = vp.height;
+                    page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise.then(function () {
+                        box.appendChild(c);
+                        c.addEventListener('click', function () {
+                            var n = +box.dataset.n, r = DOCS[cur];
+                            document.getElementById('plCap').textContent = (cur === 'astro' ? 'ASTRO HOTEL' : 'Wine&Key') + ' · ' + (n - r[0] + 1) + ' / ' + (r[1] - r[0] + 1) + '쪽';
+                            big.src = c.toDataURL('image/jpeg', 0.92); lb.classList.add('open');
+                        });
+                    });
+                });
+            }
+
+            function show(key) {
+                cur = key;
+                if (io) io.disconnect();
+                rail.innerHTML = '';
+                var r = DOCS[key];
+                io = new IntersectionObserver(function (es) {
+                    es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); draw(e.target); } });
+                }, { root: rail, rootMargin: '0px 200% 0px 200%' });
+                for (var n = r[0]; n <= r[1]; n++) {
+                    var b = document.createElement('div');
+                    b.className = 'pl-slide'; b.dataset.n = n;
+                    rail.appendChild(b); io.observe(b);
+                }
+                rail.scrollLeft = 0;
+                update();
+            }
+
+            function index() { return Math.round(rail.scrollLeft / (rail.clientWidth + 16)); }
+            function update() {
+                var r = DOCS[cur];
+                var i = index();
+                count.textContent = (i + 1) + ' / ' + (r[1] - r[0] + 1);
+                for (var k = i - 1; k <= i + 3; k++) draw(rail.children[k]);
+            }
+            function go(d) { rail.scrollTo({ left: (index() + d) * (rail.clientWidth + 16), behavior: 'smooth' }); }
+
+            rail.addEventListener('scroll', update);
+            document.getElementById('plPrev').onclick = function () { go(-1); };
+            document.getElementById('plNext').onclick = function () { go(1); };
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowLeft') go(-1);
+                if (e.key === 'ArrowRight') go(1);
+                if (e.key === 'Escape') lb.classList.remove('open');
+            });
+            lb.onclick = function () { lb.classList.remove('open'); };
+            document.querySelectorAll('#plTabs button').forEach(function (b) {
+                b.onclick = function () {
+                    document.querySelectorAll('#plTabs button').forEach(function (x) { x.classList.toggle('on', x === b); });
+                    show(b.dataset.doc);
+                };
+            });
+
+            pdfjsLib.getDocument('assets/planning/uiux_planning.pdf').promise.then(function (pdf) { pdfDoc = pdf; show('astro'); });
+        })();
+
+        function toggleNav() { document.getElementById('main-nav').classList.toggle('active'); }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    </script>
+    <script src="../assets/nav_peek.js"></script>
+    <script src="../assets/smart_back.js"></script>
+</body>
+</html>

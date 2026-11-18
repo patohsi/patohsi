@@ -25,6 +25,7 @@ function ensureLightbox() {
         <div class="lightbox-content">
             <button type="button" class="lightbox-close" aria-label="닫기" data-close-lightbox="true">&times;</button>
             <img class="lightbox-image" alt="">
+            <div class="lightbox-caption"></div>
         </div>
     `;
 
@@ -39,12 +40,26 @@ function ensureLightbox() {
     return lightbox;
 }
 
+function buildCaption(alt) {
+    const esc = (t) => String(t || '').replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+    const titleEl = document.querySelector('.post-main-title');
+    const descEl = document.querySelector('.post-text p');
+    const title = titleEl ? titleEl.textContent.trim() : '';
+    const desc = descEl ? descEl.textContent.replace(/\s+/g, ' ').trim() : '';
+    let html = '';
+    if (alt && alt !== title) html += '<span>' + esc(alt) + '</span>';
+    if (title) html = '<b>' + esc(title) + '</b>' + html;
+    if (desc) html += '<span>' + esc(desc) + '</span>';
+    return html;
+}
+
 function openLightbox(src, alt) {
     const lightbox = ensureLightbox();
     const image = lightbox.querySelector('.lightbox-image');
 
     image.src = src;
     image.alt = alt || '';
+    lightbox.querySelector('.lightbox-caption').innerHTML = buildCaption(alt);
     lightbox.classList.add('open');
     document.body.classList.add('lightbox-open');
 }

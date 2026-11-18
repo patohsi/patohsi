@@ -31,7 +31,7 @@
             <div class="as-desc"><p>동방 온리전, 환상일주 같은 외부 행사에 부스로 참가했습니다.</p><p>굿즈와 안내물을 직접 만들어 배치했고, 해외 행사인 潮汕THO 2nd의 서브 포스터 일러스트도 제작했습니다.</p></div>
             <aside>
                 <p class="as-side-label">SOFTWARE</p>
-                <div class="as-tools"><img src="../profile/assets/tool_photoshop.webp" alt="Photoshop" title="Photoshop"><img src="../profile/assets/tool_illustrator.webp" alt="Illustrator" title="Illustrator"><img src="../profile/assets/tool_blender.png" alt="Blender" title="Blender"></div>
+                <div class="as-tools"><img loading="lazy" decoding="async" src="../profile/assets/tool_photoshop.webp" alt="Photoshop" title="Photoshop"><img loading="lazy" decoding="async" src="../profile/assets/tool_illustrator.webp" alt="Illustrator" title="Illustrator"><img loading="lazy" decoding="async" src="../profile/assets/tool_blender.png" alt="Blender" title="Blender"></div>
                 <p class="as-side-label">ROLE</p>
                 <ul class="as-roles"><li>부스 참가 · 굿즈 판매</li><li>굿즈 · 안내물 제작</li><li>행사 포스터 일러스트</li></ul>
             </aside>
@@ -54,7 +54,7 @@
 
         <section class="as-more">
             <h2 class="as-more-title">More from Patohsi</h2>
-            <div class="as-more-grid"><a class="as-more-card" href="game.html"><img src="../assets/main_hero1.png" alt=""><span>小鈴の里日記</span></a><a class="as-more-card" href="modeling.html"><img src="../portfolio/assets/2026/19-2.jpg" alt=""><span>3D 모델링</span></a><a class="as-more-card" href="../portfolio/art.html?section=3d"><img src="../portfolio/assets/2026/20-1.jpg" alt=""><span>3D 작업 모아보기</span></a></div>
+            <div class="as-more-grid"><a class="as-more-card" href="game.html"><img loading="lazy" decoding="async" src="../assets/main_hero1.png" alt=""><span>小鈴の里日記</span></a><a class="as-more-card" href="modeling.html"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/19-2.jpg" alt=""><span>3D 모델링</span></a><a class="as-more-card" href="../portfolio/art.html?section=3d"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/20-1.jpg" alt=""><span>3D 작업 모아보기</span></a></div>
         </section>
     </main>
 
@@ -81,7 +81,7 @@
         </nav>
     </div>
 
-    <div class="as-lightbox" id="asLightbox"><img alt=""></div>
+    <div class="as-lightbox" id="asLightbox"><figure><img loading="lazy" decoding="async" alt=""><figcaption></figcaption></figure></div>
     <script>
         function toggleNav() { document.getElementById('main-nav').classList.toggle('active'); }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -96,8 +96,12 @@
         (function () {
             var box = document.getElementById('asLightbox');
             var big = box.querySelector('img');
+            var cap = box.querySelector('figcaption');
             document.querySelectorAll('.as-media img').forEach(function (img) {
-                img.addEventListener('click', function () { big.src = img.src; box.classList.add('open'); });
+                img.addEventListener('click', function () {
+                    var fc = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+                    big.src = img.src; cap.textContent = fc ? fc.textContent : (img.alt || ''); box.classList.add('open');
+                });
             });
             box.addEventListener('click', function () { box.classList.remove('open'); });
             document.addEventListener('keydown', function (e) { if (e.key === 'Escape') box.classList.remove('open'); });

@@ -19,7 +19,7 @@
         <h1 class="post-main-title">언리얼 블루프린트 S퀄리티 텍스쳐 혼합</h1>
 
         <div class="post-section">
-            <img src="../../assets/2026/white_line.png" alt="Texture issue" class="post-image">
+            <img loading="lazy" decoding="async" src="../../assets/2026/white_line.png" alt="Texture issue" class="post-image">
             <div class="post-text">
                 <p>블루프린트에서 여러 텍스처를 섞어 사용할 때 가장 먼저 확인한 부분은 반복 경계와 흰 줄처럼 보이는 이음새였습니다.</p>
                 <p>문제는 텍스처 자체보다 UV와 샘플링 방식에서 생기는 경우가 많아, 머티리얼 단계보다 먼저 기준 데이터를 정리했습니다.</p>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="post-section">
-            <img src="../../assets/2026/white_line_solution.png" alt="Texture fix" class="post-image">
+            <img loading="lazy" decoding="async" src="../../assets/2026/white_line_solution.png" alt="Texture fix" class="post-image">
             <div class="post-text">
                 <p><strong>해결 방식</strong></p>
                 <p>블루프린트에서 타일 밀도와 방향값을 분리해 제어하고, 가장자리 보정용 파라미터를 따로 두어 상황별로 빠르게 대응했습니다.</p>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="post-section">
-            <img src="../../assets/2026/바닥_데칼MT.jpg" alt="Material result" class="post-image">
+            <img loading="lazy" decoding="async" src="../../assets/2026/바닥_데칼MT.jpg" alt="Material result" class="post-image">
             <div class="post-text">
                 <p>최종적으로는 데칼과 기본 텍스처가 겹쳐도 경계가 튀지 않도록 조정했고, 씬 전체 톤을 해치지 않는 범위에서 대비만 남겼습니다.</p>
             </div>

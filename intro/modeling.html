@@ -31,7 +31,7 @@
             <div class="as-desc"><p>공방처럼 설계하고 쌓아가는 모델링 아티스트입니다. 새로운 기법을 발견하면 문서로 정리하고 작업에 적용합니다.</p><p>최신 툴을 기존 디자인에 접목해 새로운 결과물을 만들고, 서로 다른 도구를 하나의 워크플로우로 엮어내는 과정에서 가장 큰 배움을 얻습니다.</p></div>
             <aside>
                 <p class="as-side-label">SOFTWARE</p>
-                <div class="as-tools"><img src="../profile/assets/tool_blender.png" alt="Blender" title="Blender"><img src="../profile/assets/tool_c4d.png" alt="Cinema 4D" title="Cinema 4D"><img src="../profile/assets/tool_maya.png" alt="Maya" title="Maya"><img src="../profile/assets/color/zbrush.png" alt="ZBrush" title="ZBrush"><img src="../profile/assets/tool_speedtree.png" alt="SpeedTree" title="SpeedTree"><img src="../profile/assets/tool_gaea.png" alt="Gaea" title="Gaea"><img src="../profile/assets/tool_marvelousdesigner.png" alt="Marvelous Designer" title="Marvelous Designer"><img src="../profile/assets/color/substance_zoom.png" alt="Substance Painter" title="Substance Painter"><img src="../profile/assets/color/substance_ds_zoom.png" alt="Substance Designer" title="Substance Designer"><img src="../profile/assets/color/mixer.png" alt="Quixel Mixer" title="Quixel Mixer"><img src="../profile/assets/tool_recap.png" alt="RealityScan" title="RealityScan"></div>
+                <div class="as-tools"><img loading="lazy" decoding="async" src="../profile/assets/tool_blender.png" alt="Blender" title="Blender"><img loading="lazy" decoding="async" src="../profile/assets/tool_c4d.png" alt="Cinema 4D" title="Cinema 4D"><img loading="lazy" decoding="async" src="../profile/assets/tool_maya.png" alt="Maya" title="Maya"><img loading="lazy" decoding="async" src="../profile/assets/color/zbrush.png" alt="ZBrush" title="ZBrush"><img loading="lazy" decoding="async" src="../profile/assets/tool_speedtree.png" alt="SpeedTree" title="SpeedTree"><img loading="lazy" decoding="async" src="../profile/assets/tool_gaea.png" alt="Gaea" title="Gaea"><img loading="lazy" decoding="async" src="../profile/assets/tool_marvelousdesigner.png" alt="Marvelous Designer" title="Marvelous Designer"><img loading="lazy" decoding="async" src="../profile/assets/color/substance_zoom.png" alt="Substance Painter" title="Substance Painter"><img loading="lazy" decoding="async" src="../profile/assets/color/substance_ds_zoom.png" alt="Substance Designer" title="Substance Designer"><img loading="lazy" decoding="async" src="../profile/assets/color/mixer.png" alt="Quixel Mixer" title="Quixel Mixer"><img loading="lazy" decoding="async" src="../profile/assets/tool_recap.png" alt="RealityScan" title="RealityScan"></div>
                 <p class="as-side-label">ROLE</p>
                 <ul class="as-roles"><li>모듈러 키트 제작</li><li>하이-로우 모델링</li><li>텍스쳐링 · PBR 최적화</li><li>폴리지 제작</li></ul>
             </aside>
@@ -59,7 +59,7 @@
 
         <section class="as-more">
             <h2 class="as-more-title">More from Patohsi</h2>
-            <div class="as-more-grid"><a class="as-more-card" href="game.html"><img src="../assets/main_hero1.png" alt=""><span>小鈴の里日記</span></a><a class="as-more-card" href="booth.html"><img src="../portfolio/assets/2026/6.png" alt=""><span>행사 부스</span></a><a class="as-more-card" href="../portfolio/art.html?section=3d"><img src="../portfolio/assets/2026/20-1.jpg" alt=""><span>3D 작업 모아보기</span></a></div>
+            <div class="as-more-grid"><a class="as-more-card" href="game.html"><img loading="lazy" decoding="async" src="../assets/main_hero1.png" alt=""><span>小鈴の里日記</span></a><a class="as-more-card" href="booth.html"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/6.png" alt=""><span>행사 부스</span></a><a class="as-more-card" href="../portfolio/art.html?section=3d"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/20-1.jpg" alt=""><span>3D 작업 모아보기</span></a></div>
         </section>
     </main>
 
@@ -86,7 +86,7 @@
         </nav>
     </div>
 
-    <div class="as-lightbox" id="asLightbox"><img alt=""></div>
+    <div class="as-lightbox" id="asLightbox"><figure><img loading="lazy" decoding="async" alt=""><figcaption></figcaption></figure></div>
     <script>
         function toggleNav() { document.getElementById('main-nav').classList.toggle('active'); }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -101,8 +101,12 @@
         (function () {
             var box = document.getElementById('asLightbox');
             var big = box.querySelector('img');
+            var cap = box.querySelector('figcaption');
             document.querySelectorAll('.as-media img').forEach(function (img) {
-                img.addEventListener('click', function () { big.src = img.src; box.classList.add('open'); });
+                img.addEventListener('click', function () {
+                    var fc = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+                    big.src = img.src; cap.textContent = fc ? fc.textContent : (img.alt || ''); box.classList.add('open');
+                });
             });
             box.addEventListener('click', function () { box.classList.remove('open'); });
             document.addEventListener('keydown', function (e) { if (e.key === 'Escape') box.classList.remove('open'); });

@@ -86,7 +86,7 @@
     fetch('portfolio/art.html').then(function (r) { return r.ok ? r.text() : ''; }).then(function (text) {
         if (!text) return;
         var doc = parse(text);
-        fill('latestArt', latestOf(doc, 'art'));
+        fill('latestArt', latestOf(doc, 'booth'));
         fill('latest3d', latestOf(doc, '3d'));
     }).catch(function () {});
 

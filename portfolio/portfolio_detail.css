@@ -472,3 +472,11 @@ body.lightbox-open {
     font-size: 0.82rem;
     line-height: 1.35;
 }
+
+/* 확대 화면 아래 설명 */
+.lightbox-content { display: flex; flex-direction: column; align-items: center; }
+.lightbox-image { max-height: 76vh; }
+.lightbox-caption { margin-top: 14px; max-width: 760px; text-align: center; color: #fff; line-height: 1.7; }
+.lightbox-caption:empty { display: none; }
+.lightbox-caption b { display: block; font-size: 1.05rem; }
+.lightbox-caption span { display: block; font-size: 0.88rem; color: #d4d4da; }

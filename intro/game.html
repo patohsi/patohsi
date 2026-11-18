@@ -31,7 +31,7 @@
             <div class="as-desc"><p>졸업작품으로 HD2D 게임 「小鈴の里日記」를 제작하며 배경과 레벨을 직접 구현했습니다.</p><p>제한된 리소스 안에서 시각적 완성도와 성능을 함께 확보하기 위해, 모듈러 키트와 텍스쳐 모듈화를 중심으로 재사용할 수 있는 구조를 만들었습니다.</p><p>PBR을 이용한 텍스쳐 자동화와 거리 기반 텍스쳐 변환으로 메모리를 절약하고, 모듈식 텍스쳐로 작업 시간을 줄였습니다.</p></div>
             <aside>
                 <p class="as-side-label">SOFTWARE</p>
-                <div class="as-tools"><img src="../profile/assets/tool_blender.png" alt="Blender" title="Blender"><img src="../profile/assets/color/substance_zoom.png" alt="Substance Painter" title="Substance Painter"><img src="../profile/assets/tool_speedtree.png" alt="SpeedTree" title="SpeedTree"><img src="../profile/assets/tool_photoshop.webp" alt="Photoshop" title="Photoshop"><img src="../profile/assets/color/cpp.svg" alt="C++" title="C++"></div>
+                <div class="as-tools"><img loading="lazy" decoding="async" src="../profile/assets/tool_blender.png" alt="Blender" title="Blender"><img loading="lazy" decoding="async" src="../profile/assets/color/substance_zoom.png" alt="Substance Painter" title="Substance Painter"><img loading="lazy" decoding="async" src="../profile/assets/tool_speedtree.png" alt="SpeedTree" title="SpeedTree"><img loading="lazy" decoding="async" src="../profile/assets/tool_photoshop.webp" alt="Photoshop" title="Photoshop"><img loading="lazy" decoding="async" src="../profile/assets/color/cpp.svg" alt="C++" title="C++"></div>
                 <p class="as-side-label">ROLE</p>
                 <ul class="as-roles"><li>게임 기획</li><li>3D 모델 (배경 · 프랍)</li><li>개발 (UE5.3 · C++)</li><li>UI</li><li>레벨 · 환경 제작</li></ul>
             </aside>
@@ -60,7 +60,7 @@
 
         <section class="as-more">
             <h2 class="as-more-title">More from Patohsi</h2>
-            <div class="as-more-grid"><a class="as-more-card" href="modeling.html"><img src="../portfolio/assets/2026/19-2.jpg" alt=""><span>3D 모델링</span></a><a class="as-more-card" href="booth.html"><img src="../portfolio/assets/2026/6.png" alt=""><span>행사 부스</span></a><a class="as-more-card" href="../portfolio/art.html?section=3d"><img src="../portfolio/assets/2026/20-1.jpg" alt=""><span>3D 작업 모아보기</span></a></div>
+            <div class="as-more-grid"><a class="as-more-card" href="modeling.html"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/19-2.jpg" alt=""><span>3D 모델링</span></a><a class="as-more-card" href="booth.html"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/6.png" alt=""><span>행사 부스</span></a><a class="as-more-card" href="../portfolio/art.html?section=3d"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/20-1.jpg" alt=""><span>3D 작업 모아보기</span></a></div>
         </section>
     </main>
 
@@ -87,7 +87,7 @@
         </nav>
     </div>
 
-    <div class="as-lightbox" id="asLightbox"><img alt=""></div>
+    <div class="as-lightbox" id="asLightbox"><figure><img loading="lazy" decoding="async" alt=""><figcaption></figcaption></figure></div>
     <script>
         function toggleNav() { document.getElementById('main-nav').classList.toggle('active'); }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -102,8 +102,12 @@
         (function () {
             var box = document.getElementById('asLightbox');
             var big = box.querySelector('img');
+            var cap = box.querySelector('figcaption');
             document.querySelectorAll('.as-media img').forEach(function (img) {
-                img.addEventListener('click', function () { big.src = img.src; box.classList.add('open'); });
+                img.addEventListener('click', function () {
+                    var fc = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+                    big.src = img.src; cap.textContent = fc ? fc.textContent : (img.alt || ''); box.classList.add('open');
+                });
             });
             box.addEventListener('click', function () { box.classList.remove('open'); });
             document.addEventListener('keydown', function (e) { if (e.key === 'Escape') box.classList.remove('open'); });
