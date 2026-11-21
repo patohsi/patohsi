@@ -356,3 +356,11 @@ a { color: inherit; }
 .as-lightbox img { max-height: calc(100vh - 120px); }
 .as-lightbox figcaption { margin-top: 14px; max-width: 760px; text-align: center; color: #fff; font-size: 0.95rem; line-height: 1.7; }
 .as-lightbox figcaption:empty { display: none; }
+
+/* 이미지를 누르면 해당 작업 페이지로 이동 */
+.as-media figure.has-link a { display: block; }
+.as-media figure.has-link img { cursor: pointer; transition: opacity 0.25s; }
+.as-media figure.has-link:hover img { opacity: 0.88; }
+.as-media figure.has-link figcaption::after { content: "  ·  자세히 보기 →"; color: #8fa0ff; font-weight: 700; }
+
+.as-media figure.ext figcaption::after { content: "  ·  사이트에서 보기 ↗"; }

@@ -17,6 +17,14 @@
         .pl-tabs button { padding: 10px 22px; border: 1px solid #2c2c31; border-radius: 999px; background: #1c1c21; color: #bdbdc6; font: 700 0.88rem 'Noto Sans KR', sans-serif; cursor: pointer; transition: background .2s, color .2s; }
         .pl-tabs button:hover { color: #fff; }
         .pl-tabs button.on { background: #304ffe; border-color: #304ffe; color: #fff; }
+        .pl-tabs { flex-wrap: wrap; align-items: center; }
+        .pl-site { margin-left: auto; padding: 10px 22px; font-size: .88rem; }
+        .pl-site[hidden] { display: none; }
+        .pl-toc { display: flex; flex-wrap: wrap; gap: 6px; margin: -6px 0 16px; }
+        .pl-toc button { padding: 7px 14px; border: 1px solid #2c2c31; border-radius: 8px; background: transparent; color: #9a9aa2; font: 700 0.78rem 'Noto Sans KR', sans-serif; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+        .pl-toc button small { margin-left: 6px; font-family: 'Fredoka One', sans-serif; font-weight: 400; opacity: .6; }
+        .pl-toc button:hover { color: #fff; border-color: #4a4a52; }
+        .pl-toc button.on { background: #fff; border-color: #fff; color: #111; }
         .pl-stage { position: relative; }
         .pl-rail { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 6px; }
         .pl-rail::-webkit-scrollbar { display: none; }
@@ -26,7 +34,24 @@
         .pl-arrow:hover { background: #304ffe; }
         .pl-prev { left: 12px; } .pl-next { right: 12px; }
         .pl-count { margin: 14px 0 0; text-align: center; font-family: 'Fredoka One', sans-serif; letter-spacing: .12em; color: #9a9aa2; }
+        .pl-slidecap { margin: 10px auto 0; max-width: 760px; text-align: center; color: #d6d6dc; font-size: .92rem; line-height: 1.8; }
+        .pl-slidecap[hidden] { display: none; }
         .pl-hint { margin: 6px 0 0; text-align: center; font-size: .8rem; color: #6c6c75; }
+
+        /* 모바일 세로: 가로로 크게 보기 */
+        .pl-landbtn { display: none; margin: 14px auto 0; padding: 12px 26px; border: 0; cursor: pointer; font-family: inherit; }
+        .pl-landhint { display: none; margin: 8px 0 0; text-align: center; font-size: .8rem; color: #8fa0ff; }
+        @media (max-width: 700px) and (orientation: portrait) { .pl-landbtn { display: block; } .pl-landhint { display: block; } .pl-hint { display: none; } }
+        .pl-view { position: fixed; inset: 0; z-index: 4000; display: none; background: #000; color: #fff; overflow: hidden; touch-action: pan-y pinch-zoom; }
+        .pl-view.open { display: block; }
+        .pl-view .pv-box { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+        .pl-view.rot .pv-box { top: 0; left: 100%; width: 100vh; height: 100vw; inset: auto; top: 0; left: 100%; transform-origin: 0 0; transform: rotate(90deg); }
+        .pv-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .pv-btn { position: absolute; z-index: 2; border: 1px solid #2c2c31; background: rgba(20,20,23,.78); color: #fff; border-radius: 999px; font: 800 .9rem 'Noto Sans KR', sans-serif; cursor: pointer; }
+        .pv-close { top: 10px; right: 10px; padding: 8px 16px; }
+        .pv-prev, .pv-next { top: 50%; transform: translateY(-50%); width: 44px; height: 44px; font-size: 1.2rem; }
+        .pv-prev { left: 8px; } .pv-next { right: 8px; }
+        .pv-count { position: absolute; z-index: 2; left: 12px; bottom: 10px; font-family: 'Fredoka One', sans-serif; letter-spacing: .1em; font-size: .85rem; color: #cfcfd6; }
         .pl-lb { position: fixed; inset: 0; z-index: 3000; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,.94); cursor: zoom-out; }
         .pl-lb.open { display: flex; }
         .pl-lb figure { margin: 0; display: flex; flex-direction: column; align-items: center; max-width: 100%; max-height: 100%; }
@@ -45,14 +70,18 @@
         </header>
 
         <section class="as-info">
-            <div class="as-desc"><p>일러스트 포트폴리오 사이트(ASTRO HOTEL)와 주류 쇼핑몰 리디자인(Wine&amp;Key) 두 편의 웹사이트 서비스 기획서입니다.</p><p>사용자 분석, 벤치마킹, 메뉴 트리, 플로우 차트, 디자인 시스템, 페이지별 기능을 정리했습니다.</p></div>
-            <aside><p class="as-side-label">SOFTWARE</p><div class="as-tools"><img loading="lazy" decoding="async" src="../profile/assets/tool_figma.webp" alt="Figma" title="Figma"><img loading="lazy" decoding="async" src="../profile/assets/tool_photoshop.webp" alt="Photoshop" title="Photoshop"><img loading="lazy" decoding="async" src="../profile/assets/tool_illustrator.webp" alt="Illustrator" title="Illustrator"><img loading="lazy" decoding="async" src="../profile/assets/tool_csp.png" alt="Clip Studio" title="Clip Studio"><img loading="lazy" decoding="async" src="../profile/assets/html.png" alt="HTML" title="HTML"><img loading="lazy" decoding="async" src="../profile/assets/css.png" alt="CSS" title="CSS"><img loading="lazy" decoding="async" src="../profile/assets/js.png" alt="JavaScript" title="JavaScript"></div></aside>
+            <div class="as-desc" id="plDesc"><p>일러스트 포트폴리오 사이트(ASTRO HOTEL)와 주류 쇼핑몰 리디자인(Wine&amp;Key) 두 편의 웹사이트 서비스 기획서입니다.</p><p>사용자 분석, 벤치마킹, 메뉴 트리, 플로우 차트, 디자인 시스템, 페이지별 기능을 정리했습니다.</p></div>
+            <aside id="plSide"><p class="as-side-label">SOFTWARE</p><div class="as-tools"><img loading="lazy" decoding="async" src="../profile/assets/tool_figma.webp" alt="Figma" title="Figma"><img loading="lazy" decoding="async" src="../profile/assets/tool_photoshop.webp" alt="Photoshop" title="Photoshop"><img loading="lazy" decoding="async" src="../profile/assets/tool_illustrator.webp" alt="Illustrator" title="Illustrator"><img loading="lazy" decoding="async" src="../profile/assets/tool_csp.png" alt="Clip Studio" title="Clip Studio"><img loading="lazy" decoding="async" src="../profile/assets/html.png" alt="HTML" title="HTML"><img loading="lazy" decoding="async" src="../profile/assets/css.png" alt="CSS" title="CSS"><img loading="lazy" decoding="async" src="../profile/assets/js.png" alt="JavaScript" title="JavaScript"></div></aside>
         </section>
 
         <div class="pl-tabs" id="plTabs">
             <button type="button" class="on" data-doc="astro">ASTRO HOTEL</button>
             <button type="button" data-doc="wine">Wine&amp;Key</button>
+            <button type="button" data-doc="toram">토람 종합 정보툴</button>
+            <a class="as-link pl-site" id="plSite" href="https://toramremote.netlify.app/" target="_blank" rel="noopener" hidden>사이트 바로가기 ↗</a>
         </div>
+
+        <div class="pl-toc" id="plToc" aria-label="목차"></div>
 
         <div class="pl-stage">
             <button type="button" class="pl-arrow pl-prev" id="plPrev" aria-label="이전">←</button>
@@ -60,8 +89,21 @@
             <button type="button" class="pl-arrow pl-next" id="plNext" aria-label="다음">→</button>
         </div>
         <p class="pl-count" id="plCount"></p>
+        <p class="pl-slidecap" id="plSlideCap" hidden></p>
+        <button type="button" class="as-link pl-landbtn" id="plLandBtn">가로로 크게 보기 ↻</button>
+        <p class="pl-landhint">가로 화면으로 보면 글씨가 크게 보여요</p>
         <p class="pl-hint">좌우로 밀어서 넘기고, 화면을 누르면 크게 볼 수 있어요</p>
     </main>
+
+    <div class="pl-view" id="plView" aria-hidden="true">
+        <div class="pv-box" id="pvBox">
+            <img id="pvImg" alt="">
+            <button type="button" class="pv-btn pv-close" id="pvClose">닫기 ✕</button>
+            <button type="button" class="pv-btn pv-prev" id="pvPrev" aria-label="이전">‹</button>
+            <button type="button" class="pv-btn pv-next" id="pvNext" aria-label="다음">›</button>
+            <span class="pv-count" id="pvCount"></span>
+        </div>
+    </div>
 
     <div class="pl-lb" id="plLb"><figure><img loading="lazy" decoding="async" alt=""><figcaption id="plCap"></figcaption></figure></div>
 
@@ -88,37 +130,163 @@
         </nav>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script>
         (function () {
-            var DOCS = { astro: [1, 71], wine: [72, 122] };
+            var DOCS = { astro: [1, 71], wine: [72, 122], toram: [1, 23] };
+            var NAMES = { astro: 'ASTRO HOTEL', wine: 'Wine&Key', toram: '토람 종합 정보툴' };
+            // 토람 종합 정보툴 서비스 기획서(23쪽)
+            var TORAM = [];
+            for (var q = 1; q <= 23; q++) TORAM.push(['deck/t' + String(q).padStart(2, '0'), '', '']);
+            var DESC = {
+                astro: '<p>일러스트 포트폴리오 사이트(ASTRO HOTEL)를 가상으로 기획한 웹사이트 서비스 기획서입니다.</p><p>사용자 분석, 벤치마킹, 메뉴 트리, 플로우 차트, 디자인 시스템, 페이지별 기능을 정리했습니다.</p>',
+                wine: '<p>복잡한 와인·위스키 판매 사이트를 사용하기 쉽게 다시 설계한 팀 프로젝트 기획서입니다.</p><p>벤치마킹과 경쟁 사이트 비교로 문제를 찾고, 메뉴 구조와 상품·리뷰·검색·장바구니 흐름을 개선했습니다.</p>',
+                toram: '<p>직접 개발해 운영 중인 토람 온라인 한국어 정보 사이트의 서비스 기획서입니다.</p><p>사이트 개요, 사용자 분석, 벤치마킹, 시스템 구조, 디자인 시스템과 실제 화면을 정리했고, 인게임 기여자와 길드 분들의 도움으로 데이터를 계속 추가하고 있습니다.</p>'
+            };
+            var SIDE_ICONS = document.getElementById('plSide').innerHTML;
+            var SIDE_TORAM = '<p class="as-side-label">STACK</p><ul class="as-roles"><li>TypeScript · Vite</li><li>Firebase (Firestore)</li><li>Netlify 호스팅 · 서버 함수</li></ul><p class="as-side-label">ROLE</p><ul class="as-roles"><li>기획 · 개발 · 디자인</li><li>데이터 정리 · 운영</li></ul>';
+            var slideCap = document.getElementById('plSlideCap');
             var rail = document.getElementById('plRail');
             var count = document.getElementById('plCount');
             var lb = document.getElementById('plLb');
             var big = lb.querySelector('img');
-            var pdfDoc = null, cur = 'astro', io = null;
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            var cur = 'astro', io = null;
+
+            function pageSrc(n) {
+                return cur === 'toram'
+                    ? 'assets/toram/' + TORAM[n - 1][0] + '.webp'
+                    : 'assets/planning/pages/p' + String(n).padStart(3, '0') + '.webp';
+            }
+            function isPortraitPhone() {
+                return window.matchMedia('(max-width: 700px) and (orientation: portrait)').matches;
+            }
 
             function draw(box) {
                 if (!box || box.dataset.done) return;
                 box.dataset.done = '1';
-                pdfDoc.getPage(+box.dataset.n).then(function (page) {
-                    var vp = page.getViewport({ scale: 1.5 });
-                    var c = document.createElement('canvas');
-                    c.width = vp.width; c.height = vp.height;
-                    page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise.then(function () {
-                        box.appendChild(c);
-                        c.addEventListener('click', function () {
-                            var n = +box.dataset.n, r = DOCS[cur];
-                            document.getElementById('plCap').textContent = (cur === 'astro' ? 'ASTRO HOTEL' : 'Wine&Key') + ' · ' + (n - r[0] + 1) + ' / ' + (r[1] - r[0] + 1) + '쪽';
-                            big.src = c.toDataURL('image/jpeg', 0.92); lb.classList.add('open');
-                        });
-                    });
+                var n = +box.dataset.n;
+                var img = document.createElement('img');
+                if (cur === 'toram') {
+                    img.alt = '토람 기획서 ' + n + '쪽';
+                    img.src = 'assets/toram/' + TORAM[n - 1][0] + '.webp';
+                } else {
+                    img.alt = '기획서 ' + n + '쪽';
+                    img.src = 'assets/planning/pages/p' + String(n).padStart(3, '0') + '.webp';
+                }
+                img.style.cssText = 'display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in';
+                img.addEventListener('click', function () {
+                    if (isPortraitPhone()) { openView(n - DOCS[cur][0]); return; }
+                    var r = DOCS[cur];
+                    document.getElementById('plCap').textContent = NAMES[cur] + ' · ' + (n - r[0] + 1) + ' / ' + (r[1] - r[0] + 1) + '쪽';
+                    big.src = img.src; lb.classList.add('open');
                 });
+                box.appendChild(img);
+            }
+
+
+            // ---- 가로로 크게 보기 (모바일 세로 화면에서는 화면을 돌려 가로로 보여 준다)
+            var view = document.getElementById('plView');
+            var pvImg = document.getElementById('pvImg');
+            var pvCount = document.getElementById('pvCount');
+            var vi = 0;
+
+            function fitRot() {
+                view.classList.toggle('rot', window.innerHeight > window.innerWidth);
+            }
+            function showView(i) {
+                var r = DOCS[cur], total = r[1] - r[0] + 1;
+                vi = Math.max(0, Math.min(total - 1, i));
+                pvImg.src = pageSrc(r[0] + vi);
+                pvCount.textContent = (vi + 1) + ' / ' + total;
+                var nx = new Image();
+                if (vi + 1 < total) nx.src = pageSrc(r[0] + vi + 1);
+            }
+            function openView(i) {
+                view.classList.add('open');
+                view.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                fitRot();
+                showView(i);
+                try {
+                    var req = view.requestFullscreen || view.webkitRequestFullscreen;
+                    if (req) {
+                        var pr = req.call(view);
+                        if (pr && pr.then) pr.then(function () {
+                            if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(function () {});
+                        }).catch(function () {});
+                    }
+                } catch (e) {}
+            }
+            function closeView() {
+                view.classList.remove('open');
+                view.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                try {
+                    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+                    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+                } catch (e) {}
+                rail.scrollTo({ left: vi * (rail.clientWidth + 16), behavior: 'auto' });
+            }
+            document.getElementById('plLandBtn').onclick = function () { openView(index()); };
+            document.getElementById('pvClose').onclick = closeView;
+            document.getElementById('pvPrev').onclick = function () { showView(vi - 1); };
+            document.getElementById('pvNext').onclick = function () { showView(vi + 1); };
+            window.addEventListener('resize', fitRot);
+            window.addEventListener('orientationchange', fitRot);
+            document.addEventListener('fullscreenchange', function () { if (!document.fullscreenElement && view.classList.contains('open') && false) closeView(); });
+            // 밀어서 넘기기: 가로로 돌려 둔 상태에서는 화면의 세로 방향이 쪽 넘김 방향
+            var tx = 0, ty = 0;
+            view.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+            view.addEventListener('touchend', function (e) {
+                var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+                var d = view.classList.contains('rot') ? dy : dx;
+                var cross = view.classList.contains('rot') ? Math.abs(dx) : Math.abs(dy);
+                if (Math.abs(d) > 50 && Math.abs(d) > cross) showView(vi + (d < 0 ? 1 : -1));
+            }, { passive: true });
+            document.addEventListener('keydown', function (e) {
+                if (!view.classList.contains('open')) return;
+                if (e.key === 'Escape') closeView();
+                if (e.key === 'ArrowLeft') showView(vi - 1);
+                if (e.key === 'ArrowRight') showView(vi + 1);
+            });
+
+            // 목차: [이름, 시작 쪽(문서 안에서의 쪽 번호)]
+            var TOC = {
+                astro: [['표지', 1], ['목차', 2], ['사이트 개요', 3], ['비즈니스 컨셉', 8], ['사용자 분석', 10], ['유사 사이트 분석', 12],
+                        ['서비스 백엔드', 21], ['디자인 방향', 27], ['페이지 기능', 37], ['자체 피드백', 70]],
+                wine:  [['표지', 1], ['목차', 2], ['사이트 개요', 3], ['비즈니스 컨셉', 7], ['사용자 분석', 9], ['유사 사이트 분석', 12],
+                        ['서비스 백엔드', 23], ['디자인 방향', 33], ['페이지 기능', 37], ['자체 피드백', 50]]
+            };
+            TOC.toram = [['표지', 1], ['목차', 2], ['사이트 개요', 3], ['사용자 분석', 6], ['유사 사이트 분석', 8], ['서비스 백엔드', 10], ['디자인 방향', 12], ['화면', 15]];
+            var toc = document.getElementById('plToc');
+
+            function buildToc() {
+                toc.innerHTML = '';
+                TOC[cur].forEach(function (t) {
+                    var b = document.createElement('button');
+                    b.type = 'button';
+                    b.dataset.p = t[1];
+                    b.innerHTML = t[0] + '<small>' + t[1] + '</small>';
+                    b.onclick = function () { goPage(t[1] - 1); };
+                    toc.appendChild(b);
+                });
+            }
+            function markToc() {
+                var page = index() + 1, active = null;
+                TOC[cur].forEach(function (t) { if (t[1] <= page) active = t[1]; });
+                Array.prototype.forEach.call(toc.children, function (b) { b.classList.toggle('on', +b.dataset.p === active); });
+            }
+            function goPage(i) {
+                rail.scrollTo({ left: i * (rail.clientWidth + 16), behavior: 'smooth' });
+                var top = document.querySelector('.pl-stage').getBoundingClientRect().top;
+                if (top < 0 || top > window.innerHeight * 0.6) window.scrollBy({ top: top - 80, behavior: 'smooth' });
             }
 
             function show(key) {
                 cur = key;
+                document.getElementById('plDesc').innerHTML = DESC[key];
+                document.getElementById('plSite').hidden = key !== 'toram';
+                document.getElementById('plSide').innerHTML = key === 'toram' ? SIDE_TORAM : SIDE_ICONS;
+                buildToc();
                 if (io) io.disconnect();
                 rail.innerHTML = '';
                 var r = DOCS[key];
@@ -138,6 +306,8 @@
             function update() {
                 var r = DOCS[cur];
                 var i = index();
+                markToc();
+                slideCap.hidden = true;
                 count.textContent = (i + 1) + ' / ' + (r[1] - r[0] + 1);
                 for (var k = i - 1; k <= i + 3; k++) draw(rail.children[k]);
             }
@@ -159,7 +329,10 @@
                 };
             });
 
-            pdfjsLib.getDocument('assets/planning/uiux_planning.pdf').promise.then(function (pdf) { pdfDoc = pdf; show('astro'); });
+            show(location.hash === '#toram' ? 'toram' : 'astro');
+            if (location.hash === '#toram') {
+                document.querySelectorAll('#plTabs button').forEach(function (x) { x.classList.toggle('on', x.dataset.doc === 'toram'); });
+            }
         })();
 
         function toggleNav() { document.getElementById('main-nav').classList.toggle('active'); }

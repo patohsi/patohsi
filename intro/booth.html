@@ -43,18 +43,18 @@
             <div class="as-block"><h2>ACTIVITY 2026</h2><p>외부 행사에 부스로 참가했습니다.</p></div>
             <ul class="as-list"><li><b>환상일주 2회</b><span>행사 부스 참가 · 즉매회 1인 참가</span></li><li><b>환상일주 1회</b><span>행사 부스 참가 · 즉매회 1인 참가</span></li><li><b>동방 온리전 3회</b><span>행사 부스 참여 · 굿즈 판매회 2인 참가</span></li><li><b>동방 온리전 2회</b><span>행사 부스 참여 · 굿즈 판매회 1인 참가</span></li></ul>
             <div class="as-block"><h2>부스 굿즈 · 안내물</h2><p>직접 만든 쿠션과 안내물로 부스를 꾸몄습니다.</p></div>
-            <figure><img src="../portfolio/assets/2026/6.png" alt="으아앙 와카사기히메 쿠션" loading="lazy"><figcaption>으아앙 와카사기히메 쿠션</figcaption></figure>
-            <figure><img src="../portfolio/assets/2026/8.jpg" alt="부스 안내" loading="lazy"><figcaption>부스 안내</figcaption></figure>
+            <figure class="has-link"><a href="../portfolio/2026/work_06.html"><img src="../portfolio/assets/2026/6.webp" alt="으아앙 와카사기히메 쿠션" loading="lazy"></a><figcaption>으아앙 와카사기히메 쿠션</figcaption></figure>
+            <figure class="has-link"><a href="../portfolio/2026/work_08.html"><img src="../portfolio/assets/2026/8.jpg" alt="부스 안내" loading="lazy"></a><figcaption>부스 안내</figcaption></figure>
             <div class="as-block"><h2>潮汕THO 2nd 서브 포스터</h2><p>중국 潮汕THO 2nd 행사를 기념해 그린 일러스트입니다. 순수 일러스트본과 실제 행사에 쓰인 포스터본을 함께 담았습니다.</p></div>
-            <figure><img src="../portfolio/assets/2024/11.jpg" alt="순수 일러스트본" loading="lazy"><figcaption>순수 일러스트본</figcaption></figure>
-            <figure><img src="../portfolio/assets/2024/12.jpg" alt="행사 포스터본" loading="lazy"><figcaption>행사 포스터본</figcaption></figure>
+            <figure class="has-link"><a href="../portfolio/2024/work_11.html"><img src="../portfolio/assets/2024/11.jpg" alt="순수 일러스트본" loading="lazy"></a><figcaption>순수 일러스트본</figcaption></figure>
+            <figure class="has-link"><a href="../portfolio/2024/work_11.html"><img src="../portfolio/assets/2024/12.jpg" alt="행사 포스터본" loading="lazy"></a><figcaption>행사 포스터본</figcaption></figure>
         </section>
 
         <div class="as-links"><a class="as-link" href="../portfolio/art.html?section=booth">부스 작업 보러가기 →</a><a class="as-link line" href="../portfolio/2024/work_11.html">潮汕THO 2nd 작품 페이지 →</a></div>
 
         <section class="as-more">
             <h2 class="as-more-title">More from Patohsi</h2>
-            <div class="as-more-grid"><a class="as-more-card" href="game.html"><img loading="lazy" decoding="async" src="../assets/main_hero1.png" alt=""><span>小鈴の里日記</span></a><a class="as-more-card" href="modeling.html"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/19-2.jpg" alt=""><span>3D 모델링</span></a><a class="as-more-card" href="../portfolio/art.html?section=3d"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/20-1.jpg" alt=""><span>3D 작업 모아보기</span></a></div>
+            <div class="as-more-grid"><a class="as-more-card" href="game.html"><img loading="lazy" decoding="async" src="../assets/main_hero1.webp" alt=""><span>小鈴の里日記</span></a><a class="as-more-card" href="modeling.html"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/19-2.jpg" alt=""><span>3D 모델링</span></a><a class="as-more-card" href="../portfolio/art.html?section=3d"><img loading="lazy" decoding="async" src="../portfolio/assets/2026/20-1.jpg" alt=""><span>3D 작업 모아보기</span></a></div>
         </section>
     </main>
 
@@ -81,7 +81,6 @@
         </nav>
     </div>
 
-    <div class="as-lightbox" id="asLightbox"><figure><img loading="lazy" decoding="async" alt=""><figcaption></figcaption></figure></div>
     <script>
         function toggleNav() { document.getElementById('main-nav').classList.toggle('active'); }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -92,20 +91,6 @@
                 nav.classList.remove('active');
             }
         });
-        // 큰 이미지를 누르면 화면 가득 확대, 다시 누르거나 Esc 로 닫기
-        (function () {
-            var box = document.getElementById('asLightbox');
-            var big = box.querySelector('img');
-            var cap = box.querySelector('figcaption');
-            document.querySelectorAll('.as-media img').forEach(function (img) {
-                img.addEventListener('click', function () {
-                    var fc = img.closest('figure') && img.closest('figure').querySelector('figcaption');
-                    big.src = img.src; cap.textContent = fc ? fc.textContent : (img.alt || ''); box.classList.add('open');
-                });
-            });
-            box.addEventListener('click', function () { box.classList.remove('open'); });
-            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') box.classList.remove('open'); });
-        })();
     </script>
     <script src="../assets/nav_peek.js"></script>
     <script src="../assets/smart_back.js"></script>
