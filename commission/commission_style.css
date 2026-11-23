@@ -453,3 +453,6 @@ body {
         gap: 40px;
     }
 }
+
+/* 모바일: 옆으로 밀리지 않게 */
+html, body { overflow-x: hidden; max-width: 100%; }
