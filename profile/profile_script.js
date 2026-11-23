@@ -41,10 +41,7 @@ document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') closeResume();
 });
 
-// 메인 페이지 "이력서 보기" 링크(#resume)로 들어오면 이력서 팝업을 바로 연다
-if (location.hash === '#resume') {
-    window.addEventListener('load', openResume);
-}
+// (이력서 팝업은 assets/resume_viewer.js 가 대신 처리한다: #resume 주소로 들어와도 거기서 펼친다)
 
 
 // 프로필 탭: TOOLS / PIPELINE / HISTORY (주소 뒤에 #pipeline, #history 를 붙이면 해당 탭으로 열림)

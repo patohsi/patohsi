@@ -6,7 +6,8 @@
 const SECTIONS = {
     art:   { categories: ['art'],   kicker: 'ART',      title: 'ART',   desc: '일러스트 · 캐릭터 디자인 · 포스터', defaultTag: 'illust', tabs: true },
     booth: { categories: ['booth'], kicker: 'ART',      title: 'ART',   desc: '외부 행사 부스에서 선보인 작업', defaultTag: '', tabs: true },
-    commission: { categories: ['commission'], kicker: 'COMMISSION', title: 'COMMISSION', desc: '커미션 · 리퀘스트로 그린 작업', defaultTag: 'free', tabs: false, forceTags: ['free', 'paid'] },
+    request: { categories: ['request'], kicker: 'COMMISSION', title: '리퀘스트', desc: '리퀘스트로 그린 작업', defaultTag: '', tabs: false, back: 'commission.html' },
+    outsource: { categories: ['outsource'], kicker: 'COMMISSION', title: '외주', desc: '외주로 그린 작업', defaultTag: '', tabs: false, back: 'commission.html' },
     '3d':  { categories: ['3d'],    kicker: '3D WORKS', title: '3D',    desc: '3D 작업을 모아서 보여줍니다', defaultTag: '3d', tabs: false },
 };
 
@@ -55,6 +56,10 @@ function setupSection() {
     document.getElementById('sectionTitle').textContent = meta.title;
     document.getElementById('sectionDesc').textContent = meta.desc;
     document.title = 'Patohsi - ' + meta.title;
+    if (meta.back) {
+        const backLink = document.querySelector('.archive-home-link');
+        if (backLink) backLink.setAttribute('href', meta.back);
+    }
 
     const tabs = document.getElementById('sectionTabs');
     tabs.hidden = !meta.tabs;

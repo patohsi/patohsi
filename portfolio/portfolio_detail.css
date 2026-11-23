@@ -480,3 +480,20 @@ body.lightbox-open {
 .lightbox-caption:empty { display: none; }
 .lightbox-caption b { display: block; font-size: 1.05rem; }
 .lightbox-caption span { display: block; font-size: 0.88rem; color: #d4d4da; }
+
+
+.detail-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.25s, background 0.25s;
+}
+.detail-link-btn:hover { background: #304ffe; transform: translateY(-3px); }

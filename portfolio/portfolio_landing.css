@@ -308,3 +308,13 @@ body {
 .hub-card-name { font-size: 1.6rem; }
 @media (max-width: 1000px) { .hub-cards { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .hub-cards { grid-template-columns: 1fr; } }
+
+.hub-card-name-sm { font-size: 1.25rem; }
+
+/* 커미션 선택 페이지 */
+.hub-cards.hub-cards-2 { grid-template-columns: repeat(2, 1fr); }
+.hub-cards-2 .hub-card-link { height: 340px; }
+.hub-cards-2 .hub-card-name { font-size: 2rem; }
+.hub-back { display: inline-block; margin-bottom: 18px; color: #111; font-weight: 800; font-size: 0.85rem; text-decoration: none; }
+.hub-back:hover { color: #304ffe; }
+@media (max-width: 700px) { .hub-cards.hub-cards-2 { grid-template-columns: 1fr; } }
