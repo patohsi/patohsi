@@ -4,9 +4,9 @@
    - 이력서 이미지는 profile/assets/resume/ 에 있다. 쪽을 늘리려면 PAGES 에 파일을 추가한다.
    =================================================================== */
 (function () {
-    // 프로필 페이지에서는 받은 PDF 원본 그대로(2쪽), 그 밖의 페이지(메인 등)에서는 Patohsi 이력서(1쪽)를 보여 준다
+    // 프로필 페이지에서는 받은 PDF 원본의 1쪽(2쪽 자기소개서는 제외), 그 밖의 페이지(메인 등)에서는 Patohsi 이력서(1쪽)를 보여 준다
     var IS_PROFILE = /\/profile\//.test(location.pathname);
-    var PAGES = IS_PROFILE ? ['resume_orig_p1.webp', 'resume_orig_p2.webp'] : ['resume_p1.webp'];
+    var PAGES = IS_PROFILE ? ['resume_orig_p1.webp'] : ['resume_p1.webp'];
 
     // 이 스크립트(assets/resume_viewer.js) 위치로 사이트 루트를 계산한다
     var me = document.currentScript;
